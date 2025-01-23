@@ -565,7 +565,8 @@ export async function participantsUpdate({ id, participants, action }) {
             )}`
 
             try {
-              let welcomeResponse = await fetch(welcomeApiUrl)
+              const welcomeUrl = 'https://i.imgur.com/mxFDDcm.jpeg';
+              let welcomeResponse = await fetch(welcomeUrl)
               let welcomeBuffer = await welcomeResponse.buffer()
 
                 this.sendMessage(id, {
@@ -575,7 +576,7 @@ export async function participantsUpdate({ id, participants, action }) {
                   externalAdReply: {
                   title: 'Rick Bot',
                   body: 'Willkommen in der Gruppe',
-                  thumbnailUrl: welcomeApiUrl,
+                  thumbnailUrl: welcomeUrl,
                   sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
                   mediaType: 1,
                   renderLargerThumbnail: true,
@@ -622,7 +623,8 @@ export async function participantsUpdate({ id, participants, action }) {
             )}`
 
             try {
-              let leaveResponse = await fetch(leaveApiUrl)
+              const leaveUrl = 'https://i.imgur.com/rO8hlAQ.jpeg';
+              let leaveResponse = await fetch(leaveUrl)
               let leaveBuffer = await leaveResponse.buffer()
 
                 this.sendMessage(id, {
@@ -632,7 +634,7 @@ export async function participantsUpdate({ id, participants, action }) {
                   externalAdReply: {
                   title: 'Rick Bot',
                   body: 'Auf Wiedersehen aus der Gruppe',
-                  thumbnailUrl: leaveApiUrl,
+                  thumbnailUrl: leaveUrl,
                   sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
                   mediaType: 1,
                   renderLargerThumbnail: true,

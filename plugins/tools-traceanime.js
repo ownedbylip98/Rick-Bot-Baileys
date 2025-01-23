@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
     let mime = (q.msg || q).mimetype || q.mediaType || ''
 
     if (!mime.startsWith('image')) {
-      throw '*Respond to an image*'
+      throw '*Antworte auf ein Bild*'
     }
 
     let data = await q.download()
@@ -21,39 +21,39 @@ let handler = async (m, { conn }) => {
     console.log('API Response:', result)
 
     if (!result || result.error || result.result.length === 0) {
-      throw '*Error: Could not track the anime.*'
+      throw '*Fehler: Konnte den Anime nicht verfolgen.*'
     }
 
     let { anilist, from, to, similarity, video, episode } = result.result[0]
-    let animeTitle = anilist.title ? anilist.title.romaji || anilist.title.native : 'Unknown Title'
+    let animeTitle = anilist.title ? anilist.title.romaji || anilist.title.native : 'Unbekannter Titel'
 
     let message = `*Anime:* ${animeTitle}\n`
 
     if (anilist.synonyms && anilist.synonyms.length > 0) {
-      message += `*Synonyms:* ${anilist.synonyms.join(', ')}\n`
+      message += `*Synonyme:* ${anilist.synonyms.join(', ')}\n`
     }
 
-    message += `*Similarity:* ${similarity.toFixed(2)}%\n`
-    message += `*Time:* ${formatDuration(from * 1000)} - ${formatDuration(to * 1000)}\n`
+    message += `*Ähnlichkeit:* ${similarity.toFixed(2)}%\n`
+    message += `*Zeit:* ${formatDuration(from * 1000)} - ${formatDuration(to * 1000)}\n`
 
     if (episode) {
       message += `*Episode:* ${episode}\n`
     }
 
-    console.log('Anime Information:', {
+    console.log('Anime-Informationen:', {
       animeTitle,
-      synonyms: anilist.synonyms ? anilist.synonyms.join(', ') : 'Not Available',
+      synonyms: anilist.synonyms ? anilist.synonyms.join(', ') : 'Nicht verfügbar',
       similarity,
       timestamp: `${formatDuration(from * 1000)} - ${formatDuration(to * 1000)}`,
       video,
       episode,
     })
 
-    // Send the video with anime information as the caption
+    // Sende das Video mit Anime-Informationen als Beschriftung
     await conn.sendFile(m.chat, video, 'anime.mp4', message, m)
   } catch (error) {
-    console.error('Error:', error)
-    m.reply('*Error: Could not track the anime or send the video.*')
+    console.error('Fehler:', error)
+    m.reply('*Fehler: Konnte den Anime nicht verfolgen oder das Video nicht senden.*')
   }
 }
 

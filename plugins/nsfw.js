@@ -2,16 +2,16 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   if (!global.db.data.chats[m.chat].nsfw)
-    throw `🚫 group doesnt supprt nsfw \n\n enable it by \n*${usedPrefix}enable* nsfw`
+    throw `🚫 Gruppe unterstützt keine NSFW \n\n Aktiviere es mit \n*${usedPrefix}enable* nsfw`
   let user = global.db.data.users[m.sender].age
-  if (user < 17) throw m.reply(`❎ uneed to be atleast 18 years`)
+  if (user < 17) throw m.reply(`❎ Du musst mindestens 18 Jahre alt sein`)
   m.react(rwait)
 
   let res = await fetch(`https://fantox-apis.vercel.app/${command}`)
   if (!res.ok) throw await res.text()
   let json = await res.json()
-  if (!json.url) throw '❎ Error'
-  conn.sendFile(m.chat, json.url, 'img.jpg', `✅ Random ${command}`, m)
+  if (!json.url) throw '❎ Fehler'
+  conn.sendFile(m.chat, json.url, 'img.jpg', `✅ Zufälliger ${command}`, m)
   m.react(dmoji)
 }
 handler.help = [

@@ -1,28 +1,28 @@
-import fetch from 'node-fetch'
+/*import fetch from 'node-fetch'
 
 let handler = async (m, { text, usedPrefix, command, conn }) => {
   try {
     // Expanded intro card text with additional fields
     const introText = `
  ◈ •╭═══ ━ ━ • ━ ━ ━ ═══♡᭄
- ◈ •│       「 𝗠𝗬 𝗜𝗡𝗧𝗥𝗢 」
- ◈ •│ Name    : 𝙺𝙰𝚂𝙸𝙼 𝙰𝙻𝙸
+ ◈ •│       「 𝗠𝗘𝗜𝗡 𝗜𝗡𝗧𝗥𝗢 」
+ ◈ •│ Name    :  
  ◈ •│
- ◈ •│ Place     : 𝙿𝙰𝙺𝙸𝚂𝚃𝙰𝙽
+ ◈ •│ Ort       : 𝙳𝙴𝚄𝚃𝚂𝙲𝙷𝙻𝙰𝙽𝙳
  ◈ •│
- ◈ •│ Gender  : 𝙼𝙰𝙻𝙴
+ ◈ •│ Geschlecht: 𝙼𝙰𝙽𝙽
  ◈ •│
- ◈ •│ Age        : 𝟸𝟼_
+ ◈ •│ Alter     : 𝟸𝟼
  ◈ •│
- ◈ •│ Status   : 𝙳𝙴𝚅𝙴𝙻𝙾𝙿𝙴𝚁
+ ◈ •│ Status    : 𝙴𝙽𝚃𝚆𝙸𝙲𝙺𝙻𝙴𝚁
  ◈ •│
- ◈ •│ Skills     : 𝙹𝙰𝚅𝙰𝚂𝙲𝚁𝙸𝙿𝚃
+ ◈ •│ Fähigkeiten: 𝙹𝙰𝚅𝙰𝚂𝙲𝚁𝙸𝙿𝚃
  ◈ •│
- ◈ •│ Lang     : 𝙴𝙽𝙶𝙻𝙸𝚂𝙷,𝚄𝚁𝙳𝚄
+ ◈ •│ Sprachen  : 𝙴𝙽𝙶𝙻𝙸𝚂𝙷
  ◈ •│
- ◈ •│ Project  : 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳
+ ◈ •│ Projekt   : 𝚁𝙸𝙲𝙺-𝙱𝙾𝚃
  ◈ •│
- ◈ •│ Hobbie  : 𝙲𝙾𝙳𝙸𝙽𝙶,𝙱𝙾𝚃𝚂
+ ◈ •│ Hobbys    : 𝙲𝙾𝙳𝙸𝙴𝚁𝙴𝙽,𝙱𝙾𝚃𝚂
  ◈ •╰═══ ━ ━ • ━ ━ ━ ═══♡᭄
     `;
 
@@ -35,15 +35,15 @@ let handler = async (m, { text, usedPrefix, command, conn }) => {
       console.log("Error fetching profile picture:", e);
     }
 
-    const sourceUrl = 'https://youtube.com/@GlobalTechInfo'; // Example source URL for the card
+    const sourceUrl = 'https://youtube.com/@OwnedbyLIP'; // Example source URL for the card
 
     const contextInfo = {
       mentionedJid: [m.sender],
       externalAdReply: {
-        title: 'ULTRA-MD', // Title of the card
+        title: 'RICK-BOT', // Title of the card
         body: '𝑇𝛩𝑈𝐶𝛨 𝛨𝛯𝑅𝛯',
-        thumbnailUrl: 'https://github.com/GlobalTechInfo.png', // Fixed URL syntax with quotes
-        mediaUrl: 'https://github.com/GlobalTechInfo.png', // Fixed URL syntax with quotes
+        thumbnailUrl: 'https://github.com/OwnedbyLIP.png', // Fixed URL syntax with quotes
+        mediaUrl: 'https://github.com/OwnedbyLIP.png', // Fixed URL syntax with quotes
         sourceUrl: sourceUrl, // Source URL for the card
       },
     };
@@ -53,12 +53,13 @@ let handler = async (m, { text, usedPrefix, command, conn }) => {
 
   } catch (e) {
     console.error(e);
-    await conn.sendMessage(m.chat, { text: `❌ Something went wrong: ${e.message}` }, { quoted: m });
+    await conn.sendMessage(m.chat, { text: `❌ Etwas ist schief gelaufen: ${e.message}` }, { quoted: m });
   }
 };
 
 handler.help = ['intro'];
-handler.tags = ['fun'];
+handler.tags = ['spaß'];
 handler.command = /^owner|intro|duction$/i;
 
 export default handler;
+}*/

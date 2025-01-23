@@ -1,84 +1,83 @@
-import pkg from 'api-qasim';  // Import the `api-qasim` package
-const { styletext } = pkg;  // Destructure `styletext` from `api-qasim`
+import pkg from 'api-qasim';  // Importiere das `api-qasim` Paket
+const { styletext } = pkg;  // Destrukturiere `styletext` von `api-qasim`
 
 const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-  if (!text) throw `Please provide a text. Example: *${usedPrefix + command} Hello*`;
+  if (!text) throw `Bitte gib einen Text an. Beispiel: *${usedPrefix + command} Hallo*`;
 
   try {
-    // Apply the styletext function to the provided text
-    const styledResult = await styletext(text);  // Assuming styletext is async
+    // Wende die styletext Funktion auf den angegebenen Text an
+    const styledResult = await styletext(text);  // Angenommen, styletext ist asynchron
 
-
-    // Ensure the result is an array
+    // Stelle sicher, dass das Ergebnis ein Array ist
     if (Array.isArray(styledResult)) {
-      let styledMessage = `Choose a styled version of the text by replying with the number:\n\n`;
+      let styledMessage = `Wähle eine gestylte Version des Textes, indem du mit der Nummer antwortest:\n\n`;
 
-      // Loop through the result and check its structure before accessing properties
+      // Schleife durch das Ergebnis und überprüfe die Struktur, bevor auf Eigenschaften zugegriffen wird
       styledResult.forEach((item, index) => {
-        // Log each item in the response to understand its structure
-        console.log(`Styled Text ${index + 1}:`, item);
+        // Logge jedes Element der Antwort, um die Struktur zu verstehen
+        console.log(`Gestylter Text ${index + 1}:`, item);
 
-        // Ensure we have a valid `name` and `result` to display
-        const styledText = item.result || item;  // Use 'result' for the transformed text
-        const styleName = item.name || `Style ${index + 1}`;  // Fallback to default style name if not provided
+        // Stelle sicher, dass wir einen gültigen `name` und `result` zum Anzeigen haben
+        const styledText = item.result || item;  // Verwende 'result' für den transformierten Text
+        const styleName = item.name || `Stil ${index + 1}`;  // Fallback auf Standardstilname, falls nicht angegeben
         styledMessage += `*${index + 1}.* ${styledText}\n`;
       });
 
-      // Send the list of styled versions to the user
+      // Sende die Liste der gestylten Versionen an den Benutzer
       const { key } = await conn.reply(m.chat, styledMessage, m);
 
-      // Initialize session storage for the selected styles
-      conn.styletext = conn.styletext || {};  // Initialize session storage if not already initialized
+      // Initialisiere die Sitzungspeicherung für die ausgewählten Stile
+      conn.styletext = conn.styletext || {};  // Initialisiere die Sitzungspeicherung, falls noch nicht geschehen
       conn.styletext[m.sender] = {
         result: styledResult,
-        key, // Store the message key to delete later
+        key, // Speichere den Nachrichtenschlüssel, um später zu löschen
         timeout: setTimeout(() => {
           conn.sendMessage(m.chat, { delete: key });
           delete conn.styletext[m.sender];
-        }, 150 * 1000), // Timeout after 2.5 minutes
+        }, 150 * 1000), // Timeout nach 2,5 Minuten
       };
     } else {
-      // If the result isn't an array, inform the user
-      await conn.reply(m.chat, `No styled text found for the input provided.`, m);
+      // Wenn das Ergebnis kein Array ist, informiere den Benutzer
+      await conn.reply(m.chat, `Kein gestylter Text für die angegebene Eingabe gefunden.`, m);
     }
   } catch (error) {
-    console.error('Error applying styletext:', error);
-    await conn.reply(m.chat, `❎ Error occurred while styling the text: ${error.message || error}`, m);
+    console.error('Fehler beim Anwenden von styletext:', error);
+    await conn.reply(m.chat, `❎ Fehler beim Stylen des Textes: ${error.message || error}`, m);
   }
 };
 
 handler.before = async (m, { conn }) => {
-  // Ensure session storage is initialized before accessing
+  // Stelle sicher, dass die Sitzungspeicherung initialisiert ist, bevor darauf zugegriffen wird
   conn.styletext = conn.styletext || {};
 
-  // Ensure the user has received the options and replied with a number
+  // Stelle sicher, dass der Benutzer die Optionen erhalten und mit einer Nummer geantwortet hat
   if (m.isBaileys || !(m.sender in conn.styletext)) return;
 
   const { result, key, timeout } = conn.styletext[m.sender];
 
-  // Validate the reply and the input number
+  // Überprüfe die Antwort und die Eingabenummer
   if (!m.quoted || m.quoted.id !== key.id || !m.text) return;
 
   const choice = m.text.trim();
   const inputNumber = Number(choice);
 
-  // Validate the user's selection
+  // Überprüfe die Auswahl des Benutzers
   if (inputNumber >= 1 && inputNumber <= result.length) {
-    const selectedStyledText = result[inputNumber - 1].result || result[inputNumber - 1];  // Access 'result' for the transformed text
+    const selectedStyledText = result[inputNumber - 1].result || result[inputNumber - 1];  // Greife auf 'result' für den transformierten Text zu
 
     try {
-      // Send the selected styled text to the user
+      // Sende den ausgewählten gestylten Text an den Benutzer
       await conn.reply(m.chat, `${selectedStyledText}`, m);
-      clearTimeout(timeout); // Clear the timeout for the session
+      clearTimeout(timeout); // Lösche das Timeout für die Sitzung
 
-      // Clean up the session
+      // Bereinige die Sitzung
       delete conn.styletext[m.sender];
     } catch (error) {
-      console.error("Error sending selected styled text:", error);
-      await conn.reply(m.chat, `❎ Failed to send the styled text: ${error.message || error}`, m);
+      console.error("Fehler beim Senden des ausgewählten gestylten Textes:", error);
+      await conn.reply(m.chat, `❎ Fehler beim Senden des gestylten Textes: ${error.message || error}`, m);
     }
   } else {
-    await conn.reply(m.chat, `❎ Invalid selection. Please choose a number between 1 and ${result.length}.`, m);
+    await conn.reply(m.chat, `❎ Ungültige Auswahl. Bitte wähle eine Nummer zwischen 1 und ${result.length}.`, m);
   }
 };
 

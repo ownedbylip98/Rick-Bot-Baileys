@@ -11,7 +11,7 @@ handler.all = async function (m) {
   if (chat.autosticker && m.isGroup) {
     let q = m
     let stiker = false
-    let wm = 'GlobalTech'
+    let wm = 'OwnedbyLIP'
     let mime = (q.msg || q).mimetype || q.mediaType || ''
     if (/webp/g.test(mime)) return
     if (/image/g.test(mime)) {
@@ -20,10 +20,10 @@ handler.all = async function (m) {
       stiker = await createSticker(img, false, packname || global.packname, author || global.author)
       //stiker = await sticker(img, false, packname, author)
     } else if (/video/g.test(mime)) {
-      //if (/video/g.test(mime)) if ((q.msg || q).seconds > 8) return await this.sendButton(m.chat, '*Send video of 7 seconds*', wm, [['DEACTIVE AUTOSTICKER', '/disable autosticker']], m)
+      //if (/video/g.test(mime)) if ((q.msg || q).seconds > 8) return await this.sendButton(m.chat, '*Sende ein Video von 7 Sekunden*', wm, [['AUTOSTICKER DEAKTIVIEREN', '/disable autosticker']], m)
       if (/video/g.test(mime))
         if ((q.msg || q).seconds > 8)
-          return await this.sendReply(m.chat, { text: '*Send video of 7 seconds*' }, m.sender)
+          return await this.sendReply(m.chat, { text: '*Sende ein Video von 7 Sekunden*' }, m.sender)
       let img = await q.download()
       if (!img) return
       stiker = await mp4ToWebp(img, {

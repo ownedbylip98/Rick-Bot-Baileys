@@ -1,67 +1,67 @@
-import pkg from 'api-qasim'; // Import the entire package as 'pkg'
-import fetch from 'node-fetch'; // Import fetch to handle image download
+import pkg from 'api-qasim'; // Importiere das gesamte Paket als 'pkg'
+import fetch from 'node-fetch'; // Importiere fetch, um den Bilddownload zu handhaben
 
-const { googleImage } = pkg; // Extract the 'googleImage' function from the package
+const { googleImage } = pkg; // Extrahiere die 'googleImage' Funktion aus dem Paket
 
 let handler = async (m, { conn, text }) => {
   if (!text) {
-    return m.reply("Please provide a search query for Google Image search.");
+    return m.reply("Bitte gib eine Suchanfrage für die Google Bildersuche ein.");
   }
 
   try {
-    // Add "wait" reaction to indicate the request is processing
+    // Füge "warten" Reaktion hinzu, um anzuzeigen, dass die Anfrage bearbeitet wird
     await m.react('⏳');
 
-    // Extract search query from the text
+    // Extrahiere die Suchanfrage aus dem Text
     const searchQuery = text.trim();
 
-    // Fetch image URLs from the Google Image search API
+    // Hole Bild-URLs von der Google Bildersuche API
     let googleImageResponse = await googleImage(searchQuery);
 
-    // Log the response for debugging
-    console.log('Google Image Search Results:', googleImageResponse);
+    // Logge die Antwort zur Fehlerbehebung
+    console.log('Google Bildersuche Ergebnisse:', googleImageResponse);
 
-    // Check if the API returned valid image URLs
+    // Überprüfe, ob die API gültige Bild-URLs zurückgegeben hat
     if (!googleImageResponse || !googleImageResponse.imageUrls || googleImageResponse.imageUrls.length === 0) {
       await m.react('✅');
-      return m.reply("No images found for the search query.");
+      return m.reply("Keine Bilder für die Suchanfrage gefunden.");
     }
 
-    // Limit to the first four image URLs
+    // Begrenze auf die ersten vier Bild-URLs
     const imageUrls = googleImageResponse.imageUrls.slice(0, 4);
 
-    // Initialize an array to hold the image buffers
+    // Initialisiere ein Array, um die Bildpuffer zu halten
     const imageBuffers = [];
 
-    // Download the first four images
+    // Lade die ersten vier Bilder herunter
     for (let i = 0; i < imageUrls.length; i++) {
       const imageUrl = imageUrls[i];
       const response = await fetch(imageUrl);
       
-      // Ensure the image was fetched successfully
+      // Stelle sicher, dass das Bild erfolgreich abgerufen wurde
       if (response.ok) {
-        const buffer = await response.buffer(); // Get image data as buffer
+        const buffer = await response.buffer(); // Hole Bilddaten als Puffer
         imageBuffers.push(buffer);
       } else {
-        console.log(`Failed to fetch image at index ${i}: ${imageUrl}`);
+        console.log(`Fehler beim Abrufen des Bildes an Index ${i}: ${imageUrl}`);
       }
     }
 
-    // Send the first four images to the user in WhatsApp chat
+    // Sende die ersten vier Bilder an den Benutzer im WhatsApp-Chat
     for (let i = 0; i < imageBuffers.length; i++) {
       const imageBuffer = imageBuffers[i];
       await conn.sendMessage(m.chat, {
         image: imageBuffer,
-        caption: `Image ${i + 1} from the search query *${searchQuery}*`,
+        caption: `Bild ${i + 1} von der Suchanfrage *${searchQuery}*`,
       }, { quoted: m });
     }
 
-    // React with "done" emoji after the process is complete
+    // Reagiere mit "fertig" Emoji, nachdem der Prozess abgeschlossen ist
     await m.react('✅');
 
   } catch (error) {
-    console.error('Error:', error);
-    m.reply("An error occurred while fetching or downloading the images.");
+    console.error('Fehler:', error);
+    m.reply("Ein Fehler ist aufgetreten beim Abrufen oder Herunterladen der Bilder.");
   }
 };
 

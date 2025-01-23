@@ -2,13 +2,13 @@ import pkg from 'api-qasim';
 const { trendtwit } = pkg;
 
 let handler = async (m, { text, command, usedPrefix, conn }) => {
-    var suggest = `Please provide a country name. Example: *${usedPrefix}${command} Pakistan*`;
+    var suggest = `Bitte gib einen Ländernamen an. Beispiel: *${usedPrefix}${command} Pakistan*`;
     if (!text) throw suggest;
 
     try {
         await m.react('⌛');
 
-        console.log(`Fetching trends for country: ${text}`);
+        console.log(`Abrufen der Trends für das Land: ${text}`);
 
         // Fetch the trending topics using the trendtwit function
         let trendtwitResult = await trendtwit(text);
@@ -17,7 +17,7 @@ let handler = async (m, { text, command, usedPrefix, conn }) => {
         if (typeof trendtwitResult === 'string') {
             // Send a string message properly formatted
             let data = {
-                text: `*Trending topics in ${text}:*\n\n${trendtwitResult}`,
+                text: `*Trendthemen in ${text}:*\n\n${trendtwitResult}`,
             };
             await conn.sendMessage(m.chat, data, { quoted: m });
         } else if (trendtwitResult && typeof trendtwitResult === 'object' && trendtwitResult.result && Array.isArray(trendtwitResult.result) && trendtwitResult.result.length > 0) {
@@ -26,28 +26,28 @@ let handler = async (m, { text, command, usedPrefix, conn }) => {
                 if (trend.hastag && trend.tweet) {
                     return `${index + 1}. ${trend.hastag} - ${trend.tweet}`;
                 } else {
-                    console.warn(`Unexpected trend format at index ${index}:`, trend);
-                    return `Invalid trend format at index ${index}`;
+                    console.warn(`Unerwartetes Trendformat bei Index ${index}:`, trend);
+                    return `Ungültiges Trendformat bei Index ${index}`;
                 }
             }).join('\n');
 
             let data = {
-                text: `*Trending topics in ${text}:*\n\n${trends}\n\n*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳*`,
+                text: `*Trendthemen in ${text}:*\n\n${trends}\n\n*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © Rick-Bot*`,
             };
             await conn.sendMessage(m.chat, data, { quoted: m });
             m.react('✅');
         } else {
             // Handle case where there are no valid trends
-            throw "No trending data found for this country.";
+            throw "Keine Trenddaten für dieses Land gefunden.";
         }
 
     } catch (e) {
         // Log the error message for debugging
-        console.error('Error:', e);
+        console.error('Fehler:', e);
 
         // Ensure error message is safely handled
-        const errorMessage = e.message || e || "Unknown error occurred.";
-        throw `An error occurred: ${errorMessage}`;
+        const errorMessage = e.message || e || "Unbekannter Fehler aufgetreten.";
+        throw `Ein Fehler ist aufgetreten: ${errorMessage}`;
     }
 }
 

@@ -8,26 +8,26 @@ import os from 'os';
 const streamPipeline = promisify(pipeline);
 
 let handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) throw `Use example: ${usedPrefix}${command} naruto blue bird`;
-  await m.react('⏳'); // Assuming rwait is an emoji
+  if (!text) throw `Benutze das Beispiel: ${usedPrefix}${command} naruto blue bird`;
+  await m.react('⏳'); // Angenommen, rwait ist ein Emoji
 
   try {
     const query = encodeURIComponent(text);
     const response = await axios.get(`https://apisku-furina.vercel.app/api/downloader/play?q=${query}&apikey=indradev`);
     const result = response.data.results[0];
 
-    if (!result) throw 'Video Not Found, Try Another Title';
+    if (!result) throw 'Video nicht gefunden, versuche einen anderen Titel';
 
     const { title, thumbnail, duration, views, uploaded, url } = result;
 
     const captvid = `❀ Y O U T U B E ❀
-❏ Title: ${title}
-❐ Duration: ${duration}
-❑ Views: ${views}
-❒ Upload: ${uploaded}
+❏ Titel: ${title}
+❐ Dauer: ${duration}
+❑ Aufrufe: ${views}
+❒ Hochgeladen: ${uploaded}
 ❒ Link: ${url}
 
-> CAN NOT DOWNLOAD FOR YOU WE ARE FIXING THE PROBLEM.
+> KANN NICHT FÜR DICH HERUNTERLADEN, WIR BEHEBEN DAS PROBLEM.
 > © GlobalTechInfo
 ❍─━━━━⊱༻●༺⊰━━━━─❍`;
 
@@ -58,7 +58,7 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
           mediaType: 2,
           mediaUrl: url,
           title: title,
-          body: 'HERE IS YOUR SONG',
+          body: 'HIER IST DEIN LIED',
           sourceUrl: url,
           thumbnail: await (await conn.getFile(thumbnail)).data,
         },
@@ -67,12 +67,12 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
 
     await conn.sendMessage(m.chat, doc, { quoted: m });
 
-    // Cleanup
+    // Aufräumen
     await fs.promises.unlink(audioPath);
-    console.log(`Deleted audio file: ${audioPath}`);
+    console.log(`Audiodatei gelöscht: ${audioPath}`);
   } catch (error) {
     console.error(error);
-    throw 'An error occurred while searching for YouTube videos.';
+    throw 'Ein Fehler ist bei der Suche nach YouTube-Videos aufgetreten.';
   }
 };
 

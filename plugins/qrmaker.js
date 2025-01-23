@@ -1,11 +1,11 @@
 import { toDataURL } from 'qrcode'
 let handler = async (m, { text, conn }) => {
-  if (!text) throw `*Give a text to convert*`
+  if (!text) throw `*Gib einen Text zum Konvertieren an*`
   conn.sendFile(
     m.chat,
     await toDataURL(text.slice(0, 2048), { scale: 8 }),
     'qrcode.png',
-    'Here u go',
+    'Hier bitte',
     m
   )
 }

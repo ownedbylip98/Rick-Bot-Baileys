@@ -4,12 +4,12 @@ const tld = 'cn'
 
 let handler = async (m, { args, usedPrefix, command }) => {
   let err = `
-📌 *Example:*
+📌 *Beispiel:*
 
-*${usedPrefix + command}* <id> [text]
+*${usedPrefix + command}* <id> [Text]
 *${usedPrefix + command}* en Hello World
 
-≡ *List of supported languages:* 
+≡ *Liste der unterstützten Sprachen:* 
 
 https://cloud.google.com/translate/docs/languages
 `.trim()

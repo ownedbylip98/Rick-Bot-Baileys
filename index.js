@@ -7,7 +7,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 
 figlet(
-  'MEGA AI',
+  'Rick-Bot',
   {
     font: 'Ghost',
     horizontalLayout: 'default',
@@ -23,7 +23,7 @@ figlet(
 )
 
 figlet(
-  'Advanced Whatsapp Bot',
+  'Advanced Whatsapp Bot By OwnedbyLIP',
   {
     horizontalLayout: 'default',
     verticalLayout: 'default',
@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(chalk.green(`Port ${port} is open`))
+  console.log(chalk.green(`Port ${port} ist offen!`))
 })
 
 let isRunning = false
@@ -66,7 +66,7 @@ async function start(file) {
   })
 
   p.on('message', data => {
-    console.log(chalk.cyan(`✔️RECEIVED ${data}`))
+    console.log(chalk.cyan(`✔️ERHALTEN ${data}`))
     switch (data) {
       case 'reset':
         p.kill()
@@ -81,7 +81,7 @@ async function start(file) {
 
   p.on('exit', code => {
     isRunning = false
-    console.error(chalk.red(`❌Exited with code: ${code}`))
+    console.error(chalk.red(`❌Beendet mit Code: ${code}`))
 
     if (code === 0) return
 
@@ -92,7 +92,7 @@ async function start(file) {
   })
 
   p.on('error', err => {
-    console.error(chalk.red(`Error: ${err}`))
+    console.error(chalk.red(`Fehler: ${err}`))
     p.kill()
     isRunning = false
     start('global.js')
@@ -102,17 +102,17 @@ async function start(file) {
 
   fs.readdir(pluginsFolder, async (err, files) => {
     if (err) {
-      console.error(chalk.red(`Error reading plugins folder: ${err}`))
+      console.error(chalk.red(`Fehler beim Lesen des Plugins-Ordners: ${err}`))
       return
     }
-    console.log(chalk.yellow(`Installed ${files.length} plugins`))
+    console.log(chalk.yellow(`Installiert ${files.length} Plugins`))
 
     try {
       const { default: baileys } = await import('@whiskeysockets/baileys')
       const version = (await baileys.fetchLatestBaileysVersion()).version
-      console.log(chalk.yellow(`Using Baileys version ${version}`))
+      console.log(chalk.yellow(`Verwende Baileys Version ${version}`))
     } catch (e) {
-      console.error(chalk.red(' Baileys library is not installed'))
+      console.error(chalk.red('Baileys-Bibliothek ist nicht installiert'))
     }
   })
 }
@@ -120,12 +120,12 @@ async function start(file) {
 start('global.js')
 
 process.on('unhandledRejection', () => {
-  console.error(chalk.red(`Unhandled promise rejection. Bot will restart...`))
+  console.error(chalk.red(`Unbehandelte Promise-Ablehnung. Bot wird neu gestartet...`))
   start('global.js')
 })
 
 process.on('exit', code => {
-  console.error(chalk.red(`Exited with code: ${code}`))
-  console.error(chalk.red(`Bot will restart...`))
+  console.error(chalk.red(`Beendet mit Code: ${code}`))
+  console.error(chalk.red(`Bot wird neu gestartet...`))
   start('global.js')
 })

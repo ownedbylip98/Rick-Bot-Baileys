@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { text, usedPrefix, command }) => {
-  if (!text) throw `✳️ *Example:*\n\n*${usedPrefix + command}* Am I ugly?`
+  if (!text) throw `✳️ *Beispiel:*\n\n*${usedPrefix + command}* Bin ich hässlich?`
 
   m.react('🫣')
   conn.sendPresenceUpdate('composing', m.chat)
@@ -14,12 +14,12 @@ let handler = async (m, { text, usedPrefix, command }) => {
   if (json && json.data) {
     const answer = json.data
 
-    m.reply(`≡ *RESPONSE*
+    m.reply(`≡ *ANTWORT*
     
-▢ *Question:* ${text}
-▢ *Answer:* ${answer}`)
+▢ *Frage:* ${text}
+▢ *Antwort:* ${answer}`)
   } else {
-    throw 'No valid response received from the API.'
+    throw 'Keine gültige Antwort von der API erhalten.'
   }
 }
 

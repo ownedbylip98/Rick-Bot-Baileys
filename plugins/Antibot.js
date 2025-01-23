@@ -1,5 +1,3 @@
-
-
 import { areJidsSameUser } from '@whiskeysockets/baileys'
 
 export async function before(m, { participants, conn }) {
@@ -38,11 +36,11 @@ export async function before(m, { participants, conn }) {
 
                 setTimeout(async () => {
 
-                    await m.reply(`✨ No bot is needed in this group, You will be expelled`, null, fwc)
+                    await m.reply(`✨ Kein Bot wird in dieser Gruppe benötigt, du wirst entfernt`, null, fwc)
 
                     await this.groupLeave(m.chat)
 
-                }, 5000)// 5 segundos
+                }, 5000)// 5 Sekunden
 
             }
 

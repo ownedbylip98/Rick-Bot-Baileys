@@ -1,5 +1,5 @@
 let handler = async (m, { conn, command, text, usedPrefix, participants }) => {
-  if (!text) throw 'Mention whose you want to check character'
+  if (!text) throw 'Erwähne, wessen Charakter du überprüfen möchtest'
   const mentionedUser =
     m.mentionedJid && m.mentionedJid[0]
       ? m.mentionedJid[0]
@@ -8,26 +8,26 @@ let handler = async (m, { conn, command, text, usedPrefix, participants }) => {
         : ''
   const userChar = [
     'Sigma',
-    'Generous',
-    'Grumpy',
-    'Overconfident',
-    'Obedient',
-    'Good',
+    'Großzügig',
+    'Mürrisch',
+    'Überheblich',
+    'Gehorsam',
+    'Gut',
     'Simp',
-    'Kind',
-    'Patient',
-    'Pervert',
+    'Freundlich',
+    'Geduldig',
+    'Pervers',
     'Cool',
-    'Helpful',
-    'Brilliant',
+    'Hilfsbereit',
+    'Brillant',
     'Sexy',
-    'Hot',
-    'Gorgeous',
-    'Cute',
+    'Heiß',
+    'Wunderschön',
+    'Niedlich',
   ]
   const userCharacterSeletion = userChar[Math.floor(Math.random() * userChar.length)]
 
-  let message = `Character of @${mentionedUser.split('@')[0]}  is *${userCharacterSeletion}* 🔥⚡`
+  let message = `Der Charakter von @${mentionedUser.split('@')[0]} ist *${userCharacterSeletion}* 🔥⚡`
 
   conn.sendMessage(m.chat, { text: message, mentions: [mentionedUser] }, { quoted: m })
 }

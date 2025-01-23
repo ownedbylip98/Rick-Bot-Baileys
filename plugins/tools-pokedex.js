@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text }) => {
-  if (!text) throw 'Please provide a Pokemon name to search for.'
+  if (!text) throw 'Bitte gib einen Pokémon-Namen zum Suchen an.'
 
   const url = `https://some-random-api.com/pokemon/pokedex?pokemon=${encodeURIComponent(text)}`
 
@@ -9,17 +9,17 @@ let handler = async (m, { conn, text }) => {
   const json = await response.json()
 
   if (!response.ok) {
-    throw `An error occurred: ${json.error}`
+    throw `Ein Fehler ist aufgetreten: ${json.error}`
   }
 
   const message = `
 *≡ Name:* ${json.name}
 *≡ ID:* ${json.id}
-*≡ Type:* ${json.type}
-*≡ Abilities:* ${json.abilities.join(', ')}
-*≡ Height:* ${json.height}
-*≡ Weight:* ${json.weight}
-*≡ Description:* ${json.description}
+*≡ Typ:* ${json.type}
+*≡ Fähigkeiten:* ${json.abilities.join(', ')}
+*≡ Größe:* ${json.height}
+*≡ Gewicht:* ${json.weight}
+*≡ Beschreibung:* ${json.description}
 `
 
   // Correctly send the message using the appropriate structure

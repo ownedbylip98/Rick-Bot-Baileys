@@ -7,11 +7,11 @@ const _fs = fs.promises
 
 let handler = async (m, { text, usedPrefix, command, __dirname }) => {
     if (!text) throw `
-Penggunaan: ${usedPrefix}${command} <name file>
-Contoh: ${usedPrefix}savefile lazack.js
-        ${usedPrefix}saveplugin owner
+Verwendung: ${usedPrefix}${command} <Dateiname>
+Beispiel: ${usedPrefix}savefile lazack.js
+          ${usedPrefix}saveplugin owner
 `.trim()
-    if (!m.quoted) throw `Balas/quote media/text yang ingin disimpan`
+    if (!m.quoted) throw `Antworte/zitiere das Medium/Text, das du speichern möchtest`
     if (/p(lugin)?/i.test(command)) {
         let filename = text.replace(/plugin(s)\//i, '') + (/\.js$/i.test(text) ? '' : '.js')
         const error = syntaxError(m.quoted.text, filename, {
@@ -22,10 +22,10 @@ Contoh: ${usedPrefix}savefile lazack.js
         if (error) throw error
         const pathFile = path.join(__dirname, filename)
         // TODO: make confirmation to save if file already exists
-        // if (fs.existSync(pathFile, fs.constants.R_OK)) return m.reply(`File ${filename} sudah ada`)
+        // if (fs.existSync(pathFile, fs.constants.R_OK)) return m.reply(`Datei ${filename} existiert bereits`)
         await _fs.writeFile(pathFile, m.quoted.text)
         m.reply(`
-Successfully saved to *${filename}*
+Erfolgreich gespeichert unter *${filename}*
 
 \`\`\`
 ${util.format(m.quoted.text)}
@@ -42,7 +42,7 @@ ${util.format(m.quoted.text)}
             if (error) throw error
             await _fs.writeFile(text, m.quoted.text)
             m.reply(`
-Successfully saved to *${text}*
+Erfolgreich gespeichert unter *${text}*
 
 \`\`\`
 ${util.format(m.quoted.text)}
@@ -52,14 +52,14 @@ ${util.format(m.quoted.text)}
             const media = await m.quoted.download()
             await _fs.writeFile(text, media)
             m.reply(`
-Successfully saved media to *${text}*
+Erfolgreich gespeichert unter *${text}*
 `.trim())
         } else {
-            throw 'Not supported!!'
+            throw 'Nicht unterstützt!!'
         }
     }
 }
-handler.help = ['plugin', 'file'].map(v => `save${v} <name file>`)
+handler.help = ['plugin', 'file'].map(v => `save${v} <Dateiname>`)
 handler.tags = ['owner']
 handler.command = /^(save|s)(p(lugin)?|(f(ile)?))$/i
 

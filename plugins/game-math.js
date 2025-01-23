@@ -3,41 +3,41 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
   if (args.length < 1)
     throw `
-  🧮 available difficulties : 
+  🧮 verfügbare Schwierigkeitsgrade : 
   
 ${Object.keys(modes).join(' | ')} 
 
-_📌Example : ${usedPrefix + command} normal_
+_📌Beispiel : ${usedPrefix + command} normal_
 `.trim()
   let mode = args[0].toLowerCase()
   if (!(mode in modes))
     throw `
-  🧮 available difficulties : 
+  🧮 verfügbare Schwierigkeitsgrade : 
   
  ${Object.keys(modes).join(' | ')}
 
-_📌Example : ${usedPrefix + command} normal_
+_📌Beispiel : ${usedPrefix + command} normal_
 `.trim()
 
   let id = m.chat
   if (id in conn.math)
     return conn.reply(
       m.chat,
-      '⚠️ There are still unanswered questions in this chat',
+      '⚠️ Es gibt noch unbeantwortete Fragen in diesem Chat',
       conn.math[id][0]
     )
   let math = genMath(mode)
   conn.math[id] = [
     await conn.reply(
       m.chat,
-      `▢ HOW MUCH IS IT *${math.str}*=\n\n_Time:_ ${(math.time / 1000).toFixed(2)} seconds\n\n🎁 Reward : ${math.bonus} XP`,
+      `▢ WIE VIEL IST ES *${math.str}*=\n\n_Zeit:_ ${(math.time / 1000).toFixed(2)} Sekunden\n\n🎁 Belohnung : ${math.bonus} XP`,
       m
     ),
     math,
     4,
     setTimeout(() => {
       if (conn.math[id])
-        conn.reply(m.chat, `⏳ Time is over!\nThe answer is : *${math.result}*`, conn.math[id][0])
+        conn.reply(m.chat, `⏳ Die Zeit ist um!\nDie Antwort ist : *${math.result}*`, conn.math[id][0])
       delete conn.math[id]
     }, math.time),
   ]

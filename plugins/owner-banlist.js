@@ -1,15 +1,14 @@
-
 let handler = async (m, { conn, usedPrefix, isOwner }) => {
     let chats = Object.entries(global.db.data.chats).filter(chat => chat[1].isBanned)
     let users = Object.entries(global.db.data.users).filter(user => user[1].banned)
     
     let te = `
-≡ *USUARIOS BANEADOS*
+≡ *GEBANNTE BENUTZER*
 
 ▢ ${mssg.total} : *${users.length}* 
 
 ${users ? '\n' + users.map(([jid], i) => `
-${i + 1}. ${conn.getName(jid) == undefined ? 'Desconocido' : conn.getName(jid)}
+${i + 1}. ${conn.getName(jid) == undefined ? 'Unbekannt' : conn.getName(jid)}
 ${isOwner ? '@' + jid.split`@`[0] : jid}
 `.trim()).join('\n\n') : ''}
 `.trim()

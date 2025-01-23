@@ -56,7 +56,7 @@ let handler = async (m, _2) => {
       [conn, _2]
     )
   } catch (e) {
-    let err = syntaxerror(_text, 'Execution Function', {
+    let err = syntaxerror(_text, 'Ausführungsfunktion', {
       allowReturnOutsideFunction: true,
       allowAwaitOutsideFunction: true,
       sourceType: 'module',

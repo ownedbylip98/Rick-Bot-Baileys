@@ -8,14 +8,14 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
         room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender)
     )
   )
-    throw `✳️ You are still in the game to restart the session write : *${usedPrefix}delttt*`
-  if (!text) throw `✳️ Put a number in the room`
+    throw `✳️ Du bist noch im Spiel. Um die Sitzung neu zu starten, schreibe: *${usedPrefix}delttt*`
+  if (!text) throw `✳️ Gib eine Nummer für den Raum an`
   let room = Object.values(conn.game).find(
     room => room.state === 'WAITING' && (text ? room.name === text : true)
   )
   // m.reply('[WIP Feature]')
   if (room) {
-    m.reply('✅ mate found')
+    m.reply('✅ Partner gefunden')
     room.o = m.chat
     room.game.playerO = m.sender
     room.state = 'PLAYING'
@@ -35,16 +35,16 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
       }[v]
     })
     let str = `
-Waiting for @${room.game.currentTurn.split('@')[0]} as first player
+Warte auf @${room.game.currentTurn.split('@')[0]} als erster Spieler
         
 ${arr.slice(0, 3).join('')}
 ${arr.slice(3, 6).join('')}
 ${arr.slice(6).join('')}
 
-▢ *Room ID* ${room.id}
+▢ *Raum ID* ${room.id}
 
-▢ *Rules*
-‣ Make 3 rows of symbols vertically, horizontally or diagonally to win ‣ Type *surrender* to exit the game and be declared defeated
+▢ *Regeln*
+‣ Mache 3 Reihen von Symbolen vertikal, horizontal oder diagonal, um zu gewinnen ‣ Schreibe *aufgeben*, um das Spiel zu verlassen und als besiegt erklärt zu werden
 `.trim()
     if (room.x !== room.o)
       await conn.reply(room.x, str, m, {
@@ -65,10 +65,10 @@ ${arr.slice(6).join('')}
 
     conn.reply(
       m.chat,
-      `⏳ *expecting partner*\nType the following command to accept
+      `⏳ *warte auf einen Partner*\nGib den folgenden Befehl ein, um anzunehmen
 ▢ *${usedPrefix + command} ${text}*
 
-🎁 Reward:  *4999 XP*`,
+🎁 Belohnung:  *4999 XP*`,
       m,
       {
         mentions: conn.parseMention(text),
@@ -79,7 +79,7 @@ ${arr.slice(6).join('')}
   }
 }
 
-handler.help = ['tictactoe <tag number>']
+handler.help = ['tictactoe <Raumnummer>']
 handler.tags = ['game']
 handler.command = ['tictactoe', 'ttc', 'ttt', 'xo']
 

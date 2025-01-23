@@ -5,9 +5,9 @@ export function before(m) {
   if (user.afk > -1) {
     m.reply(
       `
-  ✅ You stopped being AFK 
-${user.afkReason ? ' \n▢ *Reason :* ' + user.afkReason : ''}
-▢ *AFK Duration :* ${(new Date() - user.afk).toTimeString()}
+  ✅ Du bist nicht mehr AFK 
+${user.afkReason ? ' \n▢ *Grund :* ' + user.afkReason : ''}
+▢ *AFK Dauer :* ${(new Date() - user.afk).toTimeString()}
   `.trim()
     )
     user.afk = -1
@@ -22,10 +22,10 @@ ${user.afkReason ? ' \n▢ *Reason :* ' + user.afkReason : ''}
     let reason = user.afkReason || ''
     m.reply(
       `
-💤 The human u mentioned is afk 
+💤 Die Person, die du erwähnt hast, ist AFK 
 
-${reason ? '▢ *Reason* : ' + reason : '▢ *Reason* : Without reason'}
-▢ *AFK Duration :* ${(new Date() - afkTime).toTimeString()}
+${reason ? '▢ *Grund* : ' + reason : '▢ *Grund* : Ohne Grund'}
+▢ *AFK Dauer :* ${(new Date() - afkTime).toTimeString()}
   `.trim()
     )
   }

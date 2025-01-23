@@ -1,6 +1,6 @@
 {
-    "name": "mega",
-    "version": "4.0.0",
+    "name": "rickBot",
+    "version": "1.0.0",
     "description": "Advanced AI",
     "main": "index.js",
     "type": "module",
@@ -28,18 +28,6 @@
         "MD",
         "baileys-md"
     ],
-    "homepage": "https://github.com/GlobalTechInfo/MEGA-AI",
-    "author": {
-        "name": "GlobalTechInfo"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/GlobalTechInfo/MEGA-AI.git"
-    },
-    "bugs": {
-        "url": "https://github.com/GlobalTechInfo/MEGA-AI/issues"
-    },
-    "license": "Apache-2.0",
     "dependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
         "@google/generative-ai": "0.1.3",

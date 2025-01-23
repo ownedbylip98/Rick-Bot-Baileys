@@ -19,15 +19,15 @@ let handler = async m => {
     let { title, artists, album, genres, release_date } = res.metadata.music[0]
     let txt = `
 𝚁𝙴𝚂𝚄𝙻𝚃
-• 📌 *TITLE*: ${title}
-• 👨‍🎤 𝙰𝚁𝚃𝙸𝚂𝚃: ${artists !== undefined ? artists.map(v => v.name).join(', ') : 'NOT FOUND'}
-• 💾 𝙰𝙻𝙱𝚄𝙼: ${album.name || 'NOT FOUND'}
-• 🌐 𝙶𝙴𝙽𝙴𝚁: ${genres !== undefined ? genres.map(v => v.name).join(', ') : 'NOT FOUND'}
-• 📆 RELEASE DATE: ${release_date || 'NOT FOUND'}
+• 📌 *TITEL*: ${title}
+• 👨‍🎤 *KÜNSTLER*: ${artists !== undefined ? artists.map(v => v.name).join(', ') : 'NICHT GEFUNDEN'}
+• 💾 *ALBUM*: ${album.name || 'NICHT GEFUNDEN'}
+• 🌐 *GENRE*: ${genres !== undefined ? genres.map(v => v.name).join(', ') : 'NICHT GEFUNDEN'}
+• 📆 *VERÖFFENTLICHUNGSDATUM*: ${release_date || 'NICHT GEFUNDEN'}
 `.trim()
     fs.unlinkSync(`./tmp/${m.sender}.${ext}`)
     m.reply(txt)
-  } else throw '*𝚁𝙴𝚂𝙿𝙾𝙽𝙳 𝙰𝚄𝙳𝙸𝙾*'
+  } else throw '*ANTWORTE MIT EINER AUDIO*'
 }
 
 handler.help = ['shazam']

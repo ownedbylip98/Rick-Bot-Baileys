@@ -2,86 +2,86 @@ import pkg from 'api-qasim';
 const { happymod } = pkg;
 
 const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-  if (!text) throw `Please provide a query to search for APKs. Example: *${usedPrefix + command}* Telegram`;
+  if (!text) throw `Bitte gib eine Suchanfrage für APKs an. Beispiel: *${usedPrefix + command}* Telegram`;
 
   try {
-    // Search for APKs using happymod
+    // Suche nach APKs mit happymod
     const searchResults = await happymod(text);
     await m.react('⏳');
 
-    // Check if there are results
+    // Überprüfe, ob es Ergebnisse gibt
     if (searchResults && Array.isArray(searchResults.data) && searchResults.data.length > 0) {
-      let apkListMessage = `*Choose an APK from the list by replying with the number:*\n\n`;
+      let apkListMessage = `*Wähle eine APK aus der Liste, indem du mit der Nummer antwortest:*\n\n`;
 
-      // Loop through the result and check its structure before accessing properties
+      // Schleife durch die Ergebnisse und überprüfe die Struktur, bevor auf Eigenschaften zugegriffen wird
       searchResults.data.forEach((item, index) => {
         console.log(`APK ${index + 1}:`, item);
 
-        // Ensure we have valid details (title, rating) before displaying
+        // Stelle sicher, dass wir gültige Details (Titel, Bewertung) haben, bevor sie angezeigt werden
         const apkTitle = item.title || `APK ${index + 1}`;
         const apkRating = item.rating || "N/A";
-        const apkLink = item.link || "#";  // Provide a fallback URL or identifier
+        const apkLink = item.link || "#";  // Fallback-URL oder Kennung bereitstellen
 
-        apkListMessage += `*${index + 1}.* ${apkTitle} (Rating: ${apkRating})\n\n`;
+        apkListMessage += `*${index + 1}.* ${apkTitle} (Bewertung: ${apkRating})\n\n`;
       });
 
-      // Send the list of APKs to the user
+      // Sende die Liste der APKs an den Benutzer
       const { key } = await conn.reply(m.chat, apkListMessage, m);
 
-      // Initialize session storage for the selected APK
-      conn.happymod = conn.happymod || {};  // Initialize session storage if not already initialized
+      // Initialisiere die Sitzungsspeicherung für die ausgewählte APK
+      conn.happymod = conn.happymod || {};  // Initialisiere die Sitzungsspeicherung, falls noch nicht geschehen
       conn.happymod[m.sender] = {
-        result: searchResults.data,  // Store the list of APKs
-        key, // Store the message key to delete later
+        result: searchResults.data,  // Speichere die Liste der APKs
+        key, // Speichere den Nachrichtenschlüssel zum späteren Löschen
         timeout: setTimeout(() => {
           conn.sendMessage(m.chat, { delete: key });
           delete conn.happymod[m.sender];
-        }, 150 * 1000), // Timeout after 2.5 minutes
+        }, 150 * 1000), // Timeout nach 2,5 Minuten
       };
     } else {
-      // If no results, inform the user
-      await conn.reply(m.chat, `No APKs found for the query provided.`, m);
+      // Wenn keine Ergebnisse, informiere den Benutzer
+      await conn.reply(m.chat, `Keine APKs für die angegebene Suchanfrage gefunden.`, m);
     }
   } catch (error) {
-    console.error('Error searching APKs:', error);
-    await conn.reply(m.chat, `❎ Error occurred while searching for APKs: ${error.message || error}`, m);
+    console.error('Fehler bei der APK-Suche:', error);
+    await conn.reply(m.chat, `❎ Fehler bei der Suche nach APKs: ${error.message || error}`, m);
   }
 };
 
 handler.before = async (m, { conn }) => {
-  // Ensure session storage is initialized before accessing
+  // Stelle sicher, dass die Sitzungsspeicherung initialisiert ist, bevor darauf zugegriffen wird
   conn.happymod = conn.happymod || {};
 
-  // Ensure the user has received the options and replied with a number
+  // Stelle sicher, dass der Benutzer die Optionen erhalten und mit einer Nummer geantwortet hat
   if (m.isBaileys || !(m.sender in conn.happymod)) return;
 
   const { result, key, timeout } = conn.happymod[m.sender];
 
-  // Validate the reply and the input number
+  // Überprüfe die Antwort und die eingegebene Nummer
   if (!m.quoted || m.quoted.id !== key.id || !m.text) return;
 
   const choice = m.text.trim();
   const inputNumber = Number(choice);
 
-  // Validate the user's selection
+  // Überprüfe die Auswahl des Benutzers
   if (inputNumber >= 1 && inputNumber <= result.length) {
-    const selectedApk = result[inputNumber - 1];  // Get the selected APK
-    const { title, rating, link, thumb } = selectedApk;  // Get the details of the selected APK
+    const selectedApk = result[inputNumber - 1];  // Hole die ausgewählte APK
+    const { title, rating, link, thumb } = selectedApk;  // Hole die Details der ausgewählten APK
 
     try {
-      // Send the selected APK details to the user
-      await conn.reply(m.chat, `*Details of the selected APK:*\n\nTitle: ${title}\nRating: ${rating}\nDownload Link: ${link}`, m);
+      // Sende die Details der ausgewählten APK an den Benutzer
+      await conn.reply(m.chat, `*Details der ausgewählten APK:*\n\nTitel: ${title}\nBewertung: ${rating}\nDownload-Link: ${link}`, m);
       await m.react('✅');
-      clearTimeout(timeout); // Clear the timeout for the session
+      clearTimeout(timeout); // Lösche das Timeout für die Sitzung
 
-      // Clean up the session
+      // Bereinige die Sitzung
       delete conn.happymod[m.sender];
     } catch (error) {
-      console.error("Error sending selected APK:", error);
-      await conn.reply(m.chat, `❎ Failed to send the APK details: ${error.message || error}`, m);
+      console.error("Fehler beim Senden der ausgewählten APK:", error);
+      await conn.reply(m.chat, `❎ Fehler beim Senden der APK-Details: ${error.message || error}`, m);
     }
   } else {
-    await conn.reply(m.chat, `❎ Invalid selection. Please choose a number between 1 and ${result.length}.`, m);
+    await conn.reply(m.chat, `❎ Ungültige Auswahl. Bitte wähle eine Nummer zwischen 1 und ${result.length}.`, m);
   }
 };
 

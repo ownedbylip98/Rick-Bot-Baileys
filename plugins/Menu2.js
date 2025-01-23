@@ -7,8 +7,8 @@ const { levelling } = '../lib/levelling.js'
 import moment from 'moment-timezone'
 import { promises } from 'fs'
 import { join } from 'path'
-const time = moment.tz('Asia/Karachi').format('HH')
-let wib = moment.tz('Asia/Karachi').format('HH:mm:ss')
+const time = moment.tz('Europe/Berlin').format('HH')
+let wib = moment.tz('Europe/Berlin').format('HH:mm:ss')
 //import db from '../lib/database.js'
 
 let handler = async (m, { conn, usedPrefix, command}) => {
@@ -19,7 +19,7 @@ let handler = async (m, { conn, usedPrefix, command}) => {
     let _uptime = process.uptime() * 1000
     let uptime = clockString(_uptime)
 let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`
+if (!(who in global.db.data.users)) throw `✳️ Der Benutzer wurde nicht in meiner Datenbank gefunden`
 let pp = './assets/A.jpg'
 let user = global.db.data.users[who]
 let { name, exp, diamond, lastclaim, registered, regTime, age, level, role, warn } = global.db.data.users[who]
@@ -37,10 +37,10 @@ let quote = quotes[Math.floor(Math.random() * quotes.length)];
 
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 let str = `
-🚀 *_Buckle up ${name}, ${greeting}! We're going on an adventure!_* 🚀
+🚀 *_Schnall dich an ${name}, ${greeting}! Wir gehen auf ein Abenteuer!_* 🚀
 
-📋 *_Quote of the day: ${quote}_* 📋
-> ➠ *Bot Name* : *MEGA-AI*
+📋 *_Zitat des Tages: ${quote}_* 📋
+> ➠ *Bot Name* : *Rick-Bot*
 > ➠ *Version*     : *4 . 0 . 0*
 > ➠ *Type*          : *PLUGINS*
 > ➠ *Platform*   : *LINUX*
@@ -78,9 +78,9 @@ let str = `
 ◈┃• fancy
 ◈┗━♪♪━★━☆━⦿
 
-© GlobalTechInfo
+© OwnedbyLIP
 
-> 💡 *_Remember, when in doubt, use ${usedPrefix}listmenu or ${usedPrefix}help It's like my magic spell book!_* 💡
+> 💡 *_Denke daran, wenn du Zweifel hast, benutze ${usedPrefix}listmenu oder ${usedPrefix}help Es ist wie mein Zauberbuch!_* 💡
 `
 
     
@@ -89,7 +89,7 @@ let str = `
     
 
 
-   conn.sendFile(m.chat, pp, 'perfil.jpg', str, m, null, canal)
+   conn.sendFile(m.chat, pp, 'profil.jpg', str, m, null, kanal)
     m.react(done)
 
 }
@@ -104,70 +104,71 @@ function clockString(ms) {
     let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
     return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')}
     
-    function ucapan() {
-      const time = moment.tz('Asia/Karachi').format('HH')
-      let res = "happy early in the day☀️"
-      if (time >= 4) {
-        res = "Good Morning 🌄"
-      }
-      if (time >= 10) {
-        res = "Good Afternoon ☀️"
-      }
-      if (time >= 15) {
-        res = "Good Afternoon 🌇"
-      }
-      if (time >= 18) {
-        res = "Good Night 🌙"
-      }
-      return res
+function ucapan() {
+    const time = moment.tz('Europe/Berlin').format('HH');
+    let res = "fröhlichen frühen Tag☀️";
+    if (time >= 6) {
+        res = "Guten Morgen 🥱";
     }
+    if (time >= 12) {
+        res = "Guten Tag🫠";
+    }
+    if (time >= 18) {
+        res = "Guten Abend 🌇";
+    }
+    if (time >= 24) {
+        res = "Gute Nacht 🌙";
+    }
+    return res;
+}
+
     const quotes = [
-      "I'm not lazy, I'm just on my energy saving mode.",
-      "Life is short, smile while you still have teeth.",
-      "I may be a bad influence, but darn I am fun!",
-      "I'm on a whiskey diet. I've lost three days already.",
-      "Why don't some couples go to the gym? Because some relationships don't work out.",
-      "I told my wife she should embrace her mistakes... She gave me a hug.",
-      "I'm great at multitasking. I can waste time, be unproductive, and procrastinate all at once.",
-      "You know you're getting old when you stoop to tie your shoelaces and wonder what else you could do while you're down there.",
-      "I'm so good at sleeping, I can do it with my eyes closed.",
-      "If you think nobody cares if you’re alive, try missing a couple of payments.",
-      "I used to think I was indecisive, but now I'm not so sure.",
-      "If you can't convince them, confuse them.",
-      "I told my wife she was drawing her eyebrows too high. She looked surprised.",
-      "I'm not clumsy, I'm just on a mission to test gravity.",
-      "I told my wife she should do more push-ups. She said, 'I could do a hundred!' So I counted to ten and stopped.",
-      "Life is like a box of chocolates; it doesn't last long if you're hungry.",
-      "I'm not saying I'm Wonder Woman, I'm just saying no one has ever seen me and Wonder Woman in the same room together.",
-      "Why do they call it beauty sleep when you wake up looking like a troll?",
-      "I don't always lose my phone, but when I do, it's always on silent.",
-      "My bed is a magical place where I suddenly remember everything I was supposed to do.",
-      "I love the sound you make when you shut up.",
-      "I'm not arguing, I'm just explaining why I'm right.",
-      "I'm not a complete idiot, some parts are missing.",
-      "When life gives you lemons, squirt someone in the eye.",
-      "I don't need anger management. You just need to stop making me angry.",
-      "I'm not saying I'm Batman. I'm just saying no one has ever seen me and Batman in the same room together.",
-      "I'm not saying I'm Superman. I'm just saying no one has ever seen me and Superman in the same room together.",
-      "I'm not saying I'm Spider-Man. I'm just saying no one has ever seen me and Spider-Man in the same room together.",
-      "I'm not saying I'm a superhero. I'm just saying no one has ever seen me and a superhero in the same room together.",
-      "The early bird can have the worm because worms are gross and mornings are stupid.",
-      "If life gives you lemons, make lemonade. Then find someone whose life has given them vodka and have a party!",
-      "The road to success is always under construction.",
-      "I am so clever that sometimes I don't understand a single word of what I am saying.",
-      "Some people just need a high-five. In the face. With a chair.",
-      "I'm not saying I'm perfect, but I'm pretty close.",
-      "A day without sunshine is like, you know, night.",
-      "The best way to predict the future is to create it.",
-      "If you can't be a good example, then you'll just have to be a horrible warning.",
-      "I don't know why I keep hitting the escape button. I'm just trying to get out of here.",
-      "I'm not lazy. I'm on energy-saving mode.",
-      "I don't need a hairstylist, my pillow gives me a new hairstyle every morning.",
-      "I don't have a bad handwriting, I have my own font.",
-      "I'm not clumsy. It's just the floor hates me, the table and chairs are bullies, and the walls get in my way.",
-      "I'm not saying I'm Batman. I'm just saying no one has ever seen me and Batman in the same room together.",
-      "I'm not saying I'm Wonder Woman. I'm just saying no one has ever seen me and Wonder Woman in the same room together.",
-      "I'm not saying I'm Superman. I'm just saying no one has ever seen me and Superman in the same room together.",
-      "I'm not saying I'm Spider-Man. I'm just saying no one has ever seen me and Spider-Man in the same room together.",
-      "I'm not saying I'm a superhero. I'm just saying no one has ever seen me and a superhero in the same room together."
+      "Ich bin nicht faul, ich bin nur im Energiesparmodus.",
+      "Das Leben ist kurz, lächle, solange du noch Zähne hast.",
+      "Ich mag ein schlechter Einfluss sein, aber verdammt, ich bin lustig!",
+      "Ich bin auf einer Whisky-Diät. Ich habe schon drei Tage verloren.",
+      "Warum gehen einige Paare nicht ins Fitnessstudio? Weil einige Beziehungen nicht funktionieren.",
+      "Ich sagte meiner Frau, sie solle ihre Fehler umarmen... Sie gab mir eine Umarmung.",
+      "Ich bin großartig im Multitasking. Ich kann Zeit verschwenden, unproduktiv sein und gleichzeitig prokrastinieren.",
+      "Du weißt, dass du alt wirst, wenn du dich bückst, um deine Schnürsenkel zu binden, und dich fragst, was du sonst noch tun könntest, während du da unten bist.",
+      "Ich bin so gut im Schlafen, ich kann es mit geschlossenen Augen tun.",
+      "Wenn du denkst, dass es niemanden interessiert, ob du lebst, versuche, ein paar Zahlungen zu verpassen.",
+      "Früher dachte ich, ich sei unentschlossen, aber jetzt bin ich mir nicht mehr so sicher.",
+      "Wenn du sie nicht überzeugen kannst, verwirre sie.",
+      "Ich sagte meiner Frau, sie ziehe ihre Augenbrauen zu hoch. Sie sah überrascht aus.",
+      "Ich bin nicht tollpatschig, ich teste nur die Schwerkraft.",
+      "Ich sagte meiner Frau, sie solle mehr Liegestütze machen. Sie sagte: 'Ich könnte hundert machen!' Also zählte ich bis zehn und hörte auf.",
+      "Das Leben ist wie eine Schachtel Pralinen; es dauert nicht lange, wenn du hungrig bist.",
+      "Ich sage nicht, dass ich Wonder Woman bin, ich sage nur, dass mich und Wonder Woman noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Warum nennen sie es Schönheitsschlaf, wenn du aufwachst und wie ein Troll aussiehst?",
+      "Ich verliere nicht immer mein Telefon, aber wenn ich es tue, ist es immer auf lautlos.",
+      "Mein Bett ist ein magischer Ort, an dem ich mich plötzlich an alles erinnere, was ich tun sollte.",
+      "Ich liebe das Geräusch, das du machst, wenn du den Mund hältst.",
+      "Ich streite nicht, ich erkläre nur, warum ich recht habe.",
+      "Ich bin kein kompletter Idiot, einige Teile fehlen.",
+      "Wenn das Leben dir Zitronen gibt, spritze jemandem in die Augen.",
+      "Ich brauche kein Aggressionsmanagement. Du musst nur aufhören, mich wütend zu machen.",
+      "Ich sage nicht, dass ich Batman bin. Ich sage nur, dass mich und Batman noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich Superman bin. Ich sage nur, dass mich und Superman noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich Spider-Man bin. Ich sage nur, dass mich und Spider-Man noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich ein Superheld bin. Ich sage nur, dass mich und einen Superhelden noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Der frühe Vogel kann den Wurm haben, weil Würmer ekelhaft sind und Morgen dumm sind.",
+      "Wenn das Leben dir Zitronen gibt, mach Limonade. Dann finde jemanden, dessen Leben ihm Wodka gegeben hat, und feiere eine Party!",
+      "Der Weg zum Erfolg ist immer im Bau.",
+      "Ich bin so clever, dass ich manchmal kein einziges Wort von dem verstehe, was ich sage.",
+      "Manche Leute brauchen einfach einen High-Five. Ins Gesicht. Mit einem Stuhl.",
+      "Ich sage nicht, dass ich perfekt bin, aber ich bin ziemlich nah dran.",
+      "Ein Tag ohne Sonnenschein ist wie, du weißt schon, Nacht.",
+      "Der beste Weg, die Zukunft vorherzusagen, ist, sie zu erschaffen.",
+      "Wenn du kein gutes Beispiel sein kannst, musst du eine schreckliche Warnung sein.",
+      "Ich weiß nicht, warum ich immer wieder die Escape-Taste drücke. Ich versuche nur, hier rauszukommen.",
+      "Ich bin nicht faul. Ich bin im Energiesparmodus.",
+      "Ich brauche keinen Friseur, mein Kissen gibt mir jeden Morgen eine neue Frisur.",
+      "Ich habe keine schlechte Handschrift, ich habe meine eigene Schriftart.",
+      "Ich bin nicht tollpatschig. Es ist nur so, dass der Boden mich hasst, der Tisch und die Stühle sind Mobber und die Wände stehen mir im Weg.",
+      "Ich sage nicht, dass ich Batman bin. Ich sage nur, dass mich und Batman noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich Wonder Woman bin. Ich sage nur, dass mich und Wonder Woman noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich Superman bin. Ich sage nur, dass mich und Superman noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich Spider-Man bin. Ich sage nur, dass mich und Spider-Man noch nie jemand zusammen im selben Raum gesehen hat.",
+      "Ich sage nicht, dass ich ein Superheld bin. Ich sage nur, dass mich und einen Superhelden noch nie jemand zusammen im selben Raum gesehen hat."
       ];

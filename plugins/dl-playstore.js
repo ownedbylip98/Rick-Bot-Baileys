@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text }) => {
   if (!text) {
-    return m.reply("Enter the name of the app to search for on the Play Store.");
+    return m.reply("Gib den Namen der App ein, nach der du im Play Store suchen möchtest.");
   }
 
   try {
@@ -10,30 +10,30 @@ let handler = async (m, { conn, text }) => {
     await m.react('⏳');
     
     // Fetch data from the Play Store API
-    const response = await fetch(`https://global-tech-api.vercel.app/playstore?query=${text}`);
+    const response = await fetch(`https://ownedbylip-api.vercel.app/playstore?query=${text}`);
     
     // Log the API response to the console for debugging
     const data = await response.json();
-    console.log("Play Store API Response:", data);
+    console.log("Play Store API Antwort:", data);
 
     // Check if the API returned results
     if (!data || data.length === 0) {
       // React with "done" emoji in case no results
       await m.react('✅');
-      return m.reply("No apps were found on the Play Store for the application you were looking for.");
+      return m.reply("Es wurden keine Apps im Play Store für die gesuchte Anwendung gefunden.");
     }
 
-    let caption = `Play Store search results for *${text}*:\n\n`;
+    let caption = `Play Store Suchergebnisse für *${text}*:\n\n`;
 
     // Loop through the results and format the response
     data.forEach((result, index) => {
       if (result.name && result.link && result.developer && result.rating_Num) {
         caption += `
-${index + 1}. *Title:* ${result.name}
-*Developer:* ${result.developer}
-*Rating:* ${result.rating_Num} stars
-*Download Link:* ${result.link}
-*Developer Page:* ${result.link_dev || 'Not available'}
+${index + 1}. *Titel:* ${result.name}
+*Entwickler:* ${result.developer}
+*Bewertung:* ${result.rating_Num} Sterne
+*Download-Link:* ${result.link}
+*Entwicklerseite:* ${result.link_dev || 'Nicht verfügbar'}
 \n`;
       }
     });
@@ -44,8 +44,8 @@ ${index + 1}. *Title:* ${result.name}
     // Send the formatted message with app details
     await conn.sendMessage(m.chat, { text: caption }, { quoted: m });
   } catch (error) {
-    console.error("Error in Play Store search:", error);
-    m.reply("An error occurred while searching for apps on the Play Store.");
+    console.error("Fehler bei der Play Store Suche:", error);
+    m.reply("Bei der Suche nach Apps im Play Store ist ein Fehler aufgetreten.");
   }
 };
 

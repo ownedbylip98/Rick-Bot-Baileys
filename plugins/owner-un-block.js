@@ -1,5 +1,5 @@
 let handler = async (m, { text, conn, usedPrefix, command }) => {
-  let why = `*ERROR, EXAMPLE:*\n*—◉ ${usedPrefix + command} @${m.sender.split('@')[0]}*`
+  let why = `*FEHLER, BEISPIEL:*\n*—◉ ${usedPrefix + command} @${m.sender.split('@')[0]}*`
   let who = m.mentionedJid[0]
     ? m.mentionedJid[0]
     : m.quoted
@@ -30,7 +30,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (res[0])
     conn.reply(
       m.chat,
-      `*SUCCESS! USER ${command} ACTION PERFORMED ON ${res ? `${res.map(v => '@' + v.split('@')[0])}` : ''}*`,
+      `*ERFOLG! BENUTZER ${command} AKTION WURDE AUF ${res ? `${res.map(v => '@' + v.split('@')[0])}` : ''} DURCHGEFÜHRT*`,
       m,
       { mentions: res }
     )

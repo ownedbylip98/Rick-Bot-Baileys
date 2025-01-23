@@ -13,8 +13,8 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     let user = global.db.data.users[m.sender]
     if (new Date - user.lastslot < cooldown) throw `⏳ ${mssg.rouletCd} *${msToTime((user.lastslot + cooldown) - new Date())}*`
     if (apuesta < 100) throw `✳️ ${mssg.betMin} *100 🪙*`
-    if (user.coin < apuesta)throw `✳️ ${mssg.coinNan}`
-   if (maxap < apuesta) return m.reply(`🎰 ${mssg.betMax} *${maxap} 🪙*`) 
+    if (user.coin < apuesta) throw `✳️ ${mssg.coinNan}`
+    if (maxap < apuesta) return m.reply(`🎰 ${mssg.betMax} *${maxap} 🪙*`) 
    	
     let emojis = ["🕊️", "🦀", "🦎"];
     let a = Math.floor(Math.random() * emojis.length);
@@ -80,4 +80,17 @@ function msToTime(duration) {
     seconds = (seconds < 10) ? "0" + seconds : seconds
 
     return seconds + ` ${mssg.second}`
+}
+
+// German translations
+const mssg = {
+    example: "Beispiel",
+    rouletCd: "Bitte warte",
+    betMin: "Der Mindesteinsatz beträgt",
+    coinNan: "Du hast nicht genug Münzen",
+    betMax: "Der Höchsteinsatz beträgt",
+    win: "Du hast gewonnen",
+    slotC: "Fast gewonnen",
+    lost: "Du hast verloren",
+    second: "Sekunden"
 }

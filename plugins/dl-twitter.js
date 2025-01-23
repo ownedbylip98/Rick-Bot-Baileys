@@ -2,7 +2,7 @@ import pkg from 'api-qasim'
 const { xdown } = pkg;
 
 let handler = async (m, { conn, usedPrefix, args, command, text }) => {
-  if (!text) throw `✳️ You need to provide the URL of any X (Twitter) video, post, reel, or image.`;
+  if (!text) throw `✳️ Du musst die URL eines X (Twitter) Videos, Posts, Reels oder Bildes angeben.`;
 
   await m.react('⏳'); // React with a loading emoji
 
@@ -10,12 +10,12 @@ let handler = async (m, { conn, usedPrefix, args, command, text }) => {
   try {
     res = await xdown(text); // Get the download link from the API
   } catch (error) {
-    throw `❌ An error occurred while fetching the media: ${error.message}`;
+    throw `❌ Ein Fehler ist beim Abrufen der Medien aufgetreten: ${error.message}`;
   }
 
   // Check if response contains media
   if (!res || !res.media || res.media.length === 0) {
-    throw '❌ No media found for the provided URL.';
+    throw '❌ Keine Medien für die angegebene URL gefunden.';
   }
 
   // Process the media array
@@ -25,7 +25,7 @@ let handler = async (m, { conn, usedPrefix, args, command, text }) => {
     const mediaType = mediaData.type;
     const mediaURL = mediaData.url;
 
-    let caption = `Here is the ${mediaType.toUpperCase()}\n\n*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝙼𝙴𝙶𝙰-𝙰𝙸*`;
+    let caption = `Hier ist das ${mediaType.toUpperCase()}\n\n*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © Rick-Bot*`;
 
     // Send media based on type
     if (mediaType === 'video') {
@@ -34,7 +34,7 @@ let handler = async (m, { conn, usedPrefix, args, command, text }) => {
       await conn.sendFile(m.chat, mediaURL, 'x.jpg', caption, m);
     } else {
       // If the media type is unknown
-      await m.reply(`❌ Unsupported media type: ${mediaType}`);
+      await m.reply(`❌ Nicht unterstützter Medientyp: ${mediaType}`);
     }
   }
 

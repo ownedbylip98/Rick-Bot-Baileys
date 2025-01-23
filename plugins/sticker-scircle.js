@@ -7,10 +7,10 @@ let handler = async (m, { conn, text }) => {
     let img = await q.download()
     let url = await uploadImage(img)
     let scircle = global.API('dzx', '/api/canvas/circle', { url })
-    let stiker = await sticker(null, scircle, global.packname, global.author)
+    let stiker = await sticker(null, scircle, 'Rick-Bot', 'OwnedbyLIP')
     conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, { asSticker: true })
   } catch (e) {
-    m.reply('*[❗𝐈𝐍𝐅𝐎❗] respond to a image to make it circle sticker*')
+    m.reply('*[❗𝐈𝐍𝐅𝐎❗] Antworte auf ein Bild, um es als Kreis-Sticker zu erstellen*')
   }
 }
 handler.command = /^scircle|circle$/i

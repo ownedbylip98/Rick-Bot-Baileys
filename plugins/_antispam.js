@@ -1,17 +1,17 @@
-//Thanks Chatgpt🤡
+//Danke Chatgpt🤡
 import { performance } from 'perf_hooks'
 
-// This function is used to prevent users from sending too many messages in a chat application or bot.
+// Diese Funktion wird verwendet, um zu verhindern, dass Benutzer zu viele Nachrichten in einer Chat-Anwendung oder einem Bot senden.
 
 export async function before(m) {
-  // Get information about users and chats from global data.
+  // Informationen über Benutzer und Chats aus globalen Daten abrufen.
   const users = global.db.data.users
   const chats = global.db.data.chats
 
-  // Check various conditions to determine if anti-spam measures should be applied.
+  // Verschiedene Bedingungen überprüfen, um festzustellen, ob Anti-Spam-Maßnahmen angewendet werden sollen.
 
-  // If anti-spam is disabled for this chat, or if the message is from the bot itself,
-  // or if the message type is a system message or poll update, do nothing and exit the function.
+  // Wenn Anti-Spam für diesen Chat deaktiviert ist, oder wenn die Nachricht vom Bot selbst stammt,
+  // oder wenn der Nachrichtentyp eine Systemnachricht oder eine Umfrageaktualisierung ist, nichts tun und die Funktion verlassen.
   if (
     !chats[m.chat].antiSpam ||
     m.isBaileys ||
@@ -22,8 +22,8 @@ export async function before(m) {
     return
   }
 
-  // If there is no message content, or if the sender is banned, or if the chat is banned,
-  // do nothing and exit the function.
+  // Wenn keine Nachricht vorhanden ist, oder wenn der Absender gesperrt ist, oder wenn der Chat gesperrt ist,
+  // nichts tun und die Funktion verlassen.
   if (
     !m.msg ||
     !m.message ||
@@ -34,48 +34,48 @@ export async function before(m) {
     return
   }
 
-  // Create or access a 'spam' object for the sender to keep track of spam-related data.
+  // Ein 'spam'-Objekt für den Absender erstellen oder darauf zugreifen, um spambezogene Daten zu verfolgen.
   this.spam = this.spam || {}
   this.spam[m.sender] = this.spam[m.sender] || { count: 0, lastspam: 0 }
 
-  // Get the current time in milliseconds.
+  // Die aktuelle Zeit in Millisekunden abrufen.
   const now = performance.now()
 
-  // Calculate the time difference since the last message from this sender.
+  // Die Zeitdifferenz seit der letzten Nachricht von diesem Absender berechnen.
   const timeDifference = now - this.spam[m.sender].lastspam
 
-  // If the time difference is less than 10 seconds, it means the sender is sending messages too quickly.
+  // Wenn die Zeitdifferenz weniger als 10 Sekunden beträgt, bedeutet dies, dass der Absender Nachrichten zu schnell sendet.
   if (timeDifference < 10000) {
-    // Increment the sender's spam count.
+    // Die Spam-Anzahl des Absenders erhöhen.
     this.spam[m.sender].count++
 
-    // If the sender's spam count reaches 5 or more, mark the sender as banned and set a 5-second cooldown.
+    // Wenn die Spam-Anzahl des Absenders 5 oder mehr erreicht, den Absender als gesperrt markieren und eine 5-Sekunden-Abklingzeit festlegen.
     if (this.spam[m.sender].count >= 5) {
       users[m.sender].banned = true
       this.spam[m.sender].lastspam = now + 5000
 
-      // Schedule a timeout to unban the user and reset their spam count after 5 seconds.
+      // Ein Timeout planen, um den Benutzer nach 5 Sekunden zu entsperren und seine Spam-Anzahl zurückzusetzen.
       setTimeout(() => {
         users[m.sender].banned = false
         this.spam[m.sender].count = 0
-        m.reply(`✅ *Cooldown finished*\nYou can send messages again.`)
+        m.reply(`✅ *Abklingzeit beendet*\nDu kannst wieder Nachrichten senden.`)
       }, 5000)
 
-      // Notify the sender about the spamming and the remaining cooldown time.
+      // Den Absender über das Spammen und die verbleibende Abklingzeit informieren.
       const message =
         m.mtype
           .replace(/message$/i, '')
           .replace('audio', m.msg.ptt ? 'PTT' : 'audio')
-          .replace(/^./, v => v.toUpperCase()) || 'Unknown'
+          .replace(/^./, v => v.toUpperCase()) || 'Unbekannt'
       return m.reply(
-        `❌ *Please do not spam ${message}*\nWait for ${Math.ceil((this.spam[m.sender].lastspam - now) / 1000)} seconds`
+        `❌ *Bitte nicht spammen ${message}*\nWarte ${Math.ceil((this.spam[m.sender].lastspam - now) / 1000)} Sekunden`
       )
     }
   } else {
-    // If the time difference is greater than or equal to 10 seconds, reset the sender's spam count.
+    // Wenn die Zeitdifferenz größer oder gleich 10 Sekunden ist, die Spam-Anzahl des Absenders zurücksetzen.
     this.spam[m.sender].count = 0
   }
 
-  // Update the 'lastspam' timestamp to the current time for the sender.
+  // Den 'lastspam'-Zeitstempel auf die aktuelle Zeit für den Absender aktualisieren.
   this.spam[m.sender].lastspam = now
 }

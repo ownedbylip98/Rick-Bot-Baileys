@@ -1,4 +1,3 @@
-
 let free = 1500
 let cooldown = 86400000
 let handler = async (m, {conn}) => {
@@ -11,9 +10,9 @@ let handler = async (m, {conn}) => {
 *${mssg.money}* : +${free.toLocaleString()} 🪙`)
   user.lastclaim = new Date * 1
 }
-handler.help = ['daily']
-handler.tags = ['econ']
-handler.command = ['daily', 'claim'] 
+handler.help = ['täglich']
+handler.tags = ['wirtschaft']
+handler.command = ['täglich', 'beanspruchen'] 
 
 
 export default handler

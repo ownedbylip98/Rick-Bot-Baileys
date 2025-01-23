@@ -1,14 +1,14 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args, text }) => {
-  if (!text) throw '*Please provide a URL or link to shorten.*'
+  if (!text) throw '*Bitte gib eine URL oder einen Link an, um ihn zu kürzen.*'
 
   let shortUrl1 = await (await fetch(`https://tinyurl.com/api-create.php?url=${args[0]}`)).text()
 
-  if (!shortUrl1) throw `*Error: Could not generate a short URL.*`
+  if (!shortUrl1) throw `*Fehler: Konnte keine Kurz-URL erstellen.*`
 
   let done =
-    `*SHORT URL CREATED!!*\n\n*Original Link:*\n${text}\n*Shortened URL:*\n${shortUrl1}`.trim()
+    `*KURZE URL ERSTELLT!!*\n\n*Originaler Link:*\n${text}\n*Verkürzte URL:*\n${shortUrl1}`.trim()
 
   m.reply(done)
 }

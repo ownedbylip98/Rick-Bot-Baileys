@@ -2,9 +2,9 @@ import fetch from 'node-fetch'
 import axios from 'axios'
 let handler = async (m, { conn, usedPrefix, command }) => {
   if (!global.db.data.chats[m.chat].nsfw)
-    throw `🚫 group doesnt supprt nsfw \n\n enable it by \n*${usedPrefix}enable* nsfw`
+    throw `🚫 Gruppe unterstützt keine NSFW \n\n Aktiviere es mit \n*${usedPrefix}enable* nsfw`
   let user = global.db.data.users[m.sender].age
-  if (user < 17) throw m.reply(`❎ uneed to be atleast 18 years`)
+  if (user < 17) throw m.reply(`❎ Du musst mindestens 18 Jahre alt sein`)
 
   m.react(rwait)
   let type = command.toLowerCase()
@@ -13,35 +13,35 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     case 'ass':
     case 'gand':
       let as = await conn.getFile(`${gurubot}/rnsfw/gand`)
-      conn.sendFile(m.chat, as.data, 'img.jpg', `✅ Random ${command}`, m)
+      conn.sendFile(m.chat, as.data, 'img.jpg', `✅ Zufälliger ${command}`, m)
       m.react(xmoji)
       break
 
     case 'boobs':
     case 'boobies':
       let xb = await conn.getFile(`${gurubot}/rnsfw/tits`)
-      conn.sendFile(m.chat, xb.data, 'img.jpg', `✅ Random ${command}`, m)
+      conn.sendFile(m.chat, xb.data, 'img.jpg', `✅ Zufälliger ${command}`, m)
       m.react(xmoji)
       break
 
     case 'pussy':
     case 'chut':
       let xp = await conn.getFile(`${gurubot}/rnsfw/porn`)
-      conn.sendFile(m.chat, xp.data, 'img.jpg', `✅ Random ${command}`, m)
+      conn.sendFile(m.chat, xp.data, 'img.jpg', `✅ Zufälliger ${command}`, m)
       m.react(xmoji)
       break
 
     case 'lesbians':
     case 'lesbian':
       let les = await conn.getFile(`${gurubot}/rnsfw/imglesbian`)
-      conn.sendFile(m.chat, les.data, 'img.jpg', `✅ Random ${command}`, m)
+      conn.sendFile(m.chat, les.data, 'img.jpg', `✅ Zufälliger ${command}`, m)
       m.react(xmoji)
       break
 
     case 'pack':
     case 'cosplay':
       let img = await conn.getFile(`${gurubot}/rnsfw/packgirl`)
-      conn.sendFile(m.chat, img.data, 'img.jpg', `✅ Result 🤭`, m)
+      conn.sendFile(m.chat, img.data, 'img.jpg', `✅ Ergebnis 🤭`, m)
       m.react(xmoji)
       break
 

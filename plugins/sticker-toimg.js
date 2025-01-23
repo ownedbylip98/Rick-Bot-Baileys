@@ -1,4 +1,3 @@
-
 import { spawn } from 'child_process'
 import { format } from 'util'
 let handler = async (m, { conn, usedPrefix, command }) => {
@@ -26,3 +25,11 @@ handler.tags = ['sticker']
 handler.command = ['toimg', 'jpg', 'aimg'] 
 
 export default handler
+
+const mssg = {
+  replyStick: 'Bitte antworte auf einen Sticker.',
+  result: 'Hier ist dein Bild!'
+}
+
+global.botname = 'Rick-Bot'
+global.ownername = 'OwnedbyLIP'

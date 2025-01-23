@@ -3,7 +3,7 @@ import { promisify } from 'util'
 let exec = promisify(_exec).bind(cp)
 let handler = async (m, { conn, isOwner, command, text }) => {
   if (conn.user.jid != conn.user.jid) return
-  m.reply('✅ running...')
+  m.reply('✅ läuft...')
   let o
   try {
     o = await exec(command.trimStart() + ' ' + text.trimEnd())
@@ -16,7 +16,7 @@ let handler = async (m, { conn, isOwner, command, text }) => {
   }
 }
 handler.help = ['$']
-handler.tags = ['advanced']
+handler.tags = ['fortgeschritten']
 handler.customPrefix = /^[$] /
 handler.command = new RegExp()
 handler.rowner = true

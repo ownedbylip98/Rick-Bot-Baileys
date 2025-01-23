@@ -49,28 +49,30 @@ export async function handler(chatUpdate) {
     try {
       // TODO: use loop to insert data instead of this
       let user = global.db.data.users[m.sender]
-      if (typeof user !== 'object') global.db.data.users[m.sender] = {}
-      if (user) {
-        if (!isNumber(user.exp)) user.exp = 0
-        if (!isNumber(user.credit)) user.credit = 10
-        if (!isNumber(user.bank)) user.bank = 0
-        if (!isNumber(user.chicken)) user.chicken = 0
-        if (!isNumber(user.lastclaim)) user.lastclaim = 0
-        if (!('registered' in user)) user.registered = false
-        //-- user registered
-        if (!user.registered) {
-          if (!('name' in user)) user.name = m.name
-          if (!isNumber(user.age)) user.age = -1
-          if (!isNumber(user.regTime)) user.regTime = -1
-        }
-        //--user number
-        if (!isNumber(user.afk)) user.afk = -1
-        if (!('afkReason' in user)) user.afkReason = ''
-        if (!('banned' in user)) user.banned = false
-        if (!isNumber(user.warn)) user.warn = 0
-        if (!isNumber(user.level)) user.level = 0
-        if (!('role' in user)) user.role = 'Tadpole'
-        if (!('autolevelup' in user)) user.autolevelup = false
+if (typeof user !== 'object') global.db.data.users[m.sender] = {}
+if (user) {
+  if (!isNumber(user.exp)) user.exp = 0
+  if (!isNumber(user.credit)) user.credit = 10
+  if (!isNumber(user.bank)) user.bank = 0
+  if (!isNumber(user.chicken)) user.chicken = 0
+  if (!isNumber(user.lastclaim)) user.lastclaim = 0
+  if (!('registered' in user)) user.registered = false
+  //-- user registered
+  if (!user.registered) {
+    if (!('name' in user)) user.name = m.name
+    if (!isNumber(user.age)) user.age = -1
+    if (!isNumber(user.regTime)) user.regTime = -1
+    if (!('location' in user)) user.location = '' 
+    if (!('relationship' in user)) user.relationship = ''
+  }
+  //--user number
+  if (!isNumber(user.afk)) user.afk = -1
+  if (!('afkReason' in user)) user.afkReason = ''
+  if (!('banned' in user)) user.banned = false
+  if (!isNumber(user.warn)) user.warn = 0
+  if (!isNumber(user.level)) user.level = 0
+  if (!('role' in user)) user.role = 'Gerry'
+  if (!('autolevelup' in user)) user.autolevelup = false
            /*
    Do Not Modify this Section ❌  👇👇
    Else Relationship Features Will Not Work 😔
@@ -103,7 +105,7 @@ export async function handler(chatUpdate) {
           banned: false,
           warn: 0,
           level: 0,
-          role: 'Tadpole',
+          role: 'Morty',
           autolevelup: false,
         }
       }
@@ -244,10 +246,10 @@ export async function handler(chatUpdate) {
           )) {
             let data = (await conn.onWhatsApp(jid))[0] || {}
             if (data.exists)
-              m.reply(
-                `*🗂️ Plugin:* ${name}\n*👤 Sender:* ${m.sender}\n*💬 Chat:* ${m.chat}\n*💻 Command:* ${m.text}\n\n\${format(e)}`.trim(),
+                m.reply(
+                `*🗂️ Plugin:* ${name}\n*👤 Absender:* ${m.sender}\n*💬 Chat:* ${m.chat}\n*💻 Befehl:* ${m.text}\n\n\${format(e)}`.trim(),
                 data.jid
-              )
+                )
           }
         }
       }
@@ -379,22 +381,22 @@ export async function handler(chatUpdate) {
         }
         m.isCommand = true
         let xp = 'exp' in plugin ? parseInt(plugin.exp) : 17 // XP Earning per command
-        if (xp > 200) m.reply('cheater')
+        if (xp > 200) m.reply('Betrüger')
         else m.exp += xp
         if (
           !isPrems &&
           plugin.credit &&
           global.db.data.users[m.sender].credit < plugin.credit * 1
         ) {
-          this.reply(m.chat, `🟥 You don't have enough gold`, m)
+            this.reply(m.chat, `🟥 Du hast nicht genug Gold`, m)
           continue // Gold finished
         }
         if (plugin.level > _user.level) {
-          this.reply(
+            this.reply(
             m.chat,
-            `🟥 Level required ${plugin.level} to use this command. \nYour level ${_user.level}`,
+            `🟥 Level ${plugin.level} erforderlich, um diesen Befehl zu verwenden. \nDein Level ${_user.level}`,
             m
-          )
+            )
           continue // If the level has not been reached
         }
         let extra = {
@@ -437,10 +439,10 @@ export async function handler(chatUpdate) {
               )) {
                 let data = (await this.onWhatsApp(jid))[0] || {}
                 if (data.exists)
-                  return m.reply(
-                    `*🗂️ Plugin:* ${m.plugin}\n*👤 Sender:* ${m.sender}\n*💬 Chat:* ${m.chat}\n*💻 Command:* ${usedPrefix}${command} ${args.join(' ')}\n📄 *Error Logs:*\n\n${text}`.trim(),
+                    return m.reply(
+                    `*🗂️ Plugin:* ${m.plugin}\n*👤 Absender:* ${m.sender}\n*💬 Chat:* ${m.chat}\n*💻 Befehl:* ${usedPrefix}${command} ${args.join(' ')}\n📄 *Fehlerprotokolle:*\n\n${text}`.trim(),
                     data.jid
-                  )
+                    )
               }
             m.reply(text)
           }
@@ -453,7 +455,7 @@ export async function handler(chatUpdate) {
               console.error(e)
             }
           }
-          if (m.credit) m.reply(`You used *${+m.credit}*`)
+            if (m.credit) m.reply(`Du hast *${+m.credit}* verwendet`)
         }
         break
       }
@@ -566,20 +568,20 @@ export async function participantsUpdate({ id, participants, action }) {
               let welcomeResponse = await fetch(welcomeApiUrl)
               let welcomeBuffer = await welcomeResponse.buffer()
 
-              this.sendMessage(id, {
+                this.sendMessage(id, {
                 text: text,
                 contextInfo: {
                   mentionedJid: [user],
                   externalAdReply: {
-                    title: 'Global Bot',
-                    body: 'Welcome to Group',
-                    thumbnailUrl: welcomeApiUrl,
-                    sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
-                    mediaType: 1,
-                    renderLargerThumbnail: true,
+                  title: 'Rick Bot',
+                  body: 'Willkommen in der Gruppe',
+                  thumbnailUrl: welcomeApiUrl,
+                  sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
+                  mediaType: 1,
+                  renderLargerThumbnail: true,
                   },
                 },
-              })
+                })
             } catch (error) {
               console.error(`Error generating welcome image: ${error}`)
             }
@@ -623,20 +625,20 @@ export async function participantsUpdate({ id, participants, action }) {
               let leaveResponse = await fetch(leaveApiUrl)
               let leaveBuffer = await leaveResponse.buffer()
 
-              this.sendMessage(id, {
+                this.sendMessage(id, {
                 text: text,
                 contextInfo: {
                   mentionedJid: [user],
                   externalAdReply: {
-                    title: 'Global Bot',
-                    body: 'Goodbye from  Group',
-                    thumbnailUrl: leaveApiUrl,
-                    sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
-                    mediaType: 1,
-                    renderLargerThumbnail: true,
+                  title: 'Rick Bot',
+                  body: 'Auf Wiedersehen aus der Gruppe',
+                  thumbnailUrl: leaveApiUrl,
+                  sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
+                  mediaType: 1,
+                  renderLargerThumbnail: true,
                   },
                 },
-              })
+                })
             } catch (error) {
               console.error(`Error generating leave image: ${error}`)
             }
@@ -649,7 +651,7 @@ export async function participantsUpdate({ id, participants, action }) {
         chat.sPromote ||
         this.spromote ||
         conn.spromote ||
-        `${emoji.promote} @user *is now admin*`
+        `${emoji.promote} @user *ist jetzt Admin*`
       ).replace('@user', '@' + participants[0].split('@')[0])
 
       if (chat.detect) {
@@ -664,7 +666,7 @@ export async function participantsUpdate({ id, participants, action }) {
         chat.sDemote ||
         this.sdemote ||
         conn.sdemote ||
-        `${emoji.demote} @user *demoted from admin*`
+        `${emoji.demote} @user *wurde als Admin degradiert*`
       ).replace('@user', '@' + participants[0].split('@')[0])
 
       if (chat.detect) {
@@ -706,53 +708,53 @@ export async function groupsUpdate(groupsUpdate) {
         chats.sDesc ||
         this.sDesc ||
         conn.sDesc ||
-        `*${emoji.desc} Description has been changed to*\n@desc`
+        `*${emoji.desc} Beschreibung wurde geändert zu*\n@desc`
       ).replace('@desc', groupUpdate.desc)
     } else if (groupUpdate.subject) {
       text = (
         chats.sSubject ||
         this.sSubject ||
         conn.sSubject ||
-        `*${emoji.subject} Subject has been changed to*\n@subject`
+        `*${emoji.subject} Betreff wurde geändert zu*\n@subject`
       ).replace('@subject', groupUpdate.subject)
     } else if (groupUpdate.icon) {
       text = (
         chats.sIcon ||
         this.sIcon ||
         conn.sIcon ||
-        `*${emoji.icon} Icon has been changed*`
+        `*${emoji.icon} Das Gruppenbild wurde geändert*`
       ).replace('@icon', groupUpdate.icon)
     } else if (groupUpdate.revoke) {
       text = (
         chats.sRevoke ||
         this.sRevoke ||
         conn.sRevoke ||
-        `*${emoji.revoke} Group link has been changed to*\n@revoke`
+        `*${emoji.revoke} Der Gruppenlink wurde geändert zu*\n@revoke`
       ).replace('@revoke', groupUpdate.revoke)
     } else if (groupUpdate.announce === true) {
       text =
         chats.sAnnounceOn ||
         this.sAnnounceOn ||
         conn.sAnnounceOn ||
-        `*${emoji.announceOn} Group is now closed!*`
+        `*${emoji.announceOn} Gruppe ist jetzt geschlossen!*`
     } else if (groupUpdate.announce === false) {
       text =
         chats.sAnnounceOff ||
         this.sAnnounceOff ||
         conn.sAnnounceOff ||
-        `*${emoji.announceOff} Group is now open!*`
+        `*${emoji.announceOff} Gruppe ist jetzt geöffnet!*`
     } else if (groupUpdate.restrict === true) {
       text =
         chats.sRestrictOn ||
         this.sRestrictOn ||
         conn.sRestrictOn ||
-        `*${emoji.restrictOn} Group is now restricted to participants only!*`
+        `*${emoji.restrictOn} Gruppe ist jetzt für Teilnehmer offen!*`
     } else if (groupUpdate.restrict === false) {
       text =
         chats.sRestrictOff ||
         this.sRestrictOff ||
         conn.sRestrictOff ||
-        `*${emoji.restrictOff} Group is now restricted to admins only!*`
+        `*${emoji.restrictOff} Gruppe ist jetzt nur für Admins eingeschränkt!*`
     }
 
     if (!text) continue
@@ -780,14 +782,14 @@ export async function deleteUpdate(message) {
     await this.reply(
       conn.user.id,
       `
-            ≡ deleted a message 
-            ┌─⊷  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀 
-            ▢ *Number :* @${participant.split`@`[0]} 
-            └─────────────
-            `.trim(),
+        ≡ Nachricht gelöscht 
+        ┌─⊷  𝘼𝙉𝙏𝙄 𝙇𝙊𝙎𝘾𝙃𝙀𝙉 
+        ▢ *Nummer :* @${participant.split`@`[0]} 
+        └─────────────
+        `.trim(),
       msg,
       {
-        mentions: [participant],
+      mentions: [participant],
       }
     )
     this.copyNForward(conn.user.id, msg, false).catch(e => console.log(e, msg))
@@ -833,16 +835,16 @@ export async function presenceUpdate(presenceUpdate) {
   if (user?.afk && status === 'composing' && user.afk > -1) {
     if (user.banned) {
       user.afk = -1
-      user.afkReason = 'User Banned Afk'
+      user.afkReason = 'Benutzer wegen AFK gesperrt'
       return
     }
 
     await console.log('AFK')
     const username = nouser[0].split('@')[0]
     const timeAfk = new Date() - user.afk
-    const caption = `\n@${username} has stopped being AFK and is currently typing.\n\nReason: ${
-      user.afkReason ? user.afkReason : 'No Reason'
-    }\nFor the past ${timeAfk.toTimeString()}.\n`
+    const caption = `\n@${username} ist nicht mehr AFK und tippt gerade.\n\nGrund: ${
+      user.afkReason ? user.afkReason : 'Kein Grund'
+    }\nFür die letzten ${timeAfk.toTimeString()}.\n`
 
     this.reply(id, caption, null, {
       mentions: this.parseMention(caption),
@@ -856,7 +858,7 @@ export async function presenceUpdate(presenceUpdate) {
 dfail
  */
 global.dfail = (type, m, conn) => {
-  const userTag = `👋 Hi *@${m.sender.split('@')[0]}*, `
+  const userTag = `👋 Hallo *@${m.sender.split('@')[0]}*, `
   const emoji = {
     general: '⚙️',
     owner: '👑',
@@ -873,26 +875,26 @@ global.dfail = (type, m, conn) => {
   }
 
   const msg = {
-    owner: `*${emoji.owner} Owner's Query*\n
-    ${userTag} This command can only be used by the *Bot Owner*!`,
-    moderator: `*${emoji.moderator} Moderator's Query*\n
-    ${userTag} This command can only be used by *Moderators*!`,
-    premium: `*${emoji.premium} Premium Query*\n
-    ${userTag} This command is only for *Premium Members*!`,
-    group: `*${emoji.group} Group Query*\n
-    ${userTag} This command can only be used in *Group Chats*!`,
-    private: `*${emoji.private} Private Query*\n
-    ${userTag} This command can only be used in *Private Chats*!`,
-    admin: `*${emoji.admin} Admin's Query*\n
-    ${userTag} This command is only for *Group Admins*!`,
-    botAdmin: `*${emoji.botAdmin} Bot Admin's Query*\n
-    ${userTag} Make the bot an *Admin* to use this command!`,
-    unreg: `*${emoji.unreg} Registration Query*\n
-    ${userTag} Please register to use this feature by typing:\n\n*#register name.age*\n\nExample: *#register ${m.name}.18*!`,
-    nsfw: `*${emoji.nsfw} NSFW Query*\n
-    ${userTag} NSFW is not active. Please contact the Group admin to enable this feature!`,
-    restrict: `*${emoji.restrict} Inactive Feature Query*\n
-    ${userTag} This feature is *disabled*!`,
+    owner: `*${emoji.owner} Besitzeranfrage*\n
+    ${userTag} Dieser Befehl kann nur vom *Bot-Besitzer* verwendet werden!`,
+    moderator: `*${emoji.moderator} Moderatoranfrage*\n
+    ${userTag} Dieser Befehl kann nur von *Moderatoren* verwendet werden!`,
+    premium: `*${emoji.premium} Premiumanfrage*\n
+    ${userTag} Dieser Befehl ist nur für *Premium-Mitglieder*!`,
+    group: `*${emoji.group} Gruppenanfrage*\n
+    ${userTag} Dieser Befehl kann nur in *Gruppenchats* verwendet werden!`,
+    private: `*${emoji.private} Private Anfrage*\n
+    ${userTag} Dieser Befehl kann nur in *Privatchats* verwendet werden!`,
+    admin: `*${emoji.admin} Adminanfrage*\n
+    ${userTag} Dieser Befehl ist nur für *Gruppenadmins*!`,
+    botAdmin: `*${emoji.botAdmin} Bot-Admin-Anfrage*\n
+    ${userTag} Machen Sie den Bot zu einem *Admin*, um diesen Befehl zu verwenden!`,
+    unreg: `*${emoji.unreg} Registrierungsanfrage*\n
+    ${userTag} Bitte registrieren Sie sich, um diese Funktion zu nutzen, indem Sie tippen:\n\n*#register name.alter*\n\nBeispiel: *#register ${m.name}.18*!`,
+    nsfw: `*${emoji.nsfw} NSFW-Anfrage*\n
+    ${userTag} NSFW ist nicht aktiv. Bitte kontaktieren Sie den Gruppenadmin, um diese Funktion zu aktivieren!`,
+    restrict: `*${emoji.restrict} Inaktive Funktionsanfrage*\n
+    ${userTag} Diese Funktion ist *deaktiviert*!`,
   }[type]
   if (msg) return m.reply(msg)
 }

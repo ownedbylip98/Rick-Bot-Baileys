@@ -27,13 +27,13 @@ let handler = async (m, { conn, text }) => {
     m.reply(`*${format}* = _${result}_`)
   } catch (e) {
     if (e == undefined)
-      throw '✳️ enter the equation\n\ncompatible symbols -, +, *, /, ×, ÷, π, e, (, )'
-    throw 'Incorrect format, only 0-9 and symbol -, +, *, /, ×, ÷, π, e, (, ) what can you use'
+      throw '✳️ Gib die Gleichung ein\n\nKompatible Symbole -, +, *, /, ×, ÷, π, e, (, )'
+    throw 'Falsches Format, nur 0-9 und Symbole -, +, *, /, ×, ÷, π, e, (, ) sind erlaubt'
   }
 }
-handler.help = ['cal <equation>']
+handler.help = ['cal <gleichung>']
 handler.tags = ['tools']
-handler.command = ['cal', 'calc', 'calcular', 'calculadora']
+handler.command = ['cal', 'calc', 'berechnen', 'rechner']
 handler.exp = 5
 
 export default handler

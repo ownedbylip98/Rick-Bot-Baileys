@@ -1,7 +1,7 @@
 import yts from 'yt-search';
 
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-    if (!text) throw `✳️ Example: *${usedPrefix + command}* Lil Peep hate my life`;
+    if (!text) throw `✳️ Beispiel: *${usedPrefix + command}* Lil Peep hate my life`;
     m.react('📀');
     
     let result = await yts(text);
@@ -16,20 +16,20 @@ let handler = async (m, { conn, usedPrefix, text, args, command }) => {
                 {
                     header: '🎶 MP3',
                     title: "",
-                    description: `▢ ⌚ *Duration:* ${v.timestamp}\n▢ 👀 *Views:* ${v.views}\n▢ 📌 *Title:* ${v.title}\n▢ 📆 *Uploaded:* ${v.ago}\n`, 
+                    description: `▢ ⌚ *Dauer:* ${v.timestamp}\n▢ 👀 *Aufrufe:* ${v.views}\n▢ 📌 *Titel:* ${v.title}\n▢ 📆 *Hochgeladen:* ${v.ago}\n`, 
                     id: `${usedPrefix}yta ${v.url}`
                 },
                 {
                     header: "🎥 MP4",
                     title: "" ,
-                    description: `▢ ⌚ *Duration:* ${v.timestamp}\n▢ 👀 *Views:* ${v.views}\n▢ 📌 *Title:* ${v.title}\n▢ 📆 *Uploaded:* ${v.ago}\n`, 
+                    description: `▢ ⌚ *Dauer:* ${v.timestamp}\n▢ 👀 *Aufrufe:* ${v.views}\n▢ 📌 *Titel:* ${v.title}\n▢ 📆 *Hochgeladen:* ${v.ago}\n`, 
                     id: `${usedPrefix}ytv ${v.url}`
                 }
             ]
         });
     }
 
-    await conn.sendList(m.chat, '  ≡ *ULTRA-MD MUSIC*🔎', `\n 📀 Results for:\n *${text}*`, `Click Here`, ytres[0].image, listSections, m);
+    await conn.sendList(m.chat, '  ≡ *Rick-Bot MUSIC*🔎', `\n 📀 Ergebnisse für:\n *${text}*`, `Klicke hier`, ytres[0].image, listSections, m);
 };
 
 handler.help = ['play2'];

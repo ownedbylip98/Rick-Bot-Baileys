@@ -7,7 +7,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   let name = await conn.getName(who)
   let totalf = Object.values(global.plugins).filter(v => v.help && v.tags).length
   let txt = `*乂  B O T  -  F E A T U R E*\n\n`
-  txt += `	◦  *Total* : ${totalf}\n`
+  txt += `	◦  *Gesamt* : ${totalf}\n`
   txt += author
   await conn.relayMessage(
     m.chat,
@@ -32,7 +32,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     {}
   )
 }
-handler.help = ['totalfeature']
+handler.help = ['gesamtfeature']
 handler.tags = ['main']
-handler.command = /^(feature|totalfeature)$/i
+handler.command = /^(feature|gesamtfeature)$/i
 export default handler

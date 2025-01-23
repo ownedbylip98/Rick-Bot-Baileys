@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch';
 let handler = async (m, { conn, text }) => {
 	
@@ -10,12 +9,12 @@ m.react('💬')
         let res = await gpt.json()
         await m.reply(res.result)
 	} catch {
-		m.reply(`❎ Error: intenta más tarde`);
+		m.reply(`❎ Fehler: Versuche es später noch einmal`);
 	}
 
 }
 handler.help = ['gemini <text>']; 
-handler.tags = ['tools'];
+handler.tags = ['werkzeuge'];
 handler.command = ['gemini'];
 
 export default handler;

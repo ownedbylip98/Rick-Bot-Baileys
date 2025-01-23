@@ -6,8 +6,8 @@ export async function before(m) {
   const presenceStatus = commands.some(cmd =>
     cmd instanceof RegExp ? cmd.test(m.text) : m.text.includes(cmd)
   )
-    ? 'composing'
-    : 'available'
+    ? 'schreibt'
+    : 'verfügbar'
 
   if (presenceStatus) await this.sendPresenceUpdate(presenceStatus, m.chat)
 }

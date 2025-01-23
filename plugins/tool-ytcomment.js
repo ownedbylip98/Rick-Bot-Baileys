@@ -1,5 +1,5 @@
 let handler = async (m, { conn, text }) => {
-  if (!text) throw 'No Text'
+  if (!text) throw 'Kein Text'
   conn.sendFile(
     m.chat,
     global.API('https://some-random-api.com', '/canvas/misc/youtube-comment', {
@@ -10,11 +10,11 @@ let handler = async (m, { conn, text }) => {
       username: conn.getName(m.sender),
     }),
     'error.png',
-    '*THANKS FOR COMMENT*',
+    '*DANKE FÜR DEINEN KOMMENTAR*',
     m
   )
 }
-handler.help = ['ytcomment <comment>']
-handler.tags = ['maker']
+handler.help = ['ytcomment <kommentar>']
+handler.tags = ['macher']
 handler.command = /^(ytcomment)$/i
 export default handler

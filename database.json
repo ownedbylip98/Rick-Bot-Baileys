@@ -1,0 +1,720 @@
+{
+  "users": {
+    "491745126033@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 1749,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "+49 174 5126033",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 0,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false,
+      "location": "",
+      "relationship": ""
+    },
+    "491624542167@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 4807,
+      "credit": 4600,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 1737184666838,
+      "registered": true,
+      "name": "Nico",
+      "age": 26,
+      "regTime": 1737238239224,
+      "afk": 1737642415685,
+      "afkReason": "bin im urlaub",
+      "banned": false,
+      "warn": 0,
+      "level": 5,
+      "role": "Summer",
+      "autolevelup": true,
+      "coin": null,
+      "weekly": 1737184679084,
+      "lastmiming": 1737184725619,
+      "lastslot": 1737185465729,
+      "shipping": 1737185897142,
+      "location": "Dortmund",
+      "relationship": "Single"
+    },
+    "4915739067859@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 84,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "🦋✨ᵈˣ._ʲᵃⁿᵃ✨🦋",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 0,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false,
+      "location": "",
+      "relationship": ""
+    },
+    "4915907694486@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 62,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "Lukas",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 0,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false
+    },
+    "4915906562547@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 683,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "Nerv nööch",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 1,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false,
+      "location": "",
+      "relationship": ""
+    },
+    "4915780408435@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 407,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "Katja",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 0,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false,
+      "location": "",
+      "relationship": ""
+    },
+    "491737806531@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 204,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "Jemand😴",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 0,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false,
+      "location": "",
+      "relationship": ""
+    },
+    "4560160810@s.whatsapp.net": {
+      "lover": "",
+      "exlover": "",
+      "crush": "",
+      "excount": 0,
+      "exp": 219,
+      "credit": 0,
+      "bank": 0,
+      "chicken": 0,
+      "lastclaim": 0,
+      "registered": false,
+      "name": "Emil",
+      "age": -1,
+      "regTime": -1,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "warn": 0,
+      "level": 0,
+      "role": "Morty",
+      "autolevelup": false,
+      "location": "",
+      "relationship": ""
+    }
+  },
+  "chats": {
+    "491745126033@s.whatsapp.net": {
+      "antiDelete": false,
+      "antiLink": false,
+      "antiSticker": false,
+      "antiToxic": false,
+      "detect": false,
+      "expired": 0,
+      "getmsg": true,
+      "isBanned": false,
+      "nsfw": false,
+      "sBye": "",
+      "sDemote": "",
+      "simi": false,
+      "sPromote": "",
+      "sticker": false,
+      "sWelcome": "",
+      "useDocument": false,
+      "viewOnce": false,
+      "viewStory": false,
+      "welcome": false,
+      "chatbot": false
+    },
+    "491624542167@s.whatsapp.net": {
+      "antiDelete": false,
+      "antiLink": false,
+      "antiSticker": false,
+      "antiToxic": false,
+      "detect": false,
+      "expired": 0,
+      "getmsg": true,
+      "isBanned": false,
+      "nsfw": false,
+      "sBye": "",
+      "sDemote": "",
+      "simi": false,
+      "sPromote": "",
+      "sticker": false,
+      "sWelcome": "",
+      "useDocument": false,
+      "viewOnce": false,
+      "viewStory": false,
+      "welcome": false,
+      "chatbot": false
+    },
+    "120363373535725165@g.us": {
+      "antiDelete": false,
+      "antiLink": false,
+      "antiSticker": false,
+      "antiToxic": false,
+      "detect": false,
+      "expired": 0,
+      "getmsg": true,
+      "isBanned": false,
+      "nsfw": false,
+      "sBye": "Tschüss",
+      "sDemote": "",
+      "simi": false,
+      "sPromote": "",
+      "sticker": false,
+      "sWelcome": "",
+      "useDocument": false,
+      "viewOnce": false,
+      "viewStory": false,
+      "welcome": true,
+      "chatbot": false,
+      "rules": "Testbereich Area51 Rick"
+    },
+    "4915907694486@s.whatsapp.net": {
+      "antiDelete": false,
+      "antiLink": false,
+      "antiSticker": false,
+      "antiToxic": false,
+      "detect": false,
+      "expired": 0,
+      "getmsg": true,
+      "isBanned": false,
+      "nsfw": false,
+      "sBye": "",
+      "sDemote": "",
+      "simi": false,
+      "sPromote": "",
+      "sticker": false,
+      "sWelcome": "",
+      "useDocument": false,
+      "viewOnce": false,
+      "viewStory": false,
+      "welcome": false,
+      "chatbot": false
+    },
+    "120363372726466649@g.us": {
+      "antiDelete": false,
+      "antiLink": false,
+      "antiSticker": false,
+      "antiToxic": false,
+      "detect": false,
+      "expired": 0,
+      "getmsg": true,
+      "isBanned": false,
+      "nsfw": false,
+      "sBye": "",
+      "sDemote": "",
+      "simi": false,
+      "sPromote": "",
+      "sticker": false,
+      "sWelcome": "Willkommen an das/die neue/n Mitglid/er. Bitte vorstellen mit Bild Name Altern und dem Wohnort bitte auch die Regeln sorgfältig durch lesen",
+      "useDocument": false,
+      "viewOnce": false,
+      "viewStory": false,
+      "welcome": true,
+      "chatbot": false,
+      "rules": "Vorstellen:\n• neue Mitglieder stellen sich direkt mit Bild, Name, Alter, Wohnort vor, ohne daran erinnert werden zu müssen!\n• Jeden Sonntag ist für ALLE Vorstellungsrunde!\nAnschreiben:\n• Bevor pn angeschrieben wird, wird erst die andere Person in der Gruppe nach Erlaubnis gefragt.\nNEIN HEIẞT NEIN, WER TRZ ANSCHREIBT ODER OHNE ERLAUBNIS ANSCHREIBT, DARF FLIEGEN\nRespektvoller Umgang:\n• Keiner wird wegen seiner Herkunft, Aussehen oder sonstiges gejudged oder fertig gemacht.\n• Rassismus wird hier nicht unterstützt!\n• Jeder wird mit Respekt behandelt, denn ihr wollt auch mit Respekt behandelt werden.\n• Wenn es Streit zwischen zwei Personen gibt wird er außerhalb der Gruppe geklärt!\n• Es wird nicht mit den Admins diskutiert!\nSticker/Gruppenlinks:\n• Es werden keine anderen Gruppenlinks geduldet\n• Es werden keine obszöne Sticker in die Gruppe geschickt ( Rassistische/Sexuelle/etc)\n\nWenn irgendwas ist, wendet euch an den Admin‘s, eine Liste der admins findet ihr mit .staff"
+    },
+    "4915906562547@s.whatsapp.net": {
+      "antiDelete": false,
+      "antiLink": false,
+      "antiSticker": false,
+      "antiToxic": false,
+      "detect": false,
+      "expired": 0,
+      "getmsg": true,
+      "isBanned": false,
+      "nsfw": false,
+      "sBye": "",
+      "sDemote": "",
+      "simi": false,
+      "sPromote": "",
+      "sticker": false,
+      "sWelcome": "",
+      "useDocument": false,
+      "viewOnce": false,
+      "viewStory": false,
+      "welcome": false,
+      "chatbot": false
+    }
+  },
+  "stats": {
+    "dl-igstalk.js": {
+      "total": 8,
+      "success": 7,
+      "last": 1737184623740,
+      "lastSuccess": 1737184623740
+    },
+    "econ-daily.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737184666839,
+      "lastSuccess": 1737184666839
+    },
+    "econ-weekly.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737184679085,
+      "lastSuccess": 1737184679085
+    },
+    "econ-bank.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737185016791,
+      "lastSuccess": 1737185016791
+    },
+    "econ-mine.js": {
+      "total": 3,
+      "success": 2,
+      "last": 1737184730757,
+      "lastSuccess": 1737184725620
+    },
+    "econ-levelup.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737237846904,
+      "lastSuccess": 1737237846904
+    },
+    "econ-deposit.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737184801530,
+      "lastSuccess": 1737184801530
+    },
+    "econ-withdraw.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737184827778,
+      "lastSuccess": 1737184827778
+    },
+    "gp-profile.js": {
+      "total": 13,
+      "success": 8,
+      "last": 1737238247659,
+      "lastSuccess": 1737238247659
+    },
+    "main-ping.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737233363072,
+      "lastSuccess": 1737233363072
+    },
+    "econ-balance.js": {
+      "total": 4,
+      "success": 0,
+      "last": 1737184982276,
+      "lastSuccess": 0
+    },
+    "econ-addGold.js": {
+      "total": 4,
+      "success": 2,
+      "last": 1737185005267,
+      "lastSuccess": 1737185005267
+    },
+    "econ-roulette.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737185041070,
+      "lastSuccess": 1737185041070
+    },
+    "game-slot.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737185049331,
+      "lastSuccess": 1737185049331
+    },
+    "econ-wallet.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737227328763,
+      "lastSuccess": 1737227328763
+    },
+    "fun-chacter.js": {
+      "total": 4,
+      "success": 1,
+      "last": 1737185230847,
+      "lastSuccess": 1737185230847
+    },
+    "anime-reaction.js": {
+      "total": 4,
+      "success": 1,
+      "last": 1737226108977,
+      "lastSuccess": 1737226108977
+    },
+    "fun-maker.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737185336651,
+      "lastSuccess": 1737185336651
+    },
+    "fun-pickupline.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737185386641,
+      "lastSuccess": 1737185386641
+    },
+    "econ-slot.js": {
+      "total": 11,
+      "success": 6,
+      "last": 1737185465925,
+      "lastSuccess": 1737185465925
+    },
+    "fun-question.js": {
+      "total": 3,
+      "success": 0,
+      "last": 1737185513788,
+      "lastSuccess": 0
+    },
+    "fun-shipping.js": {
+      "total": 5,
+      "success": 3,
+      "last": 1737185947057,
+      "lastSuccess": 1737185897142
+    },
+    "game-guessFlag.js": {
+      "total": 20,
+      "success": 9,
+      "last": 1737187556100,
+      "lastSuccess": 1737187555969
+    },
+    "game-guessFlag_hint.js": {
+      "total": 10,
+      "success": 10,
+      "last": 1737187560803,
+      "lastSuccess": 1737187560803
+    },
+    "game-math.js": {
+      "total": 7,
+      "success": 3,
+      "last": 1737187533061,
+      "lastSuccess": 1737187533061
+    },
+    "game-ppt.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737187699738,
+      "lastSuccess": 1737187699738
+    },
+    "gc-setname.js": {
+      "total": 4,
+      "success": 3,
+      "last": 1737225884737,
+      "lastSuccess": 1737225884737
+    },
+    "gc-setdesc.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737225736664,
+      "lastSuccess": 1737225736664
+    },
+    "gc-setpp.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737225953319,
+      "lastSuccess": 1737225953319
+    },
+    "gp-demote.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737226357702,
+      "lastSuccess": 1737226357702
+    },
+    "gp-promote.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737642110684,
+      "lastSuccess": 1737642110684
+    },
+    "gp-hidetag.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737642176789,
+      "lastSuccess": 1737642176789
+    },
+    "prefix.js": {
+      "total": 3,
+      "success": 1,
+      "last": 1737233351220,
+      "lastSuccess": 1737233351220
+    },
+    "main-list.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737226731886,
+      "lastSuccess": 1737226731886
+    },
+    "owner-addsudo.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737226856613,
+      "lastSuccess": 1737226856613
+    },
+    "owner-delsudo.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737227207149,
+      "lastSuccess": 1737227207149
+    },
+    "gp-link.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737642077849,
+      "lastSuccess": 1737642077849
+    },
+    "gp-resetLink.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737227376265,
+      "lastSuccess": 1737227376265
+    },
+    "gp-rules.js": {
+      "total": 5,
+      "success": 5,
+      "last": 1737641789127,
+      "lastSuccess": 1737641789127
+    },
+    "gp-setrules.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737641818290,
+      "lastSuccess": 1737641818290
+    },
+    "gp-simulate.js": {
+      "total": 6,
+      "success": 4,
+      "last": 1737641187106,
+      "lastSuccess": 1737641187106
+    },
+    "enable.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737640312476,
+      "lastSuccess": 1737640312476
+    },
+    "gp-setbye.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737227593989,
+      "lastSuccess": 1737227593989
+    },
+    "gp-staff.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737641823076,
+      "lastSuccess": 1737641823076
+    },
+    "gp-polling.js": {
+      "total": 4,
+      "success": 3,
+      "last": 1737228333435,
+      "lastSuccess": 1737228333435
+    },
+    "econ-leaderboard.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737228958187,
+      "lastSuccess": 1737228958187
+    },
+    "main-menu4.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737229533391,
+      "lastSuccess": 1737229533391
+    },
+    "gp-delete.js": {
+      "total": 4,
+      "success": 4,
+      "last": 1737640356595,
+      "lastSuccess": 1737640356595
+    },
+    "main-server.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737230301074,
+      "lastSuccess": 1737230301074
+    },
+    "maker-horny.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737230517949,
+      "lastSuccess": 1737230517949
+    },
+    "menu.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737230996688,
+      "lastSuccess": 1737230996688
+    },
+    "owner-inspect.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737232849101,
+      "lastSuccess": 1737232849101
+    },
+    "owner-intro.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737233000666,
+      "lastSuccess": 1737233000666
+    },
+    "owner-join.js": {
+      "total": 3,
+      "success": 0,
+      "last": 1737233322993,
+      "lastSuccess": 0
+    },
+    "rg-register.js": {
+      "total": 28,
+      "success": 21,
+      "last": 1737239627902,
+      "lastSuccess": 1737239627902
+    },
+    "rg-sn.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737236160012,
+      "lastSuccess": 1737236160012
+    },
+    "rg-unreg.js": {
+      "total": 7,
+      "success": 7,
+      "last": 1737238963658,
+      "lastSuccess": 1737238963658
+    },
+    "gp-setwelcome.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737641006580,
+      "lastSuccess": 1737641006580
+    },
+    "gp-kick.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737641458169,
+      "lastSuccess": 1737641458169
+    },
+    "gp-warning.js": {
+      "total": 3,
+      "success": 3,
+      "last": 1737641572914,
+      "lastSuccess": 1737641572914
+    },
+    "gp-add.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737642025541,
+      "lastSuccess": 1737642025541
+    },
+    "afk-afk.js": {
+      "total": 2,
+      "success": 2,
+      "last": 1737642415686,
+      "lastSuccess": 1737642415686
+    }
+  },
+  "msgs": {},
+  "sticker": {},
+  "settings": {
+    "491745126033@s.whatsapp.net": {
+      "self": false,
+      "autoread": false,
+      "restrict": false,
+      "restartDB": 0,
+      "status": 0
+    }
+  }
+}

@@ -1,5 +1,5 @@
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  let te = `✳️ Select the language you want to use\n≡ *Available languages:*\n- es (Spanish)\n- en (English)\n- id (Indonesian)\n- pt (Portuguese)\n- ar (Arabic)\n\nExample: *${usedPrefix + command}* en\nHelp us translate the bot into your language\nt.me/GlobalBotInc`.trim();
+  let te = `✳️ Wähle die Sprache, die du verwenden möchtest\n≡ *Verfügbare Sprachen:*\n- es (Spanisch)\n- en (Englisch)\n- id (Indonesisch)\n- pt (Portugiesisch)\n- ar (Arabisch)\n- de (Deutsch)\n\nBeispiel: *${usedPrefix + command}* de\nHilf uns, den Bot in deine Sprache zu übersetzen\nt.me/OwnedbyLIP`.trim();
   
   if (!text) throw te;
 
@@ -20,6 +20,9 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
   } else if (args[0] === "ar") {
     user.language = args[0];
     m.reply("✅ *تم اختيار اللغة العربية*\n\nالآن سيقوم البوت بالرد على رسائلك باللغة العربية");
+  } else if (args[0] === "de") {
+    user.language = args[0];
+    m.reply("✅ *Deutsch ausgewählt*\n\nJetzt wird der Bot auf deine Nachrichten auf Deutsch antworten");
   } else {
     m.reply(te);
   }

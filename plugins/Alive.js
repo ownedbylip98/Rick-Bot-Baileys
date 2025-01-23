@@ -17,12 +17,12 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   };
 
   let messageContent = {
-    text: '𝗨𝗟𝗧𝗥𝗔-𝗠𝗗 𝗜𝗦 𝗥𝗨𝗡𝗡𝗜𝗡𝗚', // Text content in case a message body is needed
+    text: '𝗥𝗶𝗰𝗸-𝗕𝗼𝘁 𝗟Ä𝗨𝗙𝗧', // Text content in case a message body is needed
     contextInfo: {
       mentionedJid: [m.sender],
       externalAdReply: {
-        title: '© 𝙶𝚕𝚘𝚋𝚊𝚕𝚃𝚎𝚌𝚑𝙸𝚗𝚏𝚘',
-        body: '© GlobalTechInfo',
+        title: '© 𝙾𝚠𝚗𝚎𝚍𝚋𝚢𝙻𝙸𝙿',
+        body: '© OwnedbyLIP',
         thumbnailUrl: img,
         sourceUrl: 'https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07',
         mediaType: 1,

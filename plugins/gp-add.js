@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch'
 /**
  * @type {import('@whiskeysockets/baileys')}
@@ -37,11 +36,11 @@ let handler = async (m, { conn, text, participants }) => {
         const content = getBinaryNodeChild(user, 'add_request')
         const invite_code = content.attrs.code
         const invite_code_exp = content.attrs.expiration
-        let teks = `✳️ Al usuario @${jid.split('@')[0]} solo lo pueden agregar sus contactos :'v `
+        let teks = `✳️ Der Benutzer @${jid.split('@')[0]} kann nur von seinen Kontakten hinzugefügt werden :'v `
         m.reply(teks, null, {
             mentions: conn.parseMention(teks)
         })
-        //await conn.sendGroupV4Invite(m.chat, jid, invite_code, invite_code_exp, await conn.getName(m.chat), 'Invitación para unirse a mi grupo de WhatsApp ', jpegThumbnail)
+        //await conn.sendGroupV4Invite(m.chat, jid, invite_code, invite_code_exp, await conn.getName(m.chat), 'Einladung, meiner WhatsApp-Gruppe beizutreten ', jpegThumbnail)
     }
 }
 handler.help = ['add']

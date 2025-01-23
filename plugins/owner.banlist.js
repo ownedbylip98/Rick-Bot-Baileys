@@ -4,9 +4,9 @@ let handler = async (m, { conn, usedPrefix }) => {
 
   m.reply(
     `
-≡ *USERS BANNED*
+≡ *GESPERRTE BENUTZER*
 
-▢ Total : *${users.length}* 
+▢ Gesamt : *${users.length}* 
 
 ${
   users
@@ -14,7 +14,7 @@ ${
       users
         .map(([jid], i) =>
           `
-${i + 1}. ${conn.getName(jid) == undefined ? 'UNKNOWN' : conn.getName(jid)}
+${i + 1}. ${conn.getName(jid) == undefined ? 'UNBEKANNT' : conn.getName(jid)}
 ▢ ${jid}
 `.trim()
         )

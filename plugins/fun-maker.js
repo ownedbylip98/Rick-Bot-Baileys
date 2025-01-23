@@ -1,4 +1,3 @@
-
 let handler = async (m, { conn, usedPrefix, command }) => {
     
     let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -50,4 +49,4 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   handler.command = /^(trash|basura|rip|shit|spank|azotar|imgdel|beautiful)$/i
   
   export default handler
-  
+

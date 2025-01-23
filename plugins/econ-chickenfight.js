@@ -1,11 +1,11 @@
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
   /*if (global.db.data.users[m.sender].level < 5) {
-    return conn.reply(m.chat, 'You must be at least level 5 to use this command.', m);
+    return conn.reply(m.chat, 'Du musst mindestens Level 5 sein, um diesen Befehl zu verwenden.', m);
   }*/
 
-  let fa = `🟥 *Provide the amount of gold to bet*
+  let fa = `🟥 *Gib den Betrag an Gold an, den du setzen möchtest*
 
-*Example:*
+*Beispiel:*
 ${usedPrefix + command} 1000`.trim()
   if (!args[0]) throw fa
   if (isNaN(args[0])) throw fa
@@ -21,22 +21,22 @@ ${usedPrefix + command} 1000`.trim()
 
   let time = users.lastcf + 90000
   if (new Date() - users.lastcf < 90000)
-    throw `You can play cock-fight again in ${msToTime(time - new Date())}`
-  if (amount < 100) throw `🟥 *You can't bet gold less than 100*`
+    throw `Du kannst in ${msToTime(time - new Date())} wieder Hahnenkampf spielen`
+  if (amount < 100) throw `🟥 *Du kannst nicht weniger als 100 Gold setzen*`
   if (users.credit < amount)
-    throw `🟥 *You don't have enough money for this bet.*\n*You currently have only ${credit} in gold.*`
+    throw `🟥 *Du hast nicht genug Geld für diese Wette.*\n*Du hast derzeit nur ${credit} Gold.*`
   if (users.chicken < 1) {
-    throw `🟥 *You do not have any chicks to bet* \nUse the command ${usedPrefix}buy-chicken`
+    throw `🟥 *Du hast keine Hühner zum Wetten* \nVerwende den Befehl ${usedPrefix}buy-chicken`
   }
-  //if (amount > 100000) throw `🟥 *You can't bet gold more than 100000*`
+  //if (amount > 100000) throw `🟥 *Du kannst nicht mehr als 100000 Gold setzen*`
 
-  let botScore = Math.ceil(Math.random() * 35) * 1 // Random score for the bot (1 to 51)
-  let playerScore = Math.floor(Math.random() * 101) * 1 // Random score for the player (1 to 100)
-  let status = `Your chicken died 🪦`
+  let botScore = Math.ceil(Math.random() * 35) * 1 // Zufällige Punktzahl für den Bot (1 bis 35)
+  let playerScore = Math.floor(Math.random() * 101) * 1 // Zufällige Punktzahl für den Spieler (1 bis 100)
+  let status = `Dein Huhn ist gestorben 🪦`
 
   if (botScore < playerScore) {
     users.credit += amount * 1
-    status = `Your lil chicken won the fight, and made you 🪙 ${amount * 2} gold richer! 🐥`
+    status = `Dein kleines Huhn hat den Kampf gewonnen und dich um 🪙 ${amount * 2} Gold reicher gemacht! 🐥`
   } else {
     users.credit -= amount * 1
     users.chicken -= 1
@@ -49,7 +49,7 @@ ${usedPrefix + command} 1000`.trim()
   m.reply(result)
 }
 
-handler.help = ['cock-fight <amount>']
+handler.help = ['cock-fight <Betrag>']
 handler.tags = ['economy']
 handler.command = ['cock-fight', 'cf']
 
@@ -67,14 +67,14 @@ function msToTime(duration) {
   minutes = minutes < 10 ? '' + minutes : minutes
   seconds = seconds < 10 ? '' + seconds : seconds
 
-  return minutes + ' minutes ' + seconds + ' seconds'
+  return minutes + ' Minuten ' + seconds + ' Sekunden'
 }
 function pickRandom(list) {
   return list[Math.floor(list.length * Math.random())]
 }
 
 /**
- * Detect if thats number
+ * Erkennen, ob das eine Zahl ist
  * @param {Number} x
  * @returns Boolean
  */

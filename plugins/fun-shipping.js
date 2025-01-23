@@ -1,4 +1,3 @@
-
 function handler(m, {conn, groupMetadata }) {
 	
 	let time = global.db.data.users[m.sender].shipping + 28800000

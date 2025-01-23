@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch'
 import { sticker } from '../lib/sticker.js'
 let handler = async (m, { conn, args, usedPrefix, command }) => {
@@ -28,3 +27,11 @@ handler.diamond = true
 handler.group = true
 
 export default handler
+
+// German translations
+const mssg = {
+  noMention: '✳️ Du hast niemanden erwähnt.',
+  example: '📌 Beispiel',
+  slapmsg: 'hat dir eine Ohrfeige gegeben!'
+}
+const rwait = '⏳ Bitte warten...'

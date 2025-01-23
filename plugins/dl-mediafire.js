@@ -6,7 +6,7 @@ const { mediafire } = pkg; // Extract 'mediafire' function from the package
 
 let handler = async (m, { conn, text }) => {
   if (!text) {
-    return m.reply("Please provide a MediaFire URL.");
+    return m.reply("Bitte gib eine MediaFire-URL an.");
   }
 
   try {
@@ -24,24 +24,24 @@ let handler = async (m, { conn, text }) => {
     // Validate the response to ensure valid data
     if (!mediafireData || !mediafireData.name || !mediafireData.link) {
       await m.react('✅');
-      return m.reply("No valid data found for the provided URL.");
+      return m.reply("Keine gültigen Daten für die angegebene URL gefunden.");
     }
 
     // Format the caption to display file information
     let caption = `≡ *MEDIAFIRE DOWNLOADER*:\n`;
     caption += `
-▢ *File:* ${mediafireData.name}
-▢ *Size:* ${mediafireData.size}
-▢ *Type:* ${mediafireData.filetype}
+▢ *Datei:* ${mediafireData.name}
+▢ *Größe:* ${mediafireData.size}
+▢ *Typ:* ${mediafireData.filetype}
 
-*Download In Progress....Please Wait ⌛*\n\n*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳*`;
+*Download läuft....Bitte warte ⌛*\n\n*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © Rick-Bot*`;
 
     await m.react('✅');
     await conn.sendMessage(m.chat, { text: caption }, { quoted: m });
 
     // Check for file size limit (100MB) for WhatsApp
     if (mediafireData.size > 100 * 1024 * 1024) {
-      return m.reply("The file is too large to be sent via WhatsApp (limit is 100MB).");
+      return m.reply("Die Datei ist zu groß, um sie über WhatsApp zu senden (Limit ist 100MB).");
     }
 
     // Get the direct download URL from the response
@@ -60,8 +60,8 @@ let handler = async (m, { conn, text }) => {
 
     // Check if the response is valid
     if (!response.ok) {
-      console.error('Failed to fetch the file:', response.statusText);
-      return m.reply("Failed to download the file from MediaFire.");
+      console.error('Fehler beim Abrufen der Datei:', response.statusText);
+      return m.reply("Fehler beim Herunterladen der Datei von MediaFire.");
     }
 
     // Check the content length of the file
@@ -69,7 +69,7 @@ let handler = async (m, { conn, text }) => {
 
     // If content length is suspiciously small (less than 1KB), abort
     if (parseInt(contentLength) < 1000) {
-      return m.reply("The file seems too small to be the actual download. Something went wrong.");
+      return m.reply("Die Datei scheint zu klein zu sein, um der tatsächliche Download zu sein. Etwas ist schief gelaufen.");
     }
 
     // Buffer the response (file data)
@@ -77,7 +77,7 @@ let handler = async (m, { conn, text }) => {
 
     // Check if the buffer is empty or corrupt
     if (!buffer || buffer.length === 0) {
-      return m.reply("Failed to download the file properly.");
+      return m.reply("Fehler beim ordnungsgemäßen Herunterladen der Datei.");
     }
 
     // Determine the MIME type based on the file extension
@@ -124,8 +124,8 @@ switch (mediafireData.ext.toLowerCase()) {
     }, { quoted: m });
 
   } catch (error) {
-    console.error('Error:', error);
-    m.reply("An error occurred while fetching or downloading the file from MediaFire.");
+    console.error('Fehler:', error);
+    m.reply("Ein Fehler ist aufgetreten beim Abrufen oder Herunterladen der Datei von MediaFire.");
   }
 };
 

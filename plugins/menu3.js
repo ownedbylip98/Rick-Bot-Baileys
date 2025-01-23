@@ -1,20 +1,20 @@
 let handler = async function (m, { conn, text, usedPrefix }) {
-  let m2 = `≡ Use these commands without the prefix: *${usedPrefix}*
+  let m2 = `≡ Verwende diese Befehle ohne das Präfix: *${usedPrefix}*
 ┌─⊷ *AUDIOS* 
 ▢ Bot
-▢ Good morning
-▢ Good afternoon
-▢ Good evening
-▢ Fine gentlemen
-▢ Don't be Sad
+▢ Guten Morgen
+▢ Guten Nachmittag
+▢ Guten Abend
+▢ Feine Herren
+▢ Sei nicht traurig
 └──────────────`;
   
   let pp = './assets/A.jpg';
 
   // Send a button message
-  await conn.sendButton(m.chat, m2, 'MEGA-AI', pp, [
+  await conn.sendButton(m.chat, m2, 'Rick-Bot', pp, [
     ['⏍ Info', `${usedPrefix}botinfo`],
-    ['⌬ Group', `${usedPrefix}grp`]
+    ['⌬ Gruppe', `${usedPrefix}grp`]
   ], m, { quoted: m });
 
   // Send an image file

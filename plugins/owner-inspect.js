@@ -2,7 +2,7 @@ import * as baileys from '@whiskeysockets/baileys'
 
 let handler = async (m, { conn, text }) => {
   let [, code] = text.match(/chat\.whatsapp\.com\/(?:invite\/)?([0-9A-Za-z]{20,24})/i) || []
-  if (!code) throw '*[❗INFO❗] Please provide a valid group link.*'
+  if (!code) throw '*[❗INFO❗] Bitte gib einen gültigen Gruppenlink an.*'
 
   let res = await conn.query({
     tag: 'iq',
@@ -18,7 +18,7 @@ let handler = async (m, { conn, text }) => {
   if (pp) {
     return conn.sendMessage(m.chat, { image: { url: pp }, caption: txt }, { quoted: m })
   } else {
-    let groupinfo = `❖ ID: ${data.id}\n❖ Name: ${data.subject}\n❖ Created on: ${data.creation}\n❖ Owner: ${data.owner}\n❖ Description:\n${data.desc}`
+    let groupinfo = `❖ ID: ${data.id}\n❖ Name: ${data.subject}\n❖ Erstellt am: ${data.creation}\n❖ Besitzer: ${data.owner}\n❖ Beschreibung:\n${data.desc}`
     await conn.reply(m.chat, groupinfo, m)
   }
 }
@@ -36,8 +36,8 @@ const extractGroupMetadata = result => {
   const metadata = {
     id: group.attrs.id.includes('@') ? group.attrs.id : baileys.jidEncode(group.attrs.id, 'g.us'),
     subject: group.attrs.subject,
-    creation: new Date(+group.attrs.creation * 1000).toLocaleString('id', {
-      timeZone: 'Asia/Karachi',
+    creation: new Date(+group.attrs.creation * 1000).toLocaleString('de-DE', {
+      timeZone: 'Europe/Berlin',
     }),
     owner: group.attrs.creator
       ? 'wa.me/' + baileys.jidNormalizedUser(group.attrs.creator).split('@')[0]

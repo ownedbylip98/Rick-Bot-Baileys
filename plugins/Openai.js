@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `Please provide some text or quote a message to get a response.`
+    throw `Bitte gib einen Text ein oder zitiere eine Nachricht, um eine Antwort zu erhalten.`
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -23,14 +23,14 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       let result = data.response.response
 
       if (!result) {
-        throw new Error('No valid JSON response from the first API')
+        throw new Error('Keine gültige JSON-Antwort von der ersten API')
       }
 
       // Send a simple message instead of a button
       await conn.sendMessage(m.chat, { text: result }, { quoted: m })
       m.react(done)
     } catch (error) {
-      console.error('Error from the first API:', error)
+      console.error('Fehler von der ersten API:', error)
 
       const guru2 = `https://ultimetron.guruapi.tech/gpt3?prompt=${prompt}`
 
@@ -43,8 +43,8 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       m.react(done)
     }
   } catch (error) {
-    console.error('Error:', error)
-    throw `*ERROR*`
+    console.error('Fehler:', error)
+    throw `*FEHLER*`
   }
 }
 

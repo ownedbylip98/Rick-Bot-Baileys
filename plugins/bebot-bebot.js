@@ -29,7 +29,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
         throw `📌 ${mssg.nobbot}\n\n wa.me/${global.conn.user.jid.split`@`[0]}?text=${usedPrefix}botclone`;
     }
 
-    let isInit = false; // Declare isInit here
+    let isInit = false; // Deklariere isInit hier
 
     async function bbts() {
         let authFolderB = crypto.randomBytes(10).toString('hex').slice(0, 8);
@@ -298,7 +298,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                 let codeBot = await conn.requestPairingCode(cleanedNumber);
                 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
 
-                parent.sendMessage(m.chat, { text: `➤ Code: *${codeBot}*\n\nUse this code to become a Bot:\n\n1. Click on the three dots in the top right corner.\n2. Tap on Linked Devices.\n3. Select *Link with Phone Number*\n\n*Note:* The code is only valid for this number.` }, { quoted: m });
+                parent.sendMessage(m.chat, { text: `➤ Code: *${codeBot}*\n\nVerwende diesen Code, um ein Bot zu werden:\n\n1. Klicke auf die drei Punkte oben rechts.\n2. Tippe auf Verknüpfte Geräte.\n3. Wähle *Mit Telefonnummer verknüpfen*\n\n*Hinweis:* Der Code ist nur für diese Nummer gültig.` }, { quoted: m });
 
                 rl.close();
             }, 3000);
@@ -356,11 +356,11 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                 try { conn.ws.close(); } catch { }
                 conn.ev.removeAllListeners();
                 conn = makeWASocket(connectionOptions);
-                isInit = true; // Update isInit when restarting
+                isInit = true; // Aktualisiere isInit beim Neustart
             }
 
             if (!isInit) {
-                // Only remove listeners if they were set
+                // Entferne nur Listener, wenn sie gesetzt wurden
                 if (conn.handler) {
                     conn.ev.off('messages.upsert', conn.handler);
                 }
@@ -384,7 +384,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
                 }
             }
 
-            // Setup handlers
+            // Setup-Handler
             conn.welcome = global.conn.welcome + '';
             conn.bye = global.conn.bye + '';
             conn.spromote = global.conn.spromote + '';
@@ -403,7 +403,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
             conn.ev.on('message.delete', conn.onDelete);
             conn.ev.on('connection.update', conn.connectionUpdate);
             conn.ev.on('creds.update', conn.credsUpdate);
-            isInit = false; // Reset isInit after setup
+            isInit = false; // Setze isInit nach dem Setup zurück
             return true;
         }
         creloadHandler(false);

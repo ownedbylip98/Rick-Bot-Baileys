@@ -2,11 +2,11 @@ import fetch from 'node-fetch'
 import googleIt from 'google-it'
 
 const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-  if (!text) throw `give a text to search Example: *${usedPrefix + command}* ULTRA MD`
+  if (!text) throw `Gib einen Text zum Suchen ein. Beispiel: *${usedPrefix + command}* Rick-Bot`
   conn.gogleit = conn.gogleit ? conn.gogleit : {}
-  await conn.reply(m.chat, wait, m)
+  await conn.reply(m.chat, 'Bitte warten...', m)
   const result = await googleresult(text)
-  const infoText = `✦ ──『 *GOOGLE SEARCH* 』── ✦\n\n [ ⭐ Reply the number of the desired search result to get the screenshot of the website]. \n\n`
+  const infoText = `✦ ──『 *GOOGLE-SUCHE* 』── ✦\n\n [ ⭐ Antworte mit der Nummer des gewünschten Suchergebnisses, um einen Screenshot der Website zu erhalten]. \n\n`
   const orderedLinks = result.allLinks.map((linkk, index) => {
     const sectionNumber = index + 1
     const { title, link } = linkk
@@ -46,10 +46,10 @@ handler.before = async (m, { conn }) => {
       )
     ).buffer()
 
-    await conn.sendFile(m.chat, response, 'google.jpg', 'Tada! Here is your result', m)
+    await conn.sendFile(m.chat, response, 'google.jpg', 'Tada! Hier ist dein Ergebnis', m)
   } else {
     m.reply(
-      'Invalid sequence number. Please select the appropriate number from the list above.\nBetween 1 to ' +
+      'Ungültige Sequenznummer. Bitte wähle die entsprechende Nummer aus der obigen Liste.\nZwischen 1 und ' +
         result.allLinks.length
     )
   }
@@ -64,7 +64,7 @@ async function googleresult(query) {
   try {
     const res = await googleIt({ query })
 
-    if (!res.length) return 'Sorry, no video results were found for this search.'
+    if (!res.length) return 'Entschuldigung, es wurden keine Videoergebnisse für diese Suche gefunden.'
 
     const allLinks = res.map(video => ({
       title: video.title,
@@ -73,6 +73,6 @@ async function googleresult(query) {
 
     return { allLinks }
   } catch (error) {
-    return 'Error: ' + error.message
+    return 'Fehler: ' + error.message
   }
 }

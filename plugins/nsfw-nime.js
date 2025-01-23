@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch'
 import axios from 'axios'
 let handler = async (m, { conn, usedPrefix, command }) => {
@@ -16,7 +15,7 @@ switch (type) {
         let xwai = await fetch(`https://api.waifu.pics/nsfw/waifu`)
         if (!xwai.ok) throw await xwai.text()
         let xwfu = await xwai.json()
-        if (!xwfu.url) throw '❎ Error'
+        if (!xwfu.url) throw '❎ Fehler'
         conn.sendFile(m.chat, xwfu.url, 'img.jpg', `✅ ${mssg.random} *${command}*`, m)
         //conn.sendButton(m.chat, `✅ ${mssg.random} *${command}*`, fgyt, xwfu.url, [[`▷▷ ${msg.next()}`, `${usedPrefix + command}`]], m)
        m.react(xmoji)    
@@ -27,7 +26,7 @@ case 'trap':
   let res = await fetch(`https://api.waifu.pics/nsfw/${command}`)
     if (!res.ok) throw await res.text()
     let json = await res.json()
-    if (!json.url) throw '❎ Error'
+    if (!json.url) throw '❎ Fehler'
     conn.sendFile(m.chat, json.url, 'img.jpg', `✅ ${mssg.random} *${command}*`, m)
     m.react(xmoji) 
 break

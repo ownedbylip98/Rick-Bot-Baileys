@@ -14,7 +14,7 @@ let handler = async (m, { conn }) => {
       avatar: pp,
     }),
     'waste.png',
-    `*Ah! Shit :* ${name}\n\nWastedeeznuts`,
+    `*Ah! Mist :* ${name}\n\nVerschwendet`,
     m
   )
 }

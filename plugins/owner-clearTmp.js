@@ -3,7 +3,7 @@ import path, { join } from 'path'
 import { readdirSync, unlinkSync, rmSync } from 'fs'
 
 let handler = async (m, { conn, __dirname, args }) => {
-  m.reply(`✅ The folder was cleaned *tmp + session*`)
+  m.reply(`✅ Der Ordner wurde bereinigt *tmp + session*`)
   m.react(done)
   const tmp = [tmpdir(), join(__dirname, '../tmp')]
   const filename = []

@@ -2,27 +2,27 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text, usedPrefix, command, args }) => {
   if (!global.db.data.chats[m.chat].nsfw)
-    throw `🚫 Group doesn't support NSFW. Enable it by using *${usedPrefix}enable* nsfw.`;
+    throw `🚫 Diese Gruppe unterstützt keine NSFW-Inhalte. Aktiviere es mit *${usedPrefix}enable* nsfw.`;
 
   let userAge = global.db.data.users[m.sender].age;
-  if (userAge < 17) throw `❎ You need to be at least 18 years old.`;
+  if (userAge < 17) throw `❎ Du musst mindestens 18 Jahre alt sein.`;
 
   try {
     m.reply(global.wait);
     let res = await fetch('https://api.guruapi.tech/hanime/trend');
     let json = await res.json();
 
-    if (!json || json.length === 0) throw 'No data found';
+    if (!json || json.length === 0) throw 'Keine Daten gefunden';
 
     let topTrending = json.slice(0, 8);
 
-    let message = '🔥 **Top 8 Trending Hentai of the Week** 🔥\n\n';
+    let message = '🔥 **Top 8 Trending Hentai der Woche** 🔥\n\n';
 
     topTrending.forEach((data, index) => {
       message += `
 ${index + 1}. **${data.name}**
    - 📎 Link: https://hanime.tv/videos/hentai/${data.slug}
-   - 👁️ Views: ${data.views}
+   - 👁️ Ansichten: ${data.views}
 
 `;
     });
@@ -30,7 +30,7 @@ ${index + 1}. **${data.name}**
     await conn.sendFile(m.chat, topTrending[0].cover_url, 'hanime.jpeg', message, m);
   } catch (error) {
     console.error(error);
-    throw `*ERROR: Something went wrong. Please try again later.*`;
+    throw `*FEHLER: Etwas ist schief gelaufen. Bitte versuche es später erneut.*`;
   }
 };
 

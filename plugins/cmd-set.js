@@ -1,29 +1,29 @@
 let handler = async (m, { text, usedPrefix, command }) => {
     global.db.data.sticker = global.db.data.sticker || {};
     
-    // Ensure m.quoted is defined and has fileSha256
-    if (!m.quoted) throw `✳️ Quoted message not found`;
-    if (!m.quoted.fileSha256) throw `⚠️ File SHA256 not found`;
-    if (!text) throw `✳️ Command is missing`;
+    // Stelle sicher, dass m.quoted definiert ist und fileSha256 hat
+    if (!m.quoted) throw `✳️ Zitierte Nachricht nicht gefunden`;
+    if (!m.quoted.fileSha256) throw `⚠️ Datei SHA256 nicht gefunden`;
+    if (!text) throw `✳️ Befehl fehlt`;
 
     let sticker = global.db.data.sticker;
     let hash = m.quoted.fileSha256.toString('base64');
 
-    // Check if sticker is locked
+    // Überprüfe, ob der Sticker gesperrt ist
     if (sticker[hash] && sticker[hash].locked) {
-        throw '⚠️ You do not have permission to change this Sticker command';
+        throw '⚠️ Du hast keine Berechtigung, diesen Sticker-Befehl zu ändern';
     }
 
-    // Assign sticker properties
+    // Sticker-Eigenschaften zuweisen
     sticker[hash] = {
         text,
-        mentionedJid: m.mentionedJid || [], // Ensure it's defined
+        mentionedJid: m.mentionedJid || [], // Stelle sicher, dass es definiert ist
         creator: m.sender,
         at: +new Date(),
         locked: false,
     };
 
-    m.reply(`✅ Command saved successfully.`);
+    m.reply(`✅ Befehl erfolgreich gespeichert.`);
 }
 
 handler.help = ['setcmd <text>'];

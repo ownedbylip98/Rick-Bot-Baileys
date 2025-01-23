@@ -6,14 +6,14 @@ let handler = async (m, { conn, text }) => {
     who = m.chat;
   }
   
-  if (!who) throw 'Tag the person you want to make an Owner!';
+  if (!who) throw 'Markiere die Person, die du zum Besitzer machen möchtest!';
   
   let name = await conn.getName(who);
-  if (global.owner.some(owner => owner[0] === who.split('@')[0])) throw 'This person is already an owner!';
+  if (global.owner.some(owner => owner[0] === who.split('@')[0])) throw 'Diese Person ist bereits ein Besitzer!';
   
   global.owner.push([who.split('@')[0], name, true]);
   
-  const caption = `Now @${who.split('@')[0]} has been made an Owner!`;
+  const caption = `Jetzt ist @${who.split('@')[0]} ein Besitzer!`;
   await conn.reply(m.chat, caption, m, {
     mentions: conn.parseMention(caption),
   });

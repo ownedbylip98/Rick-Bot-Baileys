@@ -9,11 +9,11 @@ import os from 'os'
 const streamPipeline = promisify(pipeline)
 
 const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-  if (!text) throw `give a text to search Example: *${usedPrefix + command}* sefali odia song`
-  conn.ultra = conn.ultra ? conn.ultra : {}
+  if (!text) throw `Gib einen Text zum Suchen ein. Beispiel: *${usedPrefix + command}* sefali odia song`
+  conn.rickBot = conn.rickBot ? conn.rickBot : {}
   await conn.reply(m.chat, wait, m)
   const result = await searchAndDownloadMusic(text)
-  const infoText = `✦ ──『 *ULTRA PLAYER* 』── ⚝ \n\n [ ⭐ Reply the number of the desired search result to get the Audio]. \n\n`
+  const infoText = `✦ ──『 *RICK-BOT PLAYER* 』── ⚝ \n\n [ ⭐ Antworte mit der Nummer des gewünschten Suchergebnisses, um das Audio zu erhalten]. \n\n`
 
   const orderedLinks = result.allLinks.map((link, index) => {
     const sectionNumber = index + 1
@@ -24,22 +24,22 @@ const handler = async (m, { conn, command, text, args, usedPrefix }) => {
   const orderedLinksText = orderedLinks.join('\n\n')
   const fullText = `${infoText}\n\n${orderedLinksText}`
   const { key } = await conn.reply(m.chat, fullText, m)
-  conn.ultra[m.sender] = {
+  conn.rickBot[m.sender] = {
     result,
     key,
     timeout: setTimeout(() => {
       conn.sendMessage(m.chat, {
         delete: key,
       })
-      delete conn.ultra[m.sender]
+      delete conn.rickBot[m.sender]
     }, 150 * 1000),
   }
 }
 
 handler.before = async (m, { conn }) => {
-  conn.ultra = conn.ultra ? conn.ultra : {}
-  if (m.isBaileys || !(m.sender in conn.ultra)) return
-  const { result, key, timeout } = conn.ultra[m.sender]
+  conn.rickBot = conn.rickBot ? conn.rickBot : {}
+  if (m.isBaileys || !(m.sender in conn.rickBot)) return
+  const { result, key, timeout } = conn.rickBot[m.sender]
 
   if (!m.quoted || m.quoted.id !== key.id || !m.text) return
   const choice = m.text.trim()
@@ -72,7 +72,7 @@ handler.before = async (m, { conn }) => {
     await conn.sendMessage(m.chat, doc, { quoted: m })
   } else {
     m.reply(
-      'Invalid sequence number. Please select the appropriate number from the list above.\nBetween 1 to ' +
+      'Ungültige Sequenznummer. Bitte wähle die entsprechende Nummer aus der obigen Liste.\nZwischen 1 und ' +
         result.allLinks.length
     )
   }
@@ -96,7 +96,7 @@ function formatBytes(bytes, decimals = 2) {
 async function searchAndDownloadMusic(query) {
   try {
     const { videos } = await yts(query)
-    if (!videos.length) return 'Sorry, no video results were found for this search.'
+    if (!videos.length) return 'Entschuldigung, keine Videoergebnisse für diese Suche gefunden.'
 
     const allLinks = videos.map(video => ({
       title: video.title,
@@ -115,7 +115,7 @@ async function searchAndDownloadMusic(query) {
 
     return jsonData
   } catch (error) {
-    return 'Error: ' + error.message
+    return 'Fehler: ' + error.message
   }
 }
 

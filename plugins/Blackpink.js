@@ -2,38 +2,38 @@ import fetch from 'node-fetch'
 
 let bpink = []
 
-// Fetching the image URLs from the text file
+// Abrufen der Bild-URLs aus der Textdatei
 fetch('https://raw.githubusercontent.com/arivpn/dbase/master/kpop/blekping.txt')
   .then(res => res.text())
   .then(txt => (bpink = txt.split('\n')))
 
 let handler = async (m, { conn }) => {
   try {
-    // Send "waiting" reaction to indicate the bot is processing
+    // Sende "Warten"-Reaktion, um anzuzeigen, dass der Bot verarbeitet
     await m.react('⏳')
 
-    // Select a random image from the list
+    // Wähle ein zufälliges Bild aus der Liste
     let img = bpink[Math.floor(Math.random() * bpink.length)]
 
-    // If no image is selected, throw an error
+    // Wenn kein Bild ausgewählt wird, einen Fehler werfen
     if (!img) throw img
 
-    // Fetch the image and convert the arrayBuffer to a Buffer
+    // Bild abrufen und arrayBuffer in einen Buffer konvertieren
     const response = await fetch(img)
     const arrayBuffer = await response.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    // Send the image with a thumbnail and custom message
-    await conn.sendFile(m.chat, img, '', '*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳*', m, 0, {
-      thumbnail: buffer, // Use the Buffer for the thumbnail
+    // Sende das Bild mit einem Thumbnail und einer benutzerdefinierten Nachricht
+    await conn.sendFile(m.chat, img, '', '*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚁𝙸𝙲𝙺-𝙱𝙾𝚃*', m, 0, {
+      thumbnail: buffer, // Verwende den Buffer für das Thumbnail
     })
 
-    // After processing, send the "done" reaction
+    // Nach der Verarbeitung die "Fertig"-Reaktion senden
     await m.react('✅')
   } catch (error) {
-    console.error('Error fetching image:', error)
-    await m.react('❌')  // Send a "fail" reaction if an error occurs
-    m.reply('❌ Something went wrong while fetching the image. Please try again later.')
+    console.error('Fehler beim Abrufen des Bildes:', error)
+    await m.react('❌')  // Sende eine "Fehlgeschlagen"-Reaktion, wenn ein Fehler auftritt
+    m.reply('❌ Etwas ist schief gelaufen beim Abrufen des Bildes. Bitte versuche es später erneut.')
   }
 }
 

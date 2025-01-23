@@ -7,10 +7,10 @@ export async function before(m) {
   if (!bot.antiCall) return
 
   const messageType = {
-    40: '📞 You missed a voice call, and the call has been missed.',
-    41: '📹 You missed a video call, and the call has been missed.',
-    45: '📞 You missed a group voice call, and the call has been missed.',
-    46: '📹 You missed a group video call, and the call has been missed.',
+    40: '📞 Sie haben einen Sprachanruf verpasst, und der Anruf wurde verpasst.',
+    41: '📹 Sie haben einen Videoanruf verpasst, und der Anruf wurde verpasst.',
+    45: '📞 Sie haben einen Gruppen-Sprachanruf verpasst, und der Anruf wurde verpasst.',
+    46: '📹 Sie haben einen Gruppen-Videoanruf verpasst, und der Anruf wurde verpasst.',
   }[m.messageStubType]
 
   
@@ -18,7 +18,7 @@ export async function before(m) {
    
 
     await this.sendMessage(m.chat, {
-      text: `You are banned + blocked for calling the bot`,
+      text: `Sie sind gesperrt + blockiert, weil Sie den Bot angerufen haben`,
       mentions: [m.sender],
     })
 

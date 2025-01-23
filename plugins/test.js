@@ -2,7 +2,7 @@ import fs from 'fs'
 import fetch from 'node-fetch'
 let handler = async (m, { conn, usedPrefix: _p }) => {
   let img = 'https://i.ibb.co/9HY4wjz/a4c0b1af253197d4837ff6760d5b81c0.jpg'
-  let info = `*BOT ACTIVE*`
+  let info = `*BOT AKTIV*`
   await conn.reply(m.chat, info, m, {
     contextInfo: {
       mentionedJid: [m.sender],

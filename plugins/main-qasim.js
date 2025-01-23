@@ -2,26 +2,23 @@ let handler = async m =>
   m.reply(
     `
 
-≡ © GlobalTechInfo Groups
+≡ © OwnedbyLIP Gruppen
 
 ─────────────
-▢ Join WhatsApp Channel For Updates
-https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07
+▢ Trete dem WhatsApp-Kanal für Updates bei
+ https://chat.whatsapp.com/...  
 
-▢ Group 2
-https://t.me/GlobalTechOwner
+▢ Gruppe 2
+
 
 ─────────────
-≡ Disabled links? Chat Directly! 
-
-▢ Group WhatsApp 
- https://GlobalTechInc
+≡ Deaktivierte Links? Chatte direkt! 
+≡ https://wa.me/491624542167
 ─────────────
-▢ *Owner instagram*
+▢ *Besitzer Instagram*
  https://instagram.com/global.techinfo
 
-▢ *YouTube*
-• https://www.youtube.com/@GlobalTechInfo
+
 
 
 `.trim()

@@ -1,11 +1,11 @@
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  // Split the message text using the '|' character and slice the array to remove the first element.
+  // Teile den Nachrichtentext mit dem '|' Zeichen und entferne das erste Element des Arrays.
   let a = text.split('|').slice(1)
-  if (!a[1]) throw 'Format\n' + usedPrefix + command + ' hello |yes|no'
-  if (a[12]) throw 'Too many options, Format\n' + usedPrefix + command + ' hello |yes|no'
-  // Check for duplicate options in the poll.
-  if (checkDuplicate(a)) throw 'Duplicate options in the message!'
-  let cap = '*Polling Request By* ' + m.name + '\n*Message:* ' + text.split('|')[0]
+  if (!a[1]) throw 'Format\n' + usedPrefix + command + ' hallo |ja|nein'
+  if (a[12]) throw 'Zu viele Optionen, Format\n' + usedPrefix + command + ' hallo |ja|nein'
+  // Überprüfe auf doppelte Optionen in der Umfrage.
+  if (checkDuplicate(a)) throw 'Doppelte Optionen in der Nachricht!'
+  let cap = '*Umfrageanfrage von* ' + m.name + '\n*Nachricht:* ' + text.split('|')[0]
 
   const pollMessage = {
     name: cap,
@@ -19,13 +19,13 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
   })
 }
 
-handler.help = ['poll question|option|option']
-handler.tags = ['group']
-handler.command = /^po(l((l?ing|ls)|l)|ols?)$/i
+handler.help = ['umfrage frage|option|option']
+handler.tags = ['gruppe']
+handler.command = /^umfrage$/i
 
 export default handler
 
-// Function to check for duplicate elements in an array.
+// Funktion zur Überprüfung auf doppelte Elemente in einem Array.
 function checkDuplicate(arr) {
   return new Set(arr).size !== arr.length
 }

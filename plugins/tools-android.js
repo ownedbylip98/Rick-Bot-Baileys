@@ -12,7 +12,7 @@ async function searchAndFetchApkInfo(query) {
 
     // Ensure the result contains a 'data' field and is an array
     if (!apksearchResult || !apksearchResult.data || !Array.isArray(apksearchResult.data) || apksearchResult.data.length === 0) {
-      console.log("No valid APK data found.");
+      console.log("Keine gültigen APK-Daten gefunden.");
       return [];
     }
 
@@ -24,29 +24,29 @@ async function searchAndFetchApkInfo(query) {
       url: item.link,  // Corrected to use 'link' as the URL
     }));
   } catch (error) {
-    console.error('Error fetching APKs:', error);
+    console.error('Fehler beim Abrufen der APKs:', error);
     return [];
   }
 }
 
 const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-  if (!text) throw `Please provide an APK name to search for. Example: *${usedPrefix + command}* Telegram`;
+  if (!text) throw `Bitte gib einen APK-Namen zum Suchen an. Beispiel: *${usedPrefix + command}* Telegram`;
 
   conn.apksearch = conn.apksearch ? conn.apksearch : {}; // Initialize session storage
-  await conn.reply(m.chat, '⏳ Searching for APK...', m);
+  await conn.reply(m.chat, '⏳ Suche nach APK...', m);
 
   // Fetch the APK list from `apksearch` function
   const result = await searchAndFetchApkInfo(text);
 
   // Log the API response here
-  console.log("API Response:", result); // Log the raw API response
+  console.log("API-Antwort:", result); // Log the raw API response
 
   if (result.length === 0) {
-    return m.reply('No APKs found for your search term. Please try another one.');
+    return m.reply('Keine APKs für deinen Suchbegriff gefunden. Bitte versuche es mit einem anderen.');
   }
 
   // Prepare the list of APKs for display
-  const infoText = `📱 Available APKs for *${text.trim()}*:\n\n`;
+  const infoText = `📱 Verfügbare APKs für *${text.trim()}*:\n\n`;
 
   const orderedLinks = result.map((data, index) => {
     const { title, developer, version, url } = data;

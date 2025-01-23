@@ -5,15 +5,15 @@ let handler = async (m, { conn, text }) => {
   } else {
     who = m.chat
   }
-  if (!who) throw 'Tag the person you want to remove as an Owner!'
+  if (!who) throw 'Markiere die Person, die du als Besitzer entfernen möchtest!'
 
   const ownerId = who.split('@')[0]
   const ownerIndex = global.owner.findIndex(owner => owner[0] === ownerId)
 
-  if (ownerIndex === -1) throw 'This person is not an owner!'
+  if (ownerIndex === -1) throw 'Diese Person ist kein Besitzer!'
 
   const removedOwner = global.owner.splice(ownerIndex, 1)[0]
-  const caption = `@${removedOwner[0]} has been removed as an Owner.`
+  const caption = `@${removedOwner[0]} wurde als Besitzer entfernt.`
 
   await conn.reply(m.chat, caption, m, {
     mentions: conn.parseMention(caption),

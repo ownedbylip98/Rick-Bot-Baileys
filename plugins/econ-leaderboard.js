@@ -1,4 +1,3 @@
-
 import { areJidsSameUser } from '@whiskeysockets/baileys'
 
 let handler = async (m, { conn, args, participants }) => {

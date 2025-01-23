@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
   try {
-    if (!text) throw 'uhm.. what do you want to say?';
+    if (!text) throw 'Uhm.. was möchtest du sagen?';
     await m.react('🤖');
 
     const prompt = encodeURIComponent(text);
@@ -11,7 +11,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
     const result = await fetch(apiurl);
     const response = await result.json();
     
-    if (!response.message) throw 'No result found';
+    if (!response.message) throw 'Kein Ergebnis gefunden';
 
     const replyText = response.message;
     await conn.sendButton(
@@ -21,12 +21,12 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
       'https://letemoinhaiti.com/home/wp-content/uploads/2024/03/img_9025-1-850x560.jpg', 
       [['Script', `.sc`]], 
       null, 
-      [['Follow Me', `https://github.com/Guru322`]], 
+      [['Folge mir', `https://github.com/Guru322`]], 
       m
     );
   } catch (error) {
     console.error(error);
-    m.reply('Oops! Something went wrong. We are trying hard to fix it ASAP.');
+    m.reply('Oops! Etwas ist schief gelaufen. Wir versuchen es so schnell wie möglich zu beheben.');
   }
 };
 

@@ -6,7 +6,7 @@ let handler = async (m, { conn, isROwner, text }) => {
     .map(entry => entry[1])
   let anu = groups.map(v => v.id)
   var pesan = m.quoted && m.quoted.text ? m.quoted.text : text
-  if (!pesan) throw '*ENTER THE MESSAGE YOU WANT TO BROADCAST*'
+  if (!pesan) throw '*GIB DIE NACHRICHT EIN, DIE DU SENDEN MÖCHTEST*'
   for (let i of anu) {
     await delay(500)
     conn
@@ -18,7 +18,7 @@ let handler = async (m, { conn, isROwner, text }) => {
             degreesLongitude: 139.75270667105852,
             accuracyInMeters: 0,
             degreesClockwiseFromMagneticNorth: 2,
-            caption: '[ATTENTION]\n\n' + pesan + '\n\nTHIS IS AN OFFICIAL STATEMENT',
+            caption: '[ACHTUNG]\n\n' + pesan + '\n\nDIES IST EINE OFFIZIELLE MITTEILUNG',
             sequenceNumber: 2,
             timeOffset: 3,
             contextInfo: m,
@@ -29,7 +29,7 @@ let handler = async (m, { conn, isROwner, text }) => {
       .catch(_ => _)
   }
   m.reply(
-    `*MESSAGE SENT TO ${anu.length} GROUP/S*\n\n*NOTE: THIS COMMAND MAY FAIL AND NOT BE SENT TO ALL CHATS, SORRY FOR THE TIME BEING*`
+    `*NACHRICHT AN ${anu.length} GRUPPE(N) GESENDET*\n\n*HINWEIS: DIESER BEFEHL KANN FEHLSCHLAGEN UND NICHT AN ALLE CHATS GESENDET WERDEN, ENTSCHULDIGUNG FÜR DIE UNANNEHMLICHKEITEN*`
   )
 }
 handler.help = ['broadcastgroup', 'bcgc'].map(v => v + ' <text>')

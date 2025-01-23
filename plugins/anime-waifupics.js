@@ -9,13 +9,13 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   const fetchImage = async (endpoint) => {
     try {
       const response = await fetch(baseUrl + endpoint);
-      if (!response.ok) throw `❎ Error fetching ${type} image`;
-      const imageBuffer = await response.buffer(); // Get the image data as a buffer
-      conn.sendFile(m.chat, imageBuffer, 'img.jpg', `✅ Random ${type}`, m);
+      if (!response.ok) throw `❎ Fehler beim Abrufen des ${type} Bildes`;
+      const imageBuffer = await response.buffer(); // Bilddaten als Puffer abrufen
+      conn.sendFile(m.chat, imageBuffer, 'img.jpg', `✅ Zufälliges ${type}`, m);
       m.react('😁');
     } catch (error) {
       console.error(error);
-      m.reply(`❎ An error occurred while fetching the ${type} image.`);
+      m.reply(`❎ Ein Fehler ist aufgetreten beim Abrufen des ${type} Bildes.`);
     }
   };
 

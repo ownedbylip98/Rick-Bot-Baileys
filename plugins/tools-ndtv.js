@@ -7,23 +7,23 @@ let handler = async (m, { conn }) => {
     )
     if (!res.ok) throw await res.text()
     let data = await res.json()
-    if (!data.news || !data.news.length) throw new Error('No news available.')
+    if (!data.news || !data.news.length) throw new Error('Keine Nachrichten verfügbar.')
 
     let randomCategoryIndex = Math.floor(Math.random() * data.news.length)
     let newsCategory = data.news[randomCategoryIndex]
     let articles = newsCategory.articles
 
-    if (!articles.length) throw new Error('No news available in the selected category.')
+    if (!articles.length) throw new Error('Keine Nachrichten in der ausgewählten Kategorie verfügbar.')
 
     let randomArticleIndex = Math.floor(Math.random() * articles.length)
     let newsItem = articles[randomArticleIndex]
 
     let newsInfo = `•───── ୨❀୧ ─────•
-    ❖ 𝑺𝑻𝑨𝑻𝑼𝑺: Active
+    ❖ 𝑺𝑻𝑨𝑻𝑼𝑺: Aktiv
     ㋡ 𝑪𝑹𝑬𝑨𝑻𝑶𝑹: Qasim
     ☞ 𝑯𝑬𝑨𝑫𝑳𝑰𝑵𝑬: ${newsItem.headline}
     ${newsItem.description}
-    🔗 𝑹𝑬𝑨𝑫 𝑴𝑶𝑹𝑬: ${newsItem.url}
+    🔗 𝑴𝑬𝑯𝑹 𝑳𝑬𝑺𝑬𝑵: ${newsItem.url}
     •───── ୨❀୧ ─────•`
 
     let thumbnail =

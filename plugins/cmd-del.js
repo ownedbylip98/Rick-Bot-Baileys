@@ -9,20 +9,20 @@ let handler = async (m, { text }) => {
   }
   
   // Ensure a hash is provided
-  if (!hash) throw `✳️ Please enter the command name.`;
+  if (!hash) throw `✳️ Bitte gib den Befehl ein.`;
   
   let sticker = global.db.data.sticker;
 
   // Check if the command is locked
   if (sticker[hash] && sticker[hash].locked) {
-    throw `✳️ You cannot delete this command.`;
+    throw `✳️ Du kannst diesen Befehl nicht löschen.`;
   }
   
   // Delete the sticker command
   delete sticker[hash];
   
   // Confirm deletion
-  m.reply(`✅ Command deleted.`);
+  m.reply(`✅ Befehl gelöscht.`);
 }
 
 handler.help = ['cmd'].map(v => 'del' + v + ' <text>');

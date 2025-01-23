@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 let itunesHandler = async (m, { conn, text }) => {
-  if (!text) throw 'Please provide a song name'
+  if (!text) throw 'Bitte gib einen Liednamen an'
 
   try {
     let res = await fetch(`https://api.popcat.xyz/itunes?q=${encodeURIComponent(text)}`)
@@ -14,13 +14,13 @@ let itunesHandler = async (m, { conn, text }) => {
 
     console.log('JSON response:', json)
 
-    let songInfo = `*Song Information:*\n
+    let songInfo = `*Liedinformationen:*\n
      • *Name:* ${json.name}\n
-     • *Artist:* ${json.artist}\n
+     • *Künstler:* ${json.artist}\n
      • *Album:* ${json.album}\n
-     • *Release Date:* ${json.release_date}\n
-     • *Price:* ${json.price}\n
-     • *Length:* ${json.length}\n
+     • *Veröffentlichungsdatum:* ${json.release_date}\n
+     • *Preis:* ${json.price}\n
+     • *Länge:* ${json.length}\n
      • *Genre:* ${json.genre}\n
      • *URL:* ${json.url}`
 

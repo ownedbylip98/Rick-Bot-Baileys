@@ -5,7 +5,7 @@ let handler = async (m, { conn, args, usedPrefix, text, command }) => {
   try {
     // Ask the user to provide the link if no link is provided
     if (!text)
-      return m.reply(`Please provide the MEGA link. Example: ${usedPrefix + command} https://mega.nz/file/yourFileLink`)
+      return m.reply(`Bitte gib den MEGA-Link an. Beispiel: ${usedPrefix + command} https://mega.nz/file/yourFileLink`)
 
     // Parse the file from the provided URL
     const file = mega.File.fromURL(text)
@@ -13,14 +13,14 @@ let handler = async (m, { conn, args, usedPrefix, text, command }) => {
 
     // Check file size limit
     if (file.size >= 300000000)
-      return m.reply('Error: File size is too large (Maximum Size: 300MB)')
+      return m.reply('Fehler: Dateigröße ist zu groß (Maximale Größe: 300MB)')
 
     // Notify the user that the file is being downloaded
-    const downloadingMessage = `🌩️ Downloading file... Please wait.`
+    const downloadingMessage = `🌩️ Datei wird heruntergeladen... Bitte warte.`
     m.reply(downloadingMessage)
 
     // Format the download completion message
-    const caption = `*_Successfully downloaded..._*\nFile: ${file.name}\nSize: ${formatBytes(file.size)}`
+    const caption = `*_Erfolgreich heruntergeladen..._*\nDatei: ${file.name}\nGröße: ${formatBytes(file.size)}`
 
     // Download the file data
     const data = await file.downloadBuffer()
@@ -44,7 +44,7 @@ let handler = async (m, { conn, args, usedPrefix, text, command }) => {
     await conn.sendFile(m.chat, data, file.name, caption, m, null, { mimetype, asDocument: true })
   } catch (error) {
     // Handle errors gracefully
-    return m.reply(`Error: ${error.message}`)
+    return m.reply(`Fehler: ${error.message}`)
   }
 }
 

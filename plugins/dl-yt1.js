@@ -38,7 +38,7 @@ const convertToMp3 = async (inputBuffer, outputPath) => {
 
 const handler = async (m, { args, conn, usedprefix }) => {
     if (!args.length) {
-        await m.reply('Please provide a YouTube URL.');
+        await m.reply('Bitte gib eine YouTube-URL an.');
         return;
     }
 
@@ -47,7 +47,7 @@ const handler = async (m, { args, conn, usedprefix }) => {
 
     if (!youtubeRegex.test(url)) {
         await m.react('❌');
-        await m.reply('Invalid YouTube URL. Please provide a valid URL.');
+        await m.reply('Ungültige YouTube-URL. Bitte gib eine gültige URL an.');
         return;
     }
 
@@ -55,10 +55,10 @@ const handler = async (m, { args, conn, usedprefix }) => {
 
     try {
         const response = await ytdown(url);
-        console.log('API Response:', JSON.stringify(response, null, 2));
+        console.log('API-Antwort:', JSON.stringify(response, null, 2));
 
         if (!response || !response.data) {
-            throw new Error('Too many requests towards api wait little longer.');
+            throw new Error('Zu viele Anfragen an die API. Bitte warte etwas länger.');
         }
 
         // Check if the API provides the full-length audio file
@@ -71,7 +71,7 @@ const handler = async (m, { args, conn, usedprefix }) => {
 
         const title = response.data.title || 'audio';
         const safeTitle = title.substring(0, 4).replace(/[<>:"/\\|?*]/g, '_'); // Get the first four characters
-        const caption = `POWERED BY ULTRA`;
+        const caption = `POWERED BY Rick-Bot`;
 
         const mediaResponse = await fetchWithRetry(audioUrl, {
             headers: {
@@ -95,8 +95,8 @@ const handler = async (m, { args, conn, usedprefix }) => {
 
         await m.react('✅');
     } catch (error) {
-        console.error('Error fetching audio:', error.message);
-        await m.reply(`⏱️ Error: ${error.message}`);
+        console.error('Fehler beim Abrufen der Audiodatei:', error.message);
+        await m.reply(`⏱️ Fehler: ${error.message}`);
         await m.react('❌');
     }
 };

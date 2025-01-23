@@ -2,49 +2,49 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text }) => {
   if (!text) {
-    return m.reply("Enter the name of the app to search for the mod.");
+    return m.reply("Gib den Namen der App ein, nach der du suchen möchtest.");
   }
 
   try {
-    // Add "wait" reaction to indicate the request is processing
+    // Füge "Warten"-Reaktion hinzu, um anzuzeigen, dass die Anfrage bearbeitet wird
     await m.react('⏳');
     
     const response = await fetch(`https://global-tech-api.vercel.app/apksearch?query=${text}`);
     
-    // Log the API response to the console
+    // Logge die API-Antwort in die Konsole
     const data = await response.json();
-    console.log("API Response:", data); // Log the complete response
+    console.log("API-Antwort:", data); // Logge die vollständige Antwort
 
-    // Check if the response contains any data
+    // Überprüfe, ob die Antwort Daten enthält
     if (!data.data || data.data.length === 0) {
-      // React with "done" emoji in case no results
+      // Reagiere mit "Fertig"-Emoji, falls keine Ergebnisse gefunden wurden
       await m.react('✅');
-      return m.reply("No mods were found for the application you were looking for.");
+      return m.reply("Keine Mods für die gesuchte Anwendung gefunden.");
     }
 
-    let caption = `Search results for *${text}*:\n\n`;
+    let caption = `Suchergebnisse für *${text}*:\n\n`;
 
-    // Loop through the results and format the response
+    // Schleife durch die Ergebnisse und formatiere die Antwort
     data.data.forEach((result, index) => {
       if (result.title && result.url && result.updated && result.size) {
         caption += `
-${index + 1}. *Title:* ${result.title}
+${index + 1}. *Titel:* ${result.title}
 *Version:* ${result.version}
-*Size:* ${result.size}
-*Updated:* ${result.updated}
-*Download Link:* ${result.url}
+*Größe:* ${result.size}
+*Aktualisiert:* ${result.updated}
+*Download-Link:* ${result.url}
 \n`;
       }
     });
 
-    // React with "done" emoji after the process is complete
+    // Reagiere mit "Fertig"-Emoji, nachdem der Prozess abgeschlossen ist
     await m.react('✅');
     
-    // Send the formatted message
+    // Sende die formatierte Nachricht
     await conn.sendMessage(m.chat, { text: caption }, { quoted: m });
   } catch (error) {
-    console.error("Error in search modapk:", error);
-    m.reply("An error occurred while searching for mods.");
+    console.error("Fehler bei der Mod-Suche:", error);
+    m.reply("Ein Fehler ist bei der Suche nach Mods aufgetreten.");
   }
 };
 

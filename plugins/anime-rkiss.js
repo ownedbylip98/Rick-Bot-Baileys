@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch'
 import { sticker } from '../lib/sticker.js'
 let handler = async (m, { conn, args, usedPrefix, command }) => {
@@ -22,9 +21,9 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
    
 }
 
-handler.help = ['kiss @tag']
+handler.help = ['küssen @tag']
 handler.tags = ['rnime']
-handler.command = /^(kiss|beso)$/i
+handler.command = /^(küssen)$/i
 handler.diamond = true
 handler.group = true
 

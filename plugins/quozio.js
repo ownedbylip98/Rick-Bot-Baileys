@@ -7,7 +7,7 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
     } else if (m.quoted && m.quoted.text) {
         text = m.quoted.text;
     } else {
-        throw "Please provide text or reply to a message with the text you want to make a quote!";
+        throw "Bitte gib einen Text an oder antworte auf eine Nachricht mit dem Text, den du zitieren möchtest!";
     }
 
     try {
@@ -15,13 +15,13 @@ let handler = async (m, { conn, usedPrefix, args, command }) => {
         let quote = await createQuote(m.name, text);
 
         // Define caption for the generated quote image
-        let maker = "*Your quote has been created!*"; 
+        let maker = "*Dein Zitat wurde erstellt!*"; 
 
         // Send the generated quote image with a caption
-        await conn.sendFile(m.chat, quote, '', maker + "\n*Requested by:* " + m.name + "\n*Quote:* " + text, m);
+        await conn.sendFile(m.chat, quote, '', maker + "\n*Angefordert von:* " + m.name + "\n*Zitat:* " + text, m);
     } catch (error) {
-        console.error("Error creating quote:", error);
-        m.reply("⚠️ An error occurred while creating the quote. Please try again later.");
+        console.error("Fehler beim Erstellen des Zitats:", error);
+        m.reply("⚠️ Ein Fehler ist beim Erstellen des Zitats aufgetreten. Bitte versuche es später erneut.");
     }
 }
 
@@ -50,7 +50,7 @@ async function createQuote(author, message) {
             body,
         }).then((val) => val.json());
 
-        console.log("Created quote at: " + quote["url"], "quote");
+        console.log("Zitat erstellt unter: " + quote["url"], "quote");
         const quoteId = quote["quoteId"];
 
         // Fetch the templates
@@ -60,7 +60,7 @@ async function createQuote(author, message) {
             .then((val) => val["data"]);
 
         const index = Math.floor(Math.random() * templates.length);
-        console.log("Chose template from: " + templates[index]["url"], "quote");
+        console.log("Vorlage ausgewählt von: " + templates[index]["url"], "quote");
         const templateId = templates[index]["templateId"];
 
         // Apply the template to the quote
@@ -68,13 +68,13 @@ async function createQuote(author, message) {
         const imageUrl = await fetch(host + path)
             .then((val) => val.json())
             .then((val) => val["medium"]);
-        console.log("Created quote image at: " + imageUrl, "quote");
+        console.log("Zitatbild erstellt unter: " + imageUrl, "quote");
 
         // Return the generated image URL
         return imageUrl;
 
     } catch (error) {
-        console.error("Error in creating quote:", error);
-        throw "There was an issue with creating the quote.";
+        console.error("Fehler beim Erstellen des Zitats:", error);
+        throw "Es gab ein Problem beim Erstellen des Zitats.";
     }
 }

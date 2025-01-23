@@ -1,15 +1,15 @@
 import { spawn } from 'child_process'
 let handler = async (m, { conn, isROwner, text }) => {
-  if (!process.send) throw 'Dont: node main.js\nDo: node index.js'
+  if (!process.send) throw 'Nicht: node main.js\nSondern: node index.js'
   if (conn.user.jid == conn.user.jid) {
-    await m.reply('🔄 Restarting Bot...\n Wait a moment')
+    await m.reply('🔄 Bot wird neu gestartet...\n Einen Moment bitte')
     process.send('reset')
   } else throw 'eh'
 }
 
-handler.help = ['restart']
-handler.tags = ['owner']
-handler.command = ['restart']
+handler.help = ['neustart']
+handler.tags = ['eigentümer']
+handler.command = ['neustart']
 
 handler.rowner = true
 

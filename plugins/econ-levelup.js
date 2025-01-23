@@ -1,4 +1,3 @@
-
 import { canLevelUp, xpRange } from '../lib/levelling.js'
 let handler = async (m, { conn }) => {
 	let name = conn.getName(m.sender)
@@ -7,14 +6,14 @@ let handler = async (m, { conn }) => {
     if (!canLevelUp(user.level, user.exp, global.multiplier)) {
         let { min, xp, max } = xpRange(user.level, global.multiplier)
         let txt = `
-┌───⊷ *${mssg.lvl.toUpperCase()}*
-▢ ${mssg.name}: *${name}*
-▢ ${mssg.lvl}: *${user.level}*
+┌───⊷ *LEVEL*
+▢ Name: *${name}*
+▢ Level: *${user.level}*
 ▢ XP : *${user.exp - min}/${xp}*
-▢ ${mssg.rank}: *${user.role}*
+▢ Rang: *${user.role}*
 └──────────────
 
-*${max - user.exp} XP* ${mssg.fxp}
+*${max - user.exp} XP* bis zum nächsten Level
 `.trim()
 try {
   let imgg = API('fgmods', '/api/maker/rank', {
@@ -40,9 +39,9 @@ try {
        
         let str = `
 ┌─⊷ *LEVEL UP*
-▢ ${mssg.lvlbfor}: *${before}*
-▢ ${mssg.lvlup}: *${user.level}*
-▢ ${mssg.rank}: *${user.role}*
+▢ Vorheriges Level: *${before}*
+▢ Neues Level: *${user.level}*
+▢ Rang: *${user.role}*
 └──────────────
 `.trim()
         

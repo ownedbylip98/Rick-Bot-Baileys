@@ -53,13 +53,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 			{
 				conn.enhancer = conn.enhancer ? conn.enhancer : {};
 				if (m.sender in conn.enhancer)
-					throw "Wait for one image to be processed.";
+					throw "Warte, bis ein Bild verarbeitet wurde.";
 				let q = m.quoted ? m.quoted : m;
 				let mime = (q.msg || q).mimetype || q.mediaType || "";
 				if (!mime)
-					throw `Enter the command along with the image`;
+					throw `Gib den Befehl zusammen mit dem Bild ein`;
 				if (!/image\/(jpe?g|png)/.test(mime))
-					throw ` ${mime} Doesnot Support`;
+					throw ` ${mime} wird nicht unterstützt`;
 				else conn.enhancer[m.sender] = true;
 				m.reply(wait);
 				let img = await q.download?.();
@@ -71,7 +71,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 					error = true;
 				} finally {
 					if (error) {
-						m.reply("Disconnected from server");
+						m.reply("Verbindung zum Server unterbrochen");
 					}
 					delete conn.enhancer[m.sender];
 				}
@@ -82,13 +82,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 			{
 				conn.recolor = conn.recolor ? conn.recolor : {};
 				if (m.sender in conn.recolor)
-					throw "Wait for one image to be processed";
+					throw "Warte, bis ein Bild verarbeitet wurde";
 				let q = m.quoted ? m.quoted : m;
 				let mime = (q.msg || q).mimetype || q.mediaType || "";
 				if (!mime)
-					throw `Enter the command along with image`;
+					throw `Gib den Befehl zusammen mit dem Bild ein`;
 				if (!/image\/(jpe?g|png)/.test(mime))
-					throw `${mime} is not editable`;
+					throw `${mime} ist nicht bearbeitbar`;
 				else conn.recolor[m.sender] = true;
 				m.reply(wait);
 				let img = await q.download?.();
@@ -100,7 +100,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 					error = true;
 				} finally {
 					if (error) {
-						m.reply("Disconnected from server");
+						m.reply("Verbindung zum Server unterbrochen");
 					}
 					delete conn.recolor[m.chat];
 				}
@@ -111,13 +111,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 			{
 				conn.hdr = conn.hdr ? conn.hdr : {};
 				if (m.sender in conn.hdr)
-					throw "Wait to be processed one image then add another one dude";
+					throw "Warte, bis ein Bild verarbeitet wurde, dann füge ein weiteres hinzu";
 				let q = m.quoted ? m.quoted : m;
 				let mime = (q.msg || q).mimetype || q.mediaType || "";
 				if (!mime)
-					throw `Enter the Command Along with image`;
+					throw `Gib den Befehl zusammen mit dem Bild ein`;
 				if (!/image\/(jpe?g|png)/.test(mime))
-					throw `${mime} Doesnot Editable`;
+					throw `${mime} ist nicht bearbeitbar`;
 				else conn.hdr[m.sender] = true;
 				m.reply(wait);
 				let img = await q.download?.();
@@ -129,7 +129,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 					error = true;
 				} finally {
 					if (error) {
-						m.reply("Server Disconnected");
+						m.reply("Serververbindung unterbrochen");
 					}
 					delete conn.hdr[m.sender];
 				}
@@ -141,5 +141,5 @@ handler.help = ['hd', 'hdr', 'unblur', 'remblur', 'colorize', 'colorizer', 'enha
 handler.tags = ["image", "maker"];
 handler.command = ['hd', 'hdr', 'unblur', 'remblur', 'colorize', 'colorizer', 'enhance', 'enhancer','dehaze','recolor' ,'enhance']
 export default handler;
-      
-      
+
+

@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn }) => {
 
-let msg = `Malaysia Hot Girl 🥵🔥`
+let msg = `Heiße Mädchen aus Malaysia 🥵🔥`
 let endpoint = `https://shizoapi.onrender.com/api/pies/malaysia?apikey=${shizokeys}`
 const response = await fetch(endpoint);
 if (response.ok) {

@@ -4,7 +4,7 @@ let username = conn.getName(who)
 
 await conn.sendContact(m.chat, [[`${who.split`@`[0]}@s.whatsapp.net`, `${username}`]], m)
 }
-handler.help = ['savecontact *@tag*']
-handler.tags = ['tools']
-handler.command = ['savecontact', 'save']
+handler.help = ['speicherkontakt *@tag*'] // translated to German
+handler.tags = ['werkzeuge'] // translated to German
+handler.command = ['speicherkontakt', 'speichern'] // translated to German
 export default handler

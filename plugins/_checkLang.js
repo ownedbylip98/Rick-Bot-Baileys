@@ -1,5 +1,5 @@
 
-import { en, es, id, pt, ar } from '../language/index.js'
+import { en, es, id, pt, ar, de } from '../language/index.js'
 
 export async function before(m,{ conn }) {
 
@@ -14,8 +14,10 @@ export async function before(m,{ conn }) {
       translations = id
      } else if (lang === "pt") {
       translations = pt
-      } else if (lang === "ar") {
+     } else if (lang === "ar") {
       translations = ar
+     } else if (lang === "de") {
+      translations = de
      } else {
       translations = en
      }

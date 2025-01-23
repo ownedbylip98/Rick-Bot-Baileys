@@ -15,14 +15,14 @@ let handler = async (m, { conn, text }) => {
 
   if (!text && !m.quoted)
     return conn.reply(
-      `*❏USER RESET*\n\nTag the user, type the number or reply to the message of the user you want to RESET`,
+      `*❏BENUTZER ZURÜCKSETZEN*\n\nMarkiere den Benutzer, gib die Nummer ein oder antworte auf die Nachricht des Benutzers, den du ZURÜCKSETZEN möchtest`,
       m
     )
   //let exists = await conn.isOnWhatsApp(number)
-  // if (exists) return conn.reply(m.chat, `*The number is not registered in WhatsApp*`, m)
+  // if (exists) return conn.reply(m.chat, `*Die Nummer ist nicht bei WhatsApp registriert*`, m)
   if (isNaN(number))
-    return conn.reply(m.chat, `*❏ USER RESET*\n\nThe number you entered is invalid`, m)
-  // if(number.length > 8) return conn.reply(m.chat, `*❏ USER RESET*\n\nThe number you entered is invalid!`, m)
+    return conn.reply(m.chat, `*❏ BENUTZER ZURÜCKSETZEN*\n\nDie eingegebene Nummer ist ungültig`, m)
+  // if(number.length > 8) return conn.reply(m.chat, `*❏ BENUTZER ZURÜCKSETZEN*\n\nDie eingegebene Nummer ist ungültig!`, m)
   try {
     if (text) {
       var user = number + '@s.whatsapp.net'
@@ -40,7 +40,7 @@ let handler = async (m, { conn, text }) => {
 
     delete global.global.db.data.users[user]
 
-    conn.reply(m.chat, `*❏ USER RESET*\n\n✅ Rebooted to @${number} from the *DATABASE*`, null, {
+    conn.reply(m.chat, `*❏ BENUTZER ZURÜCKSETZEN*\n\n✅ Zurückgesetzt für @${number} aus der *DATENBANK*`, null, {
       mentions: [user],
     })
   }

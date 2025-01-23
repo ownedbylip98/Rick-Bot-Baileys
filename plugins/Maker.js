@@ -1,6 +1,6 @@
 let handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) throw `🚩 *Contoh:* ${usedPrefix + command} botcahx`
-  await conn.reply(m.chat, wait, m)
+  if (!text) throw `🚩 *Beispiel:* ${usedPrefix + command} botcahx`
+  await conn.reply(m.chat, 'Bitte warten...', m)
   try {
     if (command == 'giraffe') {
       const res = `https://api.betabotz.org/api/textpro/giraffe?text=${encodeURIComponent(text)}&apikey=${lann}`;
@@ -248,7 +248,7 @@ let handler = async (m, { conn, command, text, usedPrefix }) => {
    } 
    } catch (err) {
   console.error(err)
-  throw "🚩 Terjadi kesalahan"
+  throw "🚩 Es ist ein Fehler aufgetreten"
    };
 };
 handler.command = handler.help = ['giraffe','magma','batman','marvelstudio2','marvelstudio','avengers','ninjalogo','glitch3','glitch2','glitch','grafity','grafity2','blood','jokerlogo','hallowen2','space','thunder2','1917','3dstone','harrypotter','wolflogo','naturalleaves','blackpink','blackpink2','dropwater','christmas','gradient','captainamerica','rusty','ice','honey','blood','koi','lava','bread','strawberry','toxic','wicker','fabric','pornhub','holograpic','deluxesilver','writing','engraved','gluetext','neondevil','skytext','vintage','multicolor','robot','scifi','artpapper','glossy','watercolor','neongreen','brokenglass','artpapper','valentine2','neonlight','neongalaxy','magma','hallowen','valentine']

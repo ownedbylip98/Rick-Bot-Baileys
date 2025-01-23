@@ -19,12 +19,12 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
         let te = `
 ┌──「 *STALKING NPM* 
 ▢ *🔖Name:* ${name} 
-▢ *🔖Creator:* ${author?.name || 'Unknown'}
-▢ *👥Total Versions:* ${versionCount}
-▢ *📌Description:* ${description}
-▢ *🧩Repository:* ${repository?.url || 'No repository available'}
-▢ *🌍Homepage:* ${homepage || 'No homepage available'}
-▢ *🏷️Dist Tags:* Latest Version: ${distTags.latest}
+▢ *🔖Ersteller:* ${author?.name || 'Unbekannt'}
+▢ *👥Gesamtanzahl der Versionen:* ${versionCount}
+▢ *📌Beschreibung:* ${description}
+▢ *🧩Repository:* ${repository?.url || 'Kein Repository verfügbar'}
+▢ *🌍Homepage:* ${homepage || 'Keine Homepage verfügbar'}
+▢ *🏷️Dist Tags:* Neueste Version: ${distTags.latest}
 ▢ *🔗Link:* https://npmjs.com/package/${name}
 └────────────`;
         await m.react('✅');

@@ -8,11 +8,11 @@ function _0x36fc() {
     'get',
     '25030envDwN',
     'length',
-    'You\x20are\x20not\x20the\x20owner',
+    'Du bist nicht der Besitzer',
     'rowner',
     'split',
     '309zkYgXY',
-    'Failed\x20to\x20modify\x20config\x20var',
+    'Fehler beim Ändern der Konfigurationsvariable',
     'tags',
     '116TDAdlW',
     'var',
@@ -27,10 +27,10 @@ function _0x36fc() {
     '2626kAKsBt',
     '11092221kYItjr',
     'message',
-    'Usage:\x20!var\x20Name:Value',
+    'Benutzung: !var Name:Wert',
     '/apps/',
-    'Error\x20modifying\x20config\x20var:',
-    '\x0aWait\x20a\x20moment',
+    'Fehler beim Ändern der Konfigurationsvariable:',
+    '\x0aBitte warte einen Moment',
   ]
   _0x36fc = function () {
     return _0x4a89ad
@@ -78,9 +78,9 @@ let handler = async (_0x10f59d, { isROwner: _0x1e39bb, text: _0x1c1884 }) => {
       throw _0x248f44(0x151)
     const [_0x434c1e, _0x45126b] = _0x45ea1c[0x0]['split'](':')
     await _0x10f59d['reply'](
-      '⚙️\x20Modifying\x20Config\x20Var...\x0aAdding/Modifying\x20' +
+      '⚙️ Konfigurationsvariable wird geändert...\x0a' +
         _0x434c1e +
-        '\x20with\x20value\x20' +
+        ' wird mit dem Wert ' +
         _0x45126b +
         _0x248f44(0x154)
     )

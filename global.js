@@ -450,23 +450,23 @@ if (pairingCode && !conn.authState.creds.registered) {
 
     if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
       console.log(
-        chalk.bgBlack(chalk.redBright("Start with your country's WhatsApp code, Example : 92xxx"))
+        chalk.bgBlack(chalk.redBright("Beginnen Sie mit dem WhatsApp-Code Ihres Landes, Beispiel: 92xxx"))
       )
       process.exit(0)
     }
   } else {
     phoneNumber = await question(
-      chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number : `))
+      chalk.bgBlack(chalk.greenBright(`Bitte geben Sie Ihre WhatsApp-Nummer ein: `))
     )
     phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
     if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
       console.log(
-        chalk.bgBlack(chalk.redBright("Start with your country's WhatsApp code, Example : 92xxx"))
+        chalk.bgBlack(chalk.redBright("Beginnen Sie mit dem WhatsApp-Code Ihres Landes, Beispiel: 92xxx"))
       )
 
       phoneNumber = await question(
-        chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number : `))
+        chalk.bgBlack(chalk.greenBright(`Bitte geben Sie Ihre WhatsApp-Nummer ein: `))
       )
       phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
       rl.close()
@@ -477,12 +477,12 @@ if (pairingCode && !conn.authState.creds.registered) {
     let code = await conn.requestPairingCode(phoneNumber)
     code = code?.match(/.{1,4}/g)?.join('-') || code
     const pairingCode =
-      chalk.bold.greenBright('Your Pairing Code:') + ' ' + chalk.bgGreenBright(chalk.black(code))
+      chalk.bold.greenBright('Ihr Pairing-Code:') + ' ' + chalk.bgGreenBright(chalk.black(code))
     console.log(pairingCode)
   }, 3000)
 }
 
-conn.logger.info('\nWaiting For Login\n')
+conn.logger.info('\nWarten auf Anmeldung\n')
 
 if (!opts['test']) {
   if (global.db) {
@@ -502,10 +502,10 @@ if (opts['server']) (await import('./server.js')).default(global.conn, PORT)
 function runCleanup() {
   clearTmp()
     .then(() => {
-      console.log('Temporary file cleanup completed.')
+      console.log('Bereinigung der temporären Dateien abgeschlossen.')
     })
     .catch(error => {
-      console.error('An error occurred during temporary file cleanup:', error)
+      console.error('Ein Fehler ist bei der Bereinigung der temporären Dateien aufgetreten:', error)
     })
     .finally(() => {
       // 2 minutes
@@ -545,28 +545,27 @@ async function connectionUpdate(update) {
   }
 
   if (code && (code === DisconnectReason.restartRequired || code === 428)) {
-    conn.logger.info(chalk.yellow('\n🌀 Restart Required... Restarting'))
+    conn.logger.info(chalk.yellow('\n🌀 Neustart erforderlich... Neustart'))
     process.send('reset')
   }
 
   if (global.db.data == null) loadDatabase()
 
   if (!pairingCode && useQr && qr !== 0 && qr !== undefined) {
-    conn.logger.info(chalk.yellow('\nLogging in....'))
+    conn.logger.info(chalk.yellow('\nEinloggen....'))
   }
 
   if (connection === 'open') {
     const { jid, name } = conn.user
-    const msg = `*MEGA-AI GOT CONNECTED* \n\n *SUPPORT BY SUBSCRIBE*
-*youtube.com/@GlobalTechInfo*`
+    const msg = `*RICK-BOT WURDE VERBUNDEN* \n`
 
     await conn.sendMessage(jid, { text: msg, mentions: [jid] }, { quoted: null })
 
-    conn.logger.info(chalk.yellow('\n👍 R E A D Y'))
+    conn.logger.info(chalk.yellow('\n👍 B E R E I T'))
   }
 
   if (connection === 'close') {
-    conn.logger.error(chalk.yellow(`\nConnection closed... Get a new session`))
+    conn.logger.error(chalk.yellow(`\nVerbindung geschlossen... Neue Sitzung erhalten`))
   }
 }
 
@@ -603,18 +602,18 @@ global.reloadHandler = async function (restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate)
   }
 
-  conn.welcome = ` Hello @user!\n\n🎉 *WELCOME* to the group @group!\n\n📜 Please read the *DESCRIPTION* @desc.`
-  conn.bye = `👋GOODBYE @user \n\nSee you later!`
-  conn.spromote = `*@user* has been promoted to an admin!`
-  conn.sdemote = `*@user* is no longer an admin.`
-  conn.sDesc = `The group description has been updated to:\n@desc`
-  conn.sSubject = `The group title has been changed to:\n@group`
-  conn.sIcon = `The group icon has been updated!`
-  conn.sRevoke = ` The group link has been changed to:\n@revoke`
-  conn.sAnnounceOn = `The group is now *CLOSED*!\nOnly admins can send messages.`
-  conn.sAnnounceOff = `The group is now *OPEN*!\nAll participants can send messages.`
-  conn.sRestrictOn = `Edit Group Info has been restricted to admins only!`
-  conn.sRestrictOff = `Edit Group Info is now available to all participants!`
+  conn.welcome = ` Hallo @user!\n\n🎉 *WILLKOMMEN* in der Gruppe @group!\n\n📜 Bitte lese die *BESCHREIBUNG* @desc.`
+  conn.bye = `👋AUF WIEDERSEHEN @user \n\nBis später!`
+  conn.spromote = `*@user* wurde zum Admin befördert!`
+  conn.sdemote = `*@user* ist kein Admin mehr.`
+  conn.sDesc = `Die Gruppenbeschreibung wurde aktualisiert zu:\n@desc`
+  conn.sSubject = `Der Gruppentitel wurde geändert zu:\n@group`
+  conn.sIcon = `Das Gruppenbild wurde aktualisiert!`
+  conn.sRevoke = ` Der Gruppenlink wurde geändert zu:\n@revoke`
+  conn.sAnnounceOn = `Die Gruppe ist jetzt *GESCHLOSSEN*!\nNur Admins können Nachrichten senden.`
+  conn.sAnnounceOff = `Die Gruppe ist jetzt *OFFEN*!\nAlle Teilnehmer können Nachrichten senden.`
+  conn.sRestrictOn = `Das Bearbeiten der Gruppeninfo ist nur für Admins eingeschränkt!`
+  conn.sRestrictOff = `Das Bearbeiten der Gruppeninfo ist jetzt für alle Teilnehmer verfügbar!`
 
   conn.handler = handler.handler.bind(global.conn)
   conn.pollUpdate = handler.pollUpdate.bind(global.conn)
@@ -672,23 +671,23 @@ global.reload = async (_ev, filename) => {
   if (pluginFilter(filename)) {
     const dir = global.__filename(join(pluginFolder, filename), true)
     if (filename in global.plugins) {
-      if (existsSync(dir)) conn.logger.info(`\nUpdated plugin - '${filename}'`)
+      if (existsSync(dir)) conn.logger.info(`\nPlugin aktualisiert - '${filename}'`)
       else {
-        conn.logger.warn(`\nDeleted plugin - '${filename}'`)
+        conn.logger.warn(`\nPlugin gelöscht - '${filename}'`)
         return delete global.plugins[filename]
       }
-    } else conn.logger.info(`\nNew plugin - '${filename}'`)
+    } else conn.logger.info(`\nNeues Plugin - '${filename}'`)
     const err = syntaxerror(readFileSync(dir), filename, {
       sourceType: 'module',
       allowAwaitOutsideFunction: true,
     })
-    if (err) conn.logger.error(`\nSyntax error while loading '${filename}'\n${format(err)}`)
+    if (err) conn.logger.error(`\nSyntaxfehler beim Laden von '${filename}'\n${format(err)}`)
     else {
       try {
         const module = await import(`${global.__filename(dir)}?update=${Date.now()}`)
         global.plugins[filename] = module.default || module
       } catch (e) {
-        conn.logger.error(`\nError require plugin '${filename}\n${format(e)}'`)
+        conn.logger.error(`\nFehler beim Laden des Plugins '${filename}\n${format(e)}'`)
       } finally {
         global.plugins = Object.fromEntries(
           Object.entries(global.plugins).sort(([a], [b]) => a.localeCompare(b))

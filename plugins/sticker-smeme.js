@@ -16,19 +16,19 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
   let [topText, bottomText] = text.split(/[^\w\s]/g);
 
   if (!topText && !bottomText) {
-    return m.reply('Please provide at least one text for the meme.');
+    return m.reply('Bitte gib mindestens einen Text für das Meme an.');
   }
 
   let quotedMessage = m.quoted ? m.quoted : m;
   let mime = (quotedMessage.msg || quotedMessage).mimetype || quotedMessage.mediaType || '';
 
   if (/video/g.test(mime) && (quotedMessage.msg || quotedMessage).seconds > 11) {
-    return m.reply('Maximum video duration is 10 seconds!');
+    return m.reply('Die maximale Videodauer beträgt 10 Sekunden!');
   }
 
   if (!/webp|image|video|gif|viewOnce/g.test(mime)) {
     return m.reply(
-      `Reply to media with the command\n\n${usedPrefix + command} <${topText ? topText : 'top text'}>|<${bottomText ? bottomText : 'bottom text'}>`
+      `Antworte auf ein Medium mit dem Befehl\n\n${usedPrefix + command} <${topText ? topText : 'oberer Text'}>|<${bottomText ? bottomText : 'unterer Text'}>`
     );
   }
 
@@ -42,23 +42,23 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 
   try {
     if (/webp/g.test(mime)) {
-      out = await createSticker(meme + (await webp2png(img)), false, global.packname, name, 60);
+      out = await createSticker(meme + (await webp2png(img)), false, 'Rick-Bot', name, 60);
     } else if (/image/g.test(mime)) {
-      out = await createSticker(meme + (await uploadImage(img)), false, global.packname, name, 60);
+      out = await createSticker(meme + (await uploadImage(img)), false, 'Rick-Bot', name, 60);
     } else if (/video/g.test(mime)) {
-      out = await sticker(meme + (await uploadFile(img)), false, global.packname, name);
+      out = await sticker(meme + (await uploadFile(img)), false, 'Rick-Bot', name);
     } else if (/gif/g.test(mime) || /viewOnce/g.test(mime)) {
-      out = await createSticker(meme + (await uploadFile(img)), false, global.packname, name, 60);
+      out = await createSticker(meme + (await uploadFile(img)), false, 'Rick-Bot', name, 60);
     }
 
     if (out) {
       await m.reply(out);
     } else {
-      throw new Error('Failed to create the sticker.');
+      throw new Error('Fehler beim Erstellen des Stickers.');
     }
   } catch (error) {
     console.error(error); // Log the error for debugging
-    m.reply('Failed to create the sticker. Please try again later.');
+    m.reply('Fehler beim Erstellen des Stickers. Bitte versuche es später erneut.');
   }
 };
 

@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
       ) +
       ']'
   )
-  await m.reply(`PREFIX RESET SUCCESS`)
+  await m.reply(`PRÄFIX ERFOLGREICH ZURÜCKGESETZT`)
 }
 handler.help = ['resetprefix']
 handler.tags = ['owner']

@@ -1,7 +1,7 @@
 let handler = async (m, { conn }) => {
   if (!conn) {
-    console.error('Connection object is undefined');
-    return; // or handle the error as appropriate
+    console.error('Verbindungsobjekt ist undefiniert');
+    return; // oder den Fehler entsprechend behandeln
   }
 
   const ownerNumber = global.owner[0] ? global.owner[0][0] : 'default_number_here'; // Fallback
@@ -9,25 +9,25 @@ let handler = async (m, { conn }) => {
   let vcard = `BEGIN:VCARD
 VERSION:3.0
 N:;${ownerNumber};;;
-FN:Owner
-ORG:GlobalTechInfo
-TITLE:Owner
+FN:Besitzer
+ORG:OwnedbyLIP
+TITLE:Besitzer
 item1.TEL;waid=${ownerNumber}:${ownerNumber}
-item1.X-ABLabel:Owner
-X-WA-BIZ-DESCRIPTION:Owner of the Bot
-X-WA-BIZ-NAME:Owner
+item1.X-ABLabel:Besitzer
+X-WA-BIZ-DESCRIPTION:Besitzer des Bots
+X-WA-BIZ-NAME:Besitzer
 END:VCARD`;
 
   await conn.sendMessage(m.chat, {
     contacts: {
-      displayName: 'Owner',
+      displayName: 'Besitzer',
       contacts: [{ vcard }]
     }
   }, { quoted: m });
 }
 
-handler.help = ['owner'];
+handler.help = ['besitzer'];
 handler.tags = ['main'];
-handler.command = ['owner'];
+handler.command = ['besitzer'];
 
 export default handler;

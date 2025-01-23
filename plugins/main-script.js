@@ -3,7 +3,7 @@ import { join } from 'path'
 import axios from 'axios'
 
 let handler = async function (m, { conn, __dirname }) {
-  const githubRepoURL = 'https://github.com/GlobalTechInfo/MEGA-AI'
+  const githubRepoURL = 'https://github.com/OwnedbyLIP/Rick-Bot'
 
   try {
     const [, username, repoName] = githubRepoURL.match(/github\.com\/([^/]+)\/([^/]+)/)
@@ -16,9 +16,9 @@ let handler = async function (m, { conn, __dirname }) {
       // Format the repository information with emojis
       const formattedInfo = `
 📂 Repository Name: ${repoData.name}
-📝 Description: ${repoData.description}
-👤 Owner: ${repoData.owner.login}
-⭐ Stars: ${repoData.stargazers_count}
+📝 Beschreibung: ${repoData.description}
+👤 Besitzer: ${repoData.owner.login}
+⭐ Sterne: ${repoData.stargazers_count}
 🍴 Forks: ${repoData.forks_count}
 🌐 URL: ${repoData.html_url}
       `.trim()
@@ -47,11 +47,11 @@ let handler = async function (m, { conn, __dirname }) {
       )
     } else {
       // Handle the case where the API request fails
-      await conn.reply(m.chat, 'Unable to fetch repository information.', m)
+      await conn.reply(m.chat, 'Repository-Informationen konnten nicht abgerufen werden.', m)
     }
   } catch (error) {
     console.error(error)
-    await conn.reply(m.chat, 'An error occurred while fetching repository information.', m)
+    await conn.reply(m.chat, 'Beim Abrufen der Repository-Informationen ist ein Fehler aufgetreten.', m)
   }
 }
 

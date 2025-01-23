@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 
 let gitagptHandler = async (m, { text, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `Please provide some text or quote a message to get a response. Keep in mind that GitaGPT is still in the testing phase, so it may generate inaccurate responses at times.`
+    throw `Bitte gib einen Text ein oder zitiere eine Nachricht, um eine Antwort zu erhalten. Beachte, dass GitaGPT sich noch in der Testphase befindet und daher manchmal ungenaue Antworten generieren kann.`
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -20,8 +20,8 @@ let gitagptHandler = async (m, { text, usedPrefix, command }) => {
 
     m.reply(result)
   } catch (error) {
-    console.error('Error:', error)
-    throw `*ERROR*`
+    console.error('Fehler:', error)
+    throw `*FEHLER*`
   }
 }
 gitagptHandler.help = ['gitagpt']

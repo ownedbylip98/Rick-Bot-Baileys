@@ -10,7 +10,7 @@ let handler = async (m, { conn, text }) => {
     // Check if no text and no quoted message
     if (!text && !(m.quoted && m.quoted.text)) {
       // Reply in WhatsApp, not just logging in the terminal
-      return m.reply("Please provide some text or quote a message to get a response.")
+      return m.reply("Bitte gib einen Text ein oder zitiere eine Nachricht, um eine Antwort zu erhalten.")
     }
 
     if (!text && m.quoted && m.quoted.text) {
@@ -24,7 +24,7 @@ let handler = async (m, { conn, text }) => {
         : m.fromMe
           ? conn.user.jid
           : m.sender
-    if (!(who in global.db.data.users)) throw '✳️ The user is not found in my database'
+    if (!(who in global.db.data.users)) throw '✳️ Der Benutzer ist nicht in meiner Datenbank gefunden'
     
     let userPfp = await conn
       .profilePictureUrl(who, 'image')
@@ -65,7 +65,7 @@ let handler = async (m, { conn, text }) => {
     })
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`)
+      throw new Error(`Fehler beim Abrufen: ${res.status} ${res.statusText}`)
     }
 
     let json = await res.json()
@@ -82,8 +82,8 @@ let handler = async (m, { conn, text }) => {
     let tempImagePath = path.join(os.tmpdir(), 'tempImage.png')
     fs.writeFileSync(tempImagePath, bufferImage)
     let sticker = new Sticker(tempImagePath, {
-      pack: global.packname,
-      author: name,
+      pack: 'Rick-Bot',
+      author: 'OwnedbyLIP',
       type: StickerTypes.FULL,
       categories: ['🤩', '🎉'],
       id: randomId(),
@@ -95,11 +95,11 @@ let handler = async (m, { conn, text }) => {
     try {
       await conn.sendMessage(m.chat, await sticker.toMessage())
     } catch (stickerError) {
-      console.error('Error sending sticker:', stickerError)
-      m.reply('Error sending sticker. Sending image instead.')
+      console.error('Fehler beim Senden des Stickers:', stickerError)
+      m.reply('Fehler beim Senden des Stickers. Sende stattdessen das Bild.')
 
       // Send the image without buttons
-      await conn.sendFile(m.chat, tempImagePath, 'quote.png', 'Here is the quote image:', m)
+      await conn.sendFile(m.chat, tempImagePath, 'quote.png', 'Hier ist das Zitatbild:', m)
     }
 
     // Clean up temporary file

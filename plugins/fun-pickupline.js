@@ -12,7 +12,7 @@ let pickupLineHandler = async (m, { conn, text }) => {
 
     console.log('JSON response:', json)
 
-    let pickupLine = `*Here's a pickup line for you:*\n\n"${json.pickupline}"\n\nContributor: ${json.contributor}`
+    let pickupLine = `*Hier ist ein Anmachspruch für dich:*\n\n"${json.pickupline}"\n\nBeitrag von: ${json.contributor}`
 
     m.reply(pickupLine)
   } catch (error) {

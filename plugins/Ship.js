@@ -5,7 +5,7 @@ function handler(m, { groupMetadata }) {
     let b
     do b = ps.getRandom()
     while (b === a)
-    m.reply(`${toM(a)} ❤️ ${toM(b)}\nCongratulations 💖🍻`, null, {
+    m.reply(`${toM(a)} ❤️ ${toM(b)}\nHerzlichen Glückwunsch 💖🍻`, null, {
         mentions: [a, b]
     })
 }
@@ -15,4 +15,4 @@ handler.command = ['ship']
 
 handler.group = true
 
-export default handler  
+export default handler

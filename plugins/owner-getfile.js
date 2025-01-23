@@ -3,7 +3,7 @@ import path from 'path';
 
 let handler = async (m, { text, usedPrefix, command, __dirname }) => {
   if (!text) {
-    m.reply(`Usage: ${usedPrefix + command} <filename>\n❇️ Example:\n${usedPrefix}getfile main.js`);
+    m.reply(`Verwendung: ${usedPrefix + command} <Dateiname>\n❇️ Beispiel:\n${usedPrefix}getfile main.js`);
     return;
   }
   
@@ -14,16 +14,16 @@ let handler = async (m, { text, usedPrefix, command, __dirname }) => {
     m.reply(fileContent);
   } catch (e) {
     if (e.code === 'ENOENT') {
-      m.reply(`❌  Error: No file named "${text}" found.`);
+      m.reply(`❌ Fehler: Keine Datei mit dem Namen "${text}" gefunden.`);
     } else {
       console.error(e);
-      m.reply(`❌  Error: ${e.message}`);
+      m.reply(`❌ Fehler: ${e.message}`);
     }
   }
 }
 
-handler.help = ['getfile <filename>'];
-handler.tags = ['owner'];
+handler.help = ['getfile <Dateiname>'];
+handler.tags = ['eigentümer'];
 handler.command = ['getfile'];
 handler.rowner = true;
 

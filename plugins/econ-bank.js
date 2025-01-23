@@ -9,23 +9,23 @@ let handler = async (m, { conn, usedPrefix }) => {
   let user = global.db.data.users[who]
   let username = conn.getName(who)
   //let { wealth } = global.db.data.users[who]
-  if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`
+  if (!(who in global.db.data.users)) throw `✳️ Der Benutzer ist nicht in meiner Datenbank gefunden`
 
-  var wealth = 'Broke😭'
+  var wealth = 'Pleite😭'
   if (`${user.bank}` <= 3000) {
-    wealth = 'Broke😭'
+    wealth = 'Pleite😭'
   } else if (`${user.bank}` <= 6000) {
-    wealth = 'Poor😢'
+    wealth = 'Arm😢'
   } else if (`${user.bank}` <= 100000) {
-    wealth = 'Average💸'
+    wealth = 'Durchschnittlich💸'
   } else if (`${user.bank}` <= 1000000) {
-    wealth = 'Rich💸💰'
+    wealth = 'Reich💸💰'
   } else if (`${user.bank}` <= 10000000) {
-    wealth = 'Millionaire🤑'
+    wealth = 'Millionär🤑'
   } else if (`${user.bank}` <= 1000000000) {
-    wealth = 'Multi-Millionaire🤑'
+    wealth = 'Multi-Millionär🤑'
   } else if (`${user.bank}` <= 10000000000) {
-    wealth = 'Billionaire🤑🤑'
+    wealth = 'Milliardär🤑🤑'
   }
 
   conn.reply(
@@ -34,7 +34,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 
 *🪙 Gold* : ${user.bank}
 
-*Wealth :* ${wealth}
+*Reichtum :* ${wealth}
 
 `,
     m,

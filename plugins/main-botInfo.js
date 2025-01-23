@@ -57,28 +57,28 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   let infobt = `
 ≡ *INFO BOT*
   
-*STATE*
-▢ *${groupsIn.length}* GROUP CHATS
-▢ *${groupsIn.length}* united groups
-▢ *${groupsIn.length - groupsIn.length}* abandoned groups
-▢ *${chats.length - groupsIn.length}* private chats
-▢ *${chats.length}* Total Chats
+*ZUSTAND*
+▢ *${groupsIn.length}* GRUPPENCHATS
+▢ *${groupsIn.length}* vereinigte Gruppen
+▢ *${groupsIn.length - groupsIn.length}* verlassene Gruppen
+▢ *${chats.length - groupsIn.length}* private Chats
+▢ *${chats.length}* Gesamte Chats
 
-*≡ OWNER*
+*≡ BESITZER*
 ▢ Instagram :
-  • https://instagram.com/global.techinfo
+  • https://instagram.com/ownedbylip
 ▢ GitHub :
-  • https://github.com/GlobalTechInfo
+  • https://github.com/OwnedbyLIP
 ▢ YouTube : 
-  • https://youtube.com/@GlobalTechInfo
+  • https://youtube.com/@OwnedbyLIP
 ▢ credit: 
   • mr oreo
 
  *≡ S E R V E R*
 *🛑 RAM:* ${format(totalmem() - freemem())} / ${format(totalmem())}
-*🔵 FreeRAM:* ${format(freemem())}
+*🔵 Freier RAM:* ${format(freemem())}
 
-*≡  NodeJS memory*
+*≡  NodeJS Speicher*
 ${
   '```' +
   Object.keys(used)

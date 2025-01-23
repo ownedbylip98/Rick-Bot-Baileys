@@ -219,7 +219,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
     default:
       if (!/[01]/.test(command))
         return m.reply(`
-≡ List of options
+≡ Liste der Optionen
 
 ◈──『 *ADMIN*』
 ⛊ welcome
@@ -241,7 +241,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
 ⛊ autotype
 ⛊ autobio
 ╰──────────❍
-*📌 Example :*
+*📌 Beispiel :*
 *${usedPrefix}on* welcome
 *${usedPrefix}off* welcome
 `)
@@ -250,7 +250,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
 
   m.reply(
     `
-✅ *${type}* Now *${isEnable ? 'Active' : 'Deactive'}* ${isAll ? 'for this bot' : isUser ? '' : 'for this bot'}
+✅ *${type}* ist jetzt *${isEnable ? 'aktiv' : 'deaktiviert'}* ${isAll ? 'für diesen Bot' : isUser ? '' : 'für diesen Bot'}
 `.trim()
   )
 }

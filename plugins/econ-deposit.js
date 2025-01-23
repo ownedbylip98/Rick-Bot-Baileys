@@ -12,11 +12,11 @@ let handler = async (m, { conn, command, args }) => {
   if (global.db.data.users[m.sender].credit >= xpperbank * count) {
     global.db.data.users[m.sender].credit -= xpperbank * count
     global.db.data.users[m.sender].bank += count
-    conn.reply(m.chat, `You have transferred 🪙 ${count} gold to your bank`, m)
+    conn.reply(m.chat, `Du hast 🪙 ${count} Gold auf dein Bankkonto überwiesen`, m)
   } else
     conn.reply(
       m.chat,
-      `🟥 *You don't have sufficient amount of gold in your wallet to make this transaction*`,
+      `🟥 *Du hast nicht genügend Gold in deinem Portemonnaie, um diese Transaktion durchzuführen*`,
       m
     )
 }

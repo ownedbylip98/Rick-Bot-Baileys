@@ -1,68 +1,68 @@
 import pkg from 'nayan-videos-downloader';
 const { GDLink } = pkg;
 
-// Simple retry function for fetch requests
+// Einfache Retry-Funktion für Fetch-Anfragen
 const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
   try {
     const response = await fetch(url, options);
-    if (!response.ok) throw new Error(`Failed to fetch, status code: ${response.status}`);
+    if (!response.ok) throw new Error(`Fehler beim Abrufen, Statuscode: ${response.status}`);
     return response;
   } catch (error) {
-    if (retries === 0) throw new Error('Max retries reached. Could not fetch the media.');
-    console.log(`Fetch failed, retrying... (${retries} retries left)`);
-    await new Promise(resolve => setTimeout(resolve, delay)); // Delay before retry
-    return fetchWithRetry(url, options, retries - 1, delay); // Retry the fetch
+    if (retries === 0) throw new Error('Maximale Anzahl an Versuchen erreicht. Konnte die Medien nicht abrufen.');
+    console.log(`Abrufen fehlgeschlagen, versuche erneut... (${retries} Versuche übrig)`);
+    await new Promise(resolve => setTimeout(resolve, delay)); // Verzögerung vor erneutem Versuch
+    return fetchWithRetry(url, options, retries - 1, delay); // Erneut versuchen
   }
 };
 
 const handler = async (m, { conn, args }) => {
-  if (!args[0]) throw '✳️ Enter the Google Drive Video link next to the command';
+  if (!args[0]) throw '✳️ Gib den Google Drive Video-Link neben dem Befehl ein';
 
   m.react('⏳');
   try {
     const url = args[0];
-    console.log('Checking link:', url);
+    console.log('Überprüfe Link:', url);
 
-    // Fetching media data from Google Drive using the GDLink method from the package
+    // Abrufen der Mediendaten von Google Drive mit der GDLink-Methode aus dem Paket
     let mediaData;
     try {
-      mediaData = await GDLink(url); // Fetch data from Google Drive
-      console.log('Media Data:', mediaData);
+      mediaData = await GDLink(url); // Daten von Google Drive abrufen
+      console.log('Mediendaten:', mediaData);
     } catch (error) {
-      console.error('Error fetching Google Drive data:', error.message);
-      throw new Error('Could not fetch Google Drive data');
+      console.error('Fehler beim Abrufen der Google Drive-Daten:', error.message);
+      throw new Error('Konnte die Google Drive-Daten nicht abrufen');
     }
 
-    // Ensure mediaData and the necessary 'data' property exists
+    // Sicherstellen, dass mediaData und die notwendige 'data'-Eigenschaft existieren
     if (!mediaData || !mediaData.data) {
-      throw new Error('No valid media URL found');
+      throw new Error('Keine gültige Medien-URL gefunden');
     }
 
-    // The actual download link is in the 'data' property
+    // Der tatsächliche Download-Link befindet sich in der 'data'-Eigenschaft
     const mediaUrl = mediaData.data;
-    console.log('Media URL:', mediaUrl);
+    console.log('Medien-URL:', mediaUrl);
 
-    // Fetch the media content
+    // Abrufen des Medieninhalts
     const response = await fetchWithRetry(mediaUrl, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, wie Gecko) Chrome/85.0.4183.121 Safari/537.36',
         'Accept': 'application/json, text/plain, */*'
       }
     });
 
     const contentType = response.headers.get('content-type');
-    console.log('Content Type:', contentType);
+    console.log('Content-Type:', contentType);
 
     if (!contentType) {
-      throw new Error('No content-type received');
+      throw new Error('Kein Content-Type erhalten');
     }
 
-    // Handle video download
+    // Video-Download behandeln
     if (contentType.includes('video')) {
       const arrayBuffer = await response.arrayBuffer();
       const mediaBuffer = Buffer.from(arrayBuffer);
 
-      if (mediaBuffer.length === 0) throw new Error('Downloaded video is empty');
+      if (mediaBuffer.length === 0) throw new Error('Heruntergeladenes Video ist leer');
 
       const fileName = mediaData.title ? `${mediaData.title}.mp4` : 'media.mp4';
       const mimetype = 'video/mp4';
@@ -70,12 +70,12 @@ const handler = async (m, { conn, args }) => {
       await conn.sendFile(m.chat, mediaBuffer, fileName, '*Powered by Ultra-MD*', m, false, { mimetype });
       m.react('✅');
     }
-    // Handle image download
+    // Bild-Download behandeln
     else if (contentType.includes('image')) {
       const arrayBuffer = await response.arrayBuffer();
       const mediaBuffer = Buffer.from(arrayBuffer);
 
-      if (mediaBuffer.length === 0) throw new Error('Downloaded image is empty');
+      if (mediaBuffer.length === 0) throw new Error('Heruntergeladenes Bild ist leer');
 
       const fileName = mediaData.title ? `${mediaData.title}.jpg` : 'media.jpg';
       const mimetype = 'image/jpeg';
@@ -83,19 +83,19 @@ const handler = async (m, { conn, args }) => {
       await conn.sendFile(m.chat, mediaBuffer, fileName, '*Powered by Ultra-MD*', m, false, { mimetype });
       m.react('✅');
     } else {
-      throw new Error('Unsupported media type');
+      throw new Error('Nicht unterstützter Medientyp');
     }
 
   } catch (error) {
-    console.error('Error processing Google Drive download:', error.message);
-    await m.reply('⚠️ An error occurred while processing the request. Please try again later.');
+    console.error('Fehler bei der Verarbeitung des Google Drive-Downloads:', error.message);
+    await m.reply('⚠️ Ein Fehler ist bei der Verarbeitung der Anfrage aufgetreten. Bitte versuche es später erneut.');
     m.react('❌');
   }
 };
 
-// Global handler for unhandled promise rejections
+// Globaler Handler für nicht behandelte Promise-Ablehnungen
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  console.error('Nicht behandelte Ablehnung bei:', promise, 'Grund:', reason);
 });
 
 handler.help = ['gdrive'];

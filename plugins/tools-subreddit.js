@@ -1,28 +1,28 @@
 import fetch from 'node-fetch'
 
 let subredditHandler = async (m, { conn, text }) => {
-  if (!text) throw 'Please provide a subreddit name'
+  if (!text) throw 'Bitte gib einen Subreddit-Namen an'
 
   try {
     let res = await fetch(`https://api.popcat.xyz/subreddit/${encodeURIComponent(text)}`)
 
     if (!res.ok) {
-      throw new Error(`API request failed with status ${res.status}`)
+      throw new Error(`API-Anfrage ist fehlgeschlagen mit Status ${res.status}`)
     }
 
     let json = await res.json()
 
-    console.log('JSON response:', json)
+    console.log('JSON-Antwort:', json)
 
-    let subredditInfo = `*Subreddit Information:*\n
+    let subredditInfo = `*Subreddit-Informationen:*\n
      • *Name:* ${json.name}\n
-     • *Title:* ${json.title}\n
-     • *Active Users:* ${json.active_users}\n
-     • *Members:* ${json.members}\n
-     • *Description:* ${json.description}\n
-     • *Allow Videos:* ${json.allow_videos ? 'Yes' : 'No'}\n
-     • *Allow Images:* ${json.allow_images ? 'Yes' : 'No'}\n
-     • *Over 18:* ${json.over_18 ? 'Yes' : 'No'}\n
+     • *Titel:* ${json.title}\n
+     • *Aktive Benutzer:* ${json.active_users}\n
+     • *Mitglieder:* ${json.members}\n
+     • *Beschreibung:* ${json.description}\n
+     • *Erlaubt Videos:* ${json.allow_videos ? 'Ja' : 'Nein'}\n
+     • *Erlaubt Bilder:* ${json.allow_images ? 'Ja' : 'Nein'}\n
+     • *Über 18:* ${json.over_18 ? 'Ja' : 'Nein'}\n
      • *URL:* ${json.url}`
 
     // if icon is not null or undefined, send it along with the subreddit information as caption

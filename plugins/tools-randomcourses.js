@@ -6,7 +6,7 @@ let handler = async (m, { conn }) => {
     if (!res.ok) throw await res.text()
     let json = await res.json()
 
-    if (!json.courses || json.courses.length < 5) throw 'Not enough courses found'
+    if (!json.courses || json.courses.length < 5) throw 'Nicht genügend Kurse gefunden'
 
     let courseData = '•───── ୨❀୧ ─────•\n'
 
@@ -16,7 +16,7 @@ let handler = async (m, { conn }) => {
       // Remove the chosen course from the list so it's not chosen again
       json.courses.splice(randomIndex, 1)
 
-      courseData += `❖ Course: ${course.name}\n❖ Link: ${course.udemyLink}\n\n`
+      courseData += `❖ Kurs: ${course.name}\n❖ Link: ${course.udemyLink}\n\n`
     }
 
     courseData += '•───── ୨❀୧ ─────•'

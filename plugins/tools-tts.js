@@ -18,19 +18,19 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   } catch (e) {
     m.reply(e + '')
     text = args.join(' ')
-    if (!text) throw `📌 Example : \n${usedPrefix}${command} en hello world`
+    if (!text) throw `📌 Beispiel : \n${usedPrefix}${command} en hallo welt`
     res = await tts(text, defaultLang)
   } finally {
     if (res) conn.sendFile(m.chat, res, 'tts.opus', null, m, true)
   }
 }
-handler.help = ['tts <lang> <task>']
+handler.help = ['tts <lang> <text>']
 handler.tags = ['tools']
 handler.command = ['tts', 'voz']
 
 export default handler
 
-function tts(text, lang = 'en-en') {
+function tts(text, lang = 'de-de') {
   console.log(lang, text)
   return new Promise((resolve, reject) => {
     try {

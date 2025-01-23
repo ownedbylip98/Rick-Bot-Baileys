@@ -35,7 +35,7 @@ let handler = async (m, { conn, command }) => {
         endpoint = 'paranoia';
         break;
       default:
-        throw new Error('Invalid command. Please specify one of: !truth, !dare, !wyr, !nhie, !paranoia');
+        throw new Error('Ungültiger Befehl. Bitte gib einen der folgenden Befehle an: !truth, !dare, !wyr, !nhie, !paranoia');
     }
 
     const question = await fetchWithRetry(`${baseURL}${endpoint}`);
@@ -43,8 +43,8 @@ let handler = async (m, { conn, command }) => {
     conn.sendMessage(m.chat, { text: message }, { quoted: m });
 
   } catch (error) {
-    console.error('Error handling Truth or Dare command:', error);
-    throw new Error('Failed to fetch Truth or Dare question. Please try again later.');
+    console.error('Fehler beim Verarbeiten des Truth or Dare-Befehls:', error);
+    throw new Error('Fehler beim Abrufen der Truth or Dare-Frage. Bitte versuche es später noch einmal.');
   }
 };
 
@@ -54,8 +54,8 @@ const fetchDareQuestion = async () => {
     const response = await axios.get(dareURL);
     return response.data;
   } catch (error) {
-    console.error('Error fetching dare question:', error);
-    throw new Error('Failed to fetch dare question. Please try again later.');
+    console.error('Fehler beim Abrufen der Dare-Frage:', error);
+    throw new Error('Fehler beim Abrufen der Dare-Frage. Bitte versuche es später noch einmal.');
   }
 };
 
@@ -67,31 +67,31 @@ const fetchWithRetry = async (url, maxRetries = 3) => {
       return response.data;
     } catch (error) {
       retryCount++;
-      console.error(`Attempt ${retryCount} failed: ${error.message}`);
+      console.error(`Versuch ${retryCount} fehlgeschlagen: ${error.message}`);
       if (retryCount < maxRetries) {
-        console.log(`Retrying (${retryCount}/${maxRetries})...`);
-        await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for 3 seconds before retrying
+        console.log(`Erneuter Versuch (${retryCount}/${maxRetries})...`);
+        await new Promise(resolve => setTimeout(resolve, 3000)); // Warte 3 Sekunden vor erneutem Versuch
       } else {
-        throw new Error(`Failed after ${retryCount} attempts: ${error.message}`);
+        throw new Error(`Fehlgeschlagen nach ${retryCount} Versuchen: ${error.message}`);
       }
     }
   }
 };
 
 const formatMessage = (question) => {
-  return `Type: ${question.type.toUpperCase()}\n${question.question}`;
+  return `Typ: ${question.type.toUpperCase()}\n${question.question}`;
 };
 
 handler.command = /^(truth|dare|wyr|wouldyourather|nhie|neverhaveiever|paranoia|td)$/i;
 handler.group = true;
 // td -> list of commands that is in handler.help
 handler.help = [
-  'truth - Get a random truth question.',
-  'dare - Get a random dare question.',
-  'wyr - Get a random Would You Rather question.',
-  'nhie - Get a random Never Have I Ever question.',
-  'paranoia - Get a random Paranoia question.',
-  'td - List all available Truth or Dare commands.'
+  'truth - Erhalte eine zufällige Wahrheit-Frage.',
+  'dare - Erhalte eine zufällige Dare-Frage.',
+  'wyr - Erhalte eine zufällige "Würdest du eher"-Frage.',
+  'nhie - Erhalte eine zufällige "Ich habe noch nie"-Frage.',
+  'paranoia - Erhalte eine zufällige Paranoia-Frage.',
+  'td - Liste alle verfügbaren Truth or Dare-Befehle auf.'
 ];
 
 export default handler;

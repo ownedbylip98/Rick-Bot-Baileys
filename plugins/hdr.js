@@ -4,35 +4,35 @@ let handler = async (m, { conn, usedPrefix, command, quoted }) => {
   try {
     let q = quoted ? quoted : m;
     
-    console.log('Quoted:', q);
+    console.log('Zitiert:', q);
 
     let mime = (q.msg || q).mimetype || q.mediaType || '';
     console.log('Mime:', mime);
 
     if (!mime) {
-      console.error('❌ No mime type found.');
-      return m.reply(`❌ Please reply to an image with the caption *${usedPrefix + command}*`);
+      console.error('❌ Kein Mime-Typ gefunden.');
+      return m.reply(`❌ Bitte antworte auf ein Bild mit der Beschriftung *${usedPrefix + command}*`);
     }
 
     if (!/image\/(jpe?g|png)/.test(mime)) {
-      console.error(`❌ The quoted message does not contain a valid image. Mime: ${mime}`);
-      return m.reply(`❌ Please reply with an image to use *${usedPrefix + command}*`);
+      console.error(`❌ Die zitierte Nachricht enthält kein gültiges Bild. Mime: ${mime}`);
+      return m.reply(`❌ Bitte antworte mit einem Bild, um *${usedPrefix + command}* zu verwenden`);
     }
 
-    await conn.reply(m.chat, '⏳ Processing image... Please wait a moment.', m);
+    await conn.reply(m.chat, '⏳ Bild wird verarbeitet... Bitte warte einen Moment.', m);
 
     let media;
     try {
-      console.log('Downloading image...');
+      console.log('Bild wird heruntergeladen...');
       media = await q.download();
       if (!Buffer.isBuffer(media)) {
-        console.error('❌ Invalid image buffer received from quoted message.');
-        return m.reply('❌ The quoted image is invalid. Please try again.');
+        console.error('❌ Ungültiger Bildpuffer von zitierter Nachricht erhalten.');
+        return m.reply('❌ Das zitierte Bild ist ungültig. Bitte versuche es erneut.');
       }
-      console.log('Image downloaded:', media);
+      console.log('Bild heruntergeladen:', media);
     } catch (error) {
-      console.error('❌ Error downloading image from quoted message:', error);
-      return m.reply('❌ Something went wrong while downloading the image. Please try again.');
+      console.error('❌ Fehler beim Herunterladen des Bildes von zitierter Nachricht:', error);
+      return m.reply('❌ Etwas ist schief gelaufen beim Herunterladen des Bildes. Bitte versuche es erneut.');
     }
 
     let enhancementMethod;
@@ -53,21 +53,21 @@ let handler = async (m, { conn, usedPrefix, command, quoted }) => {
     }
 
     try {
-      console.log(`Enhancing image using method: ${enhancementMethod}...`);
+      console.log(`Bild wird mit Methode verbessert: ${enhancementMethod}...`);
       let enhancedImage = await remini(media, enhancementMethod);
-      console.log('Image enhanced successfully.');
+      console.log('Bild erfolgreich verbessert.');
 
       await conn.sendMessage(m.chat, {
         image: enhancedImage,
-        caption: `*𝘗𝘖𝘞𝘌𝘙𝘌𝘋 𝘉𝘠 © 𝘜𝘓𝘛𝘙𝘈-𝘔𝘋*\nEnjoy the enhanced image!`
+        caption: `*𝘗𝘖𝘞𝘌𝘙𝘌𝘋 𝘉𝘠 © 𝘙𝘐𝘊𝘒-𝘉𝘖𝘛*\nGenieße das verbesserte Bild!`
       }, { quoted: m });
     } catch (error) {
-      console.error('❌ Error enhancing image:', error);
-      return m.reply('❌ Something went wrong while enhancing the image. Please try again later.');
+      console.error('❌ Fehler beim Verbessern des Bildes:', error);
+      return m.reply('❌ Etwas ist schief gelaufen beim Verbessern des Bildes. Bitte versuche es später erneut.');
     }
   } catch (error) {
-    console.error('❌ Unexpected error:', error);
-    return m.reply('❌ An unexpected error occurred. Please try again later.');
+    console.error('❌ Unerwarteter Fehler:', error);
+    return m.reply('❌ Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.');
   }
 };
 

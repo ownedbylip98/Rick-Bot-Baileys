@@ -1,4 +1,3 @@
-
 let handler = async(m, { conn, usedPrefix, command }) => {
 	
 	let girl = await conn.getFile(global.API('fgmods', '/api/img/girl', { }, 'apikey'))

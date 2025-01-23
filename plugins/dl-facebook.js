@@ -2,44 +2,44 @@ import pkg from 'api-qasim';
 const { fbdl } = pkg;
 
 let handler = async (m, { conn, usedPrefix, args, command, text }) => {
-  if (!text) throw 'You need to provide the URL of the Facebook video.';
+  if (!text) throw 'Du musst die URL des Facebook-Videos angeben.';
 
-  m.react('⌛'); // Indicating that the bot is processing the request
+  m.react('⌛'); // Zeigt an, dass der Bot die Anfrage bearbeitet
 
   let res;
   try {
-    // Fetch the video data using fbdl
+    // Video-Daten mit fbdl abrufen
     res = await fbdl(text);
     
-    // Log the response to inspect its structure
-    console.log("API Response:", res); 
+    // Protokolliere die Antwort, um ihre Struktur zu überprüfen
+    console.log("API-Antwort:", res); 
 
-    // Check if res.data exists and is an array
+    // Überprüfe, ob res.data existiert und ein Array ist
     if (!res || !res.data || !Array.isArray(res.data)) {
-      throw 'No video data found or the response structure is incorrect.';
+      throw 'Keine Videodaten gefunden oder die Antwortstruktur ist falsch.';
     }
 
-    let data = res.data; // Extract video data from the response
+    let data = res.data; // Extrahiere Videodaten aus der Antwort
 
-    // Check if there is any valid video URL (find the first valid item with 'url')
+    // Überprüfe, ob eine gültige Video-URL vorhanden ist (finde das erste gültige Element mit 'url')
     const validVideo = data.find(item => item.url);
 
     if (!validVideo) {
-      throw 'No valid video URL found in the response.';
+      throw 'Keine gültige Video-URL in der Antwort gefunden.';
     }
 
-    const videoURL = validVideo.url;  // Get the video URL from the first valid item
-    console.log("Found Video URL:", videoURL); // Log the video URL for debugging
+    const videoURL = validVideo.url;  // Hole die Video-URL vom ersten gültigen Element
+    console.log("Gefundene Video-URL:", videoURL); // Protokolliere die Video-URL zur Fehlerbehebung
 
-    // If a video URL is found, send the video
-    m.react('✅'); // Indicating that the video is ready to be sent
+    // Wenn eine Video-URL gefunden wurde, sende das Video
+    m.react('✅'); // Zeigt an, dass das Video bereit ist, gesendet zu werden
 
-    const cap = 'Here is the video you requested:';
+    const cap = 'Hier ist das Video, das du angefordert hast:';
     await conn.sendFile(m.chat, videoURL, 'video.mp4', cap, m);
 
   } catch (error) {
-    console.error("Error:", error);
-    throw `An error occurred while processing the request: ${error.message}`;
+    console.error("Fehler:", error);
+    throw `Ein Fehler ist bei der Verarbeitung der Anfrage aufgetreten: ${error.message}`;
   }
 };
 

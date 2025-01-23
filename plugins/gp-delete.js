@@ -1,5 +1,5 @@
 let handler = async (m, { conn, usedPrefix, command }) => {
-  if (!m.quoted) throw `✳️ Please reply to a message to delete it.`;
+  if (!m.quoted) throw `✳️ Bitte antworte auf eine Nachricht, um sie zu löschen.`;
 
   try {
     let delet = m.message.extendedTextMessage.contextInfo.participant;

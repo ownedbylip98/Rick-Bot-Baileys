@@ -1,34 +1,34 @@
 import fetch from 'node-fetch'
 
 let elementHandler = async (m, { conn, text }) => {
-  if (!text) throw 'Please provide an element symbol or name'
+  if (!text) throw 'Bitte gib ein Elementsymbol oder einen Namen ein'
 
   try {
     let res = await fetch(`https://api.popcat.xyz/periodic-table?element=${text}`)
 
     if (!res.ok) {
-      throw new Error(`API request failed with status ${res.status}`)
+      throw new Error(`API-Anfrage fehlgeschlagen mit Status ${res.status}`)
     }
 
     let buffer = await res.arrayBuffer()
     let json = JSON.parse(Buffer.from(buffer).toString())
 
-    console.log('JSON response:', json)
+    console.log('JSON-Antwort:', json)
 
-    let elementInfo = `*Element Information:*\n
+    let elementInfo = `*Elementinformationen:*\n
      • *Name:* ${json.name}\n
      • *Symbol:* ${json.symbol}\n
-     • *Atomic Number:* ${json.atomic_number}\n
-     • *Atomic Mass:* ${json.atomic_mass}\n
-     • *Period:* ${json.period}\n
+     • *Ordnungszahl:* ${json.atomic_number}\n
+     • *Atommasse:* ${json.atomic_mass}\n
+     • *Periode:* ${json.period}\n
      • *Phase:* ${json.phase}\n
-     • *Discovered By:* ${json.discovered_by}\n
-     • *Summary:* ${json.summary}`
+     • *Entdeckt von:* ${json.discovered_by}\n
+     • *Zusammenfassung:* ${json.summary}`
 
     conn.sendFile(m.chat, json.image, 'element.jpg', elementInfo, m)
   } catch (error) {
     console.error(error)
-    // Handle the error appropriately
+    // Fehler entsprechend behandeln
   }
 }
 

@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text }) => {
   let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : ''
-  if (!teks) throw `✳️ Enter the name of the song`
+  if (!teks) throw `✳️ Gib den Namen des Liedes ein`
   try {
     let res = await fetch(global.API('https://some-random-api.com', '/lyrics', { title: teks }))
     if (!res.ok) throw await res.text()

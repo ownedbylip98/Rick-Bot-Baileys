@@ -3,7 +3,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     .map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net')
     .filter(v => v != conn.user.jid)
   let teks =
-    `▢ *PREMIUM USERS*\n─────────────\n` + prem.map(v => '- @' + v.replace(/@.+/, '')).join`\n`
+    `▢ *PREMIUM-NUTZER*\n─────────────\n` + prem.map(v => '- @' + v.replace(/@.+/, '')).join`\n`
   m.reply(teks, null, { mentions: conn.parseMention(teks) })
 }
 handler.help = ['listprem']

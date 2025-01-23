@@ -2,9 +2,9 @@
 let handler = async (m, { conn, text, isROwner, isOwner }) => {
   if (text) {
     global.db.data.chats[m.chat].sBye = text;
-    m.reply(`✅ Goodbye message updated successfully!`);
+    m.reply(`✅ Abschiedsnachricht erfolgreich aktualisiert!`);
   } else {
-    throw `✳️ Please provide a new goodbye message.`;
+    throw `✳️ Bitte gib eine neue Abschiedsnachricht ein.`;
   }
 }
 

@@ -5,7 +5,7 @@ let handler = async (m, {
     text,
     command
 }) => {
-if (!text && !m.quoted) return m.reply("Where is Infos")
+    if (!text && !m.quoted) return m.reply("Wo sind die Infos?")
     let get = await groupMetadata.participants.filter(v => v.id.endsWith('.net')).map(v => v.id)
     let count = get.length;
     let sentCount = 0;
@@ -20,17 +20,17 @@ if (!text && !m.quoted) return m.reply("Where is Infos")
                 conn.copyNForward(get[i], m.getQuotedObj(), false);
             } else if (text && m.quoted) {
                 conn.sendMessage(get[i], {
-                    text: text + "\n" + m.quoted.text + "\n\nAdvertise by Qasim"
+                    text: text + "\n" + m.quoted.text + "\n\nWerbung von Qasim"
                 });
             }
             count--;
             sentCount++;
             if (count === 0) {
-m.reply(`Succesfuly Sended the notification to all the group members ✅.
+                m.reply(`Benachrichtigung erfolgreich an alle Gruppenmitglieder gesendet ✅.
 
 👨‍🎓 *Operator:* ${author}
-🤖 *Sender:* ${botname}
-✅ *Total:* ${sentCount} users Notified`);
+🤖 *Sender:* Rick-Bot
+✅ *Gesamt:* ${sentCount} Benutzer benachrichtigt`);
             }
         }, i * 5000); // delay each transmission for 5 second
     }

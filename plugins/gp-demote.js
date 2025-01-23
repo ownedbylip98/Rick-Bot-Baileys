@@ -33,3 +33,9 @@ handler.botAdmin = true
 handler.fail = null
 
 export default handler
+
+const mssg = {
+  useCmd: () => "Benutze den Befehl",
+  numError: "Ungültige Nummer",
+  demote: "Erfolgreich degradiert"
+}

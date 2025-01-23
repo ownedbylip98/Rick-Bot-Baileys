@@ -1,7 +1,7 @@
 let { downloadContentFromMessage } = await import('@whiskeysockets/baileys')
 
 var handler = async (m, { conn }) => {
-  if (!/viewOnce/.test(m.quoted?.mtype)) throw '✳️❇️ Its Not a ViewOnce Message'
+  if (!/viewOnce/.test(m.quoted?.mtype)) throw '✳️❇️ Es ist keine ViewOnce-Nachricht'
   let mtype = Object.keys(m.quoted.message)[0]
   let buffer = await m.quoted.download()
   let caption = m.quoted.message[mtype].caption || ''

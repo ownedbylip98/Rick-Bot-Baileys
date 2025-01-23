@@ -14,7 +14,7 @@ let handler = async (m, { conn }) => {
         .catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'),
     }),
     'error.png',
-    '*🚔🚨 𝐋𝐎𝐋𝐈𝐂𝐎𝐍𝐒 like you only belong in jail 🚨🚔*',
+    '*🚔🚨 𝐋𝐎𝐋𝐈𝐂𝐎𝐍𝐒 wie du gehören nur ins Gefängnis 🚨🚔*',
     m
   )
 }

@@ -20,8 +20,8 @@ const handler = async (m, { conn, args, usedPrefix }) => {
     .map((type, index) => `${index + 1}. ${type}`)
     .join('\n')
   const helpMessage =
-    `How to use? : ${usedPrefix}setprivacy [type_number] [value_number]\n\n` +
-    'List Options:\n' +
+    `Wie benutzt man es? : ${usedPrefix}setprivacy [type_number] [value_number]\n\n` +
+    'Liste der Optionen:\n' +
     privacyTypes
 
   if (!typeNumber || isNaN(typeNumber) || typeNumber < 1 || typeNumber > typeKeys.length) {
@@ -36,8 +36,8 @@ const handler = async (m, { conn, args, usedPrefix }) => {
     .map((type, index) => `${index + 1}. ${type}`)
     .join('\n')
   const typeHelpMessage =
-    `How to use: ${usedPrefix}setprivacy [type_number] [value_number]\n\n` +
-    'List Options:\n' +
+    `Wie benutzt man es: ${usedPrefix}setprivacy [type_number] [value_number]\n\n` +
+    'Liste der Optionen:\n' +
     validTypeValuesList
 
   if (

@@ -1,4 +1,3 @@
-
 let cooldown = 14400000
 let handler = async (m, { conn }) => {
 

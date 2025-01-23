@@ -2,7 +2,7 @@ let handler = async (m, { conn }) => {
   await conn
     .fetchBlocklist()
     .then(async data => {
-      let txt = `*≡ Blocked list*\n\n*Total :* ${data.length}\n\n┌─⊷\n`
+      let txt = `*≡ Blockierte Liste*\n\n*Gesamt :* ${data.length}\n\n┌─⊷\n`
       for (let i of data) {
         txt += `▢ @${i.split('@')[0]}\n`
       }
@@ -11,11 +11,11 @@ let handler = async (m, { conn }) => {
     })
     .catch(err => {
       console.log(err)
-      throw 'There are no blocked numbers'
+      throw 'Es gibt keine blockierten Nummern'
     })
 }
-handler.help = ['blocklist']
+handler.help = ['blockliste']
 handler.tags = ['main']
-handler.command = ['blocklist', 'listblock']
+handler.command = ['blockliste']
 handler.rowner = true
 export default handler

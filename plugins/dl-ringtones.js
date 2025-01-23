@@ -31,7 +31,7 @@ async function fetchWithRetry(url, retries = 3, delay = 3000) {
 }
 
 const handler = async (m, { conn, command, text, args, usedPrefix }) => {
-  if (!text) throw `*Please provide a search term. Example: ${usedPrefix + command} Shape Of You*`;
+  if (!text) throw `*Bitte gib einen Suchbegriff ein. Beispiel: ${usedPrefix + command} Shape Of You*`;
   
   conn.ringtone = conn.ringtone ? conn.ringtone : {}; // Initialize the session storage
   await m.react('⏳');
@@ -40,11 +40,11 @@ const handler = async (m, { conn, command, text, args, usedPrefix }) => {
   const result = await searchAndFetchRingtones(text);
 
   if (result.length === 0) {
-    return m.reply('No ringtones found for your search term. Please try another one.');
+    return m.reply('Keine Klingeltöne für deinen Suchbegriff gefunden. Bitte versuche es mit einem anderen.');
   }
 
   // Prepare the list for display
-  const infoText = `🎶 Available ringtones for *${text.trim()}*:\n\n[ ⭐ Reply with the number to select a ringtone ]\n\n`;
+  const infoText = `🎶 Verfügbare Klingeltöne für *${text.trim()}*:\n\n[ ⭐ Antworte mit der Nummer, um einen Klingelton auszuwählen ]\n\n`;
 
   const orderedLinks = result.map((data, index) => {
     const sectionNumber = index + 1;
@@ -99,7 +99,7 @@ handler.before = async (m, { conn }) => {
       console.log(`Ringtone downloaded to: ${filePath}`);
 
       // Send the ringtone to the user
-      await conn.sendFile(m.chat, filePath, title + '.mp3', `*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳* 🎶\n\nCreator: ${creator}`, m);
+      await conn.sendFile(m.chat, filePath, title + '.mp3', `*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © Rick-Bot* 🎶\n\nErsteller: ${creator}`, m);
       m.react('✅');
 
       // Log the success
@@ -113,10 +113,10 @@ handler.before = async (m, { conn }) => {
       delete conn.ringtone[m.sender];
     } catch (error) {
       console.error('Error fetching the ringtone:', error);
-      m.reply(`❎ Failed to fetch the ringtone: ${error.message}`);
+      m.reply(`❎ Fehler beim Abrufen des Klingeltons: ${error.message}`);
     }
   } else {
-    m.reply(`❎ Invalid selection. Please choose a number between 1 and ${result.length}.`);
+    m.reply(`❎ Ungültige Auswahl. Bitte wähle eine Nummer zwischen 1 und ${result.length}.`);
   }
 };
 

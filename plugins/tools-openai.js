@@ -1,17 +1,16 @@
-
 import fetch from 'node-fetch';
 let handler = async (m, { conn, text }) => {
 	
 if (!text) throw `✳️ ${mssg.notext}`;
 m.react('💬')
 
- let syst = `Eres Senna Bot, un gran modelo de lenguaje entrenado por OpenAI. Siga cuidadosamente las instrucciones del usuario. Responde usando Markdown.`
+ let syst = `Du bist Rick-Bot, ein großartiges Sprachmodell, das von OpenAI trainiert wurde. Befolge sorgfältig die Anweisungen des Benutzers. Antworte mit Markdown.`
 	try {
 		let gpt = await fetch(global.API('fgmods', '/api/info/openai', { prompt: syst, text }, 'apikey'));
         let res = await gpt.json()
         await m.reply(res.result, null, rcanal)
 	} catch {
-		m.reply(`❎ Error: intenta más tarde`);
+		m.reply(`❎ Fehler: Versuche es später erneut`);
 	}
 
 }

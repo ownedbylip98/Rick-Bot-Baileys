@@ -13,7 +13,7 @@ let handler = async (m, { conn, usedPrefix }) => {
     let uptime = clockString(_uptime);
 
     let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
-    if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`;
+    if (!(who in global.db.data.users)) throw `✳️ Der Benutzer wurde nicht in meiner Datenbank gefunden`;
 
     let user = global.db.data.users[who];
     let { level } = user;
@@ -21,8 +21,8 @@ let handler = async (m, { conn, usedPrefix }) => {
     let greeting = ucapan();
 
     let str = `
-      『 *MEGA-AI* 』  
-      © 2025 *GlobalTechInfo*`;
+      『 *Rick-Bot* 』  
+      © 2025 *OwnedbyLIP*`;
 
     let msg = generateWAMessageFromContent(m.chat, {
         viewOnceMessage: {
@@ -51,26 +51,26 @@ let handler = async (m, { conn, usedPrefix }) => {
                                 "buttonParamsJson": JSON.stringify({
                                     "title": "TAP TO OPEN",
                                     "sections": [{
-                                        "title": "HERE IS BUTTONS MENU",
+                                        "title": "HIER IST DAS BUTTONS-MENÜ",
                                         "highlight_label": "ULTRA",
                                         "rows": [
-                                            { "header": "", "title": "🎁 Bot Menu", "description": "The Bot's secret control panel.", "id": `${usedPrefix}botmenu` },
-                                            { "header": "", "title": "🖲️ Owner Menu", "description": "Yep, that's for you, Boss!", "id": `${usedPrefix}ownermenu` },
-                                            { "header": "", "title": "🎉 AI Menu", "description": "Your Personal Artificial Intelligence Copilots", "id": `${usedPrefix}aimenu` },
-                                            { "header": "", "title": "🎧 Audio Menu", "description": "Tune The Mp3/Audio As You Wish", "id": `${usedPrefix}aeditor` },
-                                            { "header": "", "title": "🍫 Anime Menu", "description": "Animated Images, Stickers and Videos", "id": `${usedPrefix}animemenu` },
-                                            { "header": "", "title": "🪁 Anime Info", "description": "Full Information About Animes Like IMDB", "id": `${usedPrefix}infoanime` },
-                                            { "header": "", "title": "🛫 Group Menu", "description": "Group shenanigans central!", "id": `${usedPrefix}groupmenu` },
-                                            { "header": "", "title": "🗂️ Download Menu", "description": "'DL' stands for 'Delicious Loot'.", "id": `${usedPrefix}dlmenu` },
-                                            { "header": "", "title": "🎭 Fun Menu", "description": "The bot's party hat. Games, jokes and instant ROFLs.", "id": `${usedPrefix}funmenu` },
-                                            { "header": "", "title": "💵 Economy Menu", "description": "Your personal vault of virtual economy.", "id": `${usedPrefix}economymenu` },
-                                            { "header": "", "title": "🎮 Game Menu", "description": "Enter the gaming arena.", "id": `${usedPrefix}gamemenu` },
-                                            { "header": "", "title": "🫐 Sticker Menu", "description": "A rainbow of stickers.", "id": `${usedPrefix}stickermenu` },
+                                            { "header": "", "title": "🎁 Bot-Menü", "description": "Das geheime Kontrollpanel des Bots.", "id": `${usedPrefix}botmenu` },
+                                            { "header": "", "title": "🖲️ Besitzer-Menü", "description": "Ja, das ist für dich, Boss!", "id": `${usedPrefix}ownermenu` },
+                                            { "header": "", "title": "🎉 AI-Menü", "description": "Deine persönlichen künstlichen Intelligenz-Copiloten", "id": `${usedPrefix}aimenu` },
+                                            { "header": "", "title": "🎧 Audio-Menü", "description": "Passe die Mp3/Audio nach Belieben an", "id": `${usedPrefix}aeditor` },
+                                            { "header": "", "title": "🍫 Anime-Menü", "description": "Animierte Bilder, Sticker und Videos", "id": `${usedPrefix}animemenu` },
+                                            { "header": "", "title": "🪁 Anime-Info", "description": "Vollständige Informationen über Animes wie IMDB", "id": `${usedPrefix}infoanime` },
+                                            { "header": "", "title": "🛫 Gruppen-Menü", "description": "Zentrale für Gruppenscherze!", "id": `${usedPrefix}groupmenu` },
+                                            { "header": "", "title": "🗂️ Download-Menü", "description": "'DL' steht für 'Delicious Loot'.", "id": `${usedPrefix}dlmenu` },
+                                            { "header": "", "title": "🎭 Spaß-Menü", "description": "Der Partyhut des Bots. Spiele, Witze und sofortige ROFLs.", "id": `${usedPrefix}funmenu` },
+                                            { "header": "", "title": "💵 Wirtschafts-Menü", "description": "Dein persönlicher Tresor der virtuellen Wirtschaft.", "id": `${usedPrefix}economymenu` },
+                                            { "header": "", "title": "🎮 Spiele-Menü", "description": "Betritt die Gaming-Arena.", "id": `${usedPrefix}gamemenu` },
+                                            { "header": "", "title": "🫐 Sticker-Menü", "description": "Ein Regenbogen von Stickern.", "id": `${usedPrefix}stickermenu` },
                                             { "header": "", "title": "🖍️ Fancy Text", "description": "Fancy Text Generator.", "id": `${usedPrefix}fancy` },
-                                            { "header": "", "title": "🎊 Tool Menu", "description": "Your handy-dandy toolkit.", "id": `${usedPrefix}toolmenu` },
-                                            { "header": "", "title": "🏵️ Logo Menu", "description": "Create a logo that screams You.", "id": `${usedPrefix}logomenu` },
-                                            { "header": "", "title": "🖌️ Fancy Text2", "description": "From Text To Fancy Text As jpg", "id": `${usedPrefix}fancy2` },
-                                            { "header": "", "title": "🌄 NSFW Menu", "description": "The After Dark menu.", "id": `${usedPrefix}nsfwmenu` }
+                                            { "header": "", "title": "🎊 Werkzeug-Menü", "description": "Dein praktischer Werkzeugkasten.", "id": `${usedPrefix}toolmenu` },
+                                            { "header": "", "title": "🏵️ Logo-Menü", "description": "Erstelle ein Logo, das dich repräsentiert.", "id": `${usedPrefix}logomenu` },
+                                            { "header": "", "title": "🖌️ Fancy Text2", "description": "Von Text zu Fancy Text als jpg", "id": `${usedPrefix}fancy2` },
+                                            { "header": "", "title": "🌄 NSFW-Menü", "description": "Das After Dark-Menü.", "id": `${usedPrefix}nsfwmenu` }
                                         ]
                                     }]
                                 })
@@ -78,22 +78,22 @@ let handler = async (m, { conn, usedPrefix }) => {
                             {
                                 "name": "quick_reply",
                                 "buttonParamsJson": JSON.stringify({
-                                    "display_text": "MENU2 ❇️",
+                                    "display_text": "MENÜ2 ❇️",
                                     "id": `${usedPrefix}menu2`
                                 })
                             },
                             {
                                 "name": "cta_url",
                                 "buttonParamsJson": JSON.stringify({
-                                    "display_text": "OWNER 🌟",
-                                    "url": "https://wa.me/message/HA35ZL76JSHJB1"
+                                    "display_text": "BESITZER 🌟",
+                                    "url": "https://wa.me/491624542167"
                                 })
                             },
                             {
                                 "name": "cta_url",
                                 "buttonParamsJson": JSON.stringify({
                                     "display_text": "SCRIPT 💕",
-                                    "url": "https://github.com/GlobalTechInfo/ULTRA-MD"
+                                    "url": "https://github.com/OwnedbyLIP/Rick-Bot"
                                 })
                             }
                         ],
@@ -122,19 +122,19 @@ function clockString(ms) {
 }
 
 function ucapan() {
-    const time = moment.tz('Asia/Karachi').format('HH');
-    let res = "happy early in the day☀️";
-    if (time >= 4) {
-        res = "Good Morning 🥱";
+    const time = moment.tz('Europe/Berlin').format('HH');
+    let res = "fröhlichen frühen Tag☀️";
+    if (time >= 6) {
+        res = "Guten Morgen 🥱";
     }
-    if (time >= 10) {
-        res = "Good Afternoon 🫠";
-    }
-    if (time >= 15) {
-        res = "Good Afternoon 🌇";
+    if (time >= 12) {
+        res = "Guten Tag🫠";
     }
     if (time >= 18) {
-        res = "Good Night 🌙";
+        res = "Guten Abend 🌇";
+    }
+    if (time >= 24) {
+        res = "Gute Nacht 🌙";
     }
     return res;
 }

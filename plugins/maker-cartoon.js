@@ -105,13 +105,13 @@ function randomId() {
 let handler = async (m, { conn, usedPrefix, command }) => {
   conn.cartoon = conn.cartoon ? conn.cartoon : {}
   if (m.sender in conn.cartoon)
-    throw "There is still an unfinished process, my friend. Please wait until it's over. >//<"
+    throw "Es gibt noch einen unvollendeten Prozess, mein Freund. Bitte warte, bis er abgeschlossen ist. >//<"
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || q.mediaType || ''
-  if (!mime) throw `Where is the picture you want to convert to a cartoon?`
-  if (!/image\/(jpe?g|png)/.test(mime)) throw `file ${mime} not supported`
+  if (!mime) throw `Wo ist das Bild, das du in einen Cartoon umwandeln möchtest?`
+  if (!/image\/(jpe?g|png)/.test(mime)) throw `Datei ${mime} wird nicht unterstützt`
   else conn.cartoon[m.sender] = true
-  m.reply('converting the picture to cartoon')
+  m.reply('Das Bild wird in einen Cartoon umgewandelt')
   let img = await q.download?.()
   try {
     Cartoon(img).then(async response => {
@@ -120,7 +120,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
           m.chat,
           response.download.full,
           '',
-          'The operation was successful♥  >//<',
+          'Die Operation war erfolgreich♥  >//<',
           m
         )
         let name = await conn.getName(m.sender),
@@ -136,12 +136,12 @@ let handler = async (m, { conn, usedPrefix, command }) => {
         conn.sendMessage(m.chat, await sticker.toMessage(), { quoted: m })
       } else {
         m.reply(
-          'Excuse me my friend, the picture does not reveal a face, please send a picture in which the face is exposed and visible.'
+          'Entschuldigung, mein Freund, das Bild zeigt kein Gesicht. Bitte sende ein Bild, auf dem das Gesicht freigelegt und sichtbar ist.'
         )
       }
     })
   } catch {
-    m.reply('Process failed :(')
+    m.reply('Prozess fehlgeschlagen :(')
   } finally {
     conn.cartoon[m.sender] ? delete conn.cartoon[m.sender] : false
   }

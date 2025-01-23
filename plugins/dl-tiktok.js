@@ -3,61 +3,61 @@ import pkg from 'nayan-videos-downloader';
 const { tikdown } = pkg;
 
 const handler = async (message, { conn, args }) => {
-  // Check if the URL is provided in the command arguments
+  // Überprüfe, ob die URL in den Befehlsargumenten angegeben ist
   if (!args[0]) {
-    throw '✳️ Enter the TikTok link next to the command';
+    throw '✳️ Gib den TikTok-Link neben dem Befehl ein';
   }
 
-  // Validate the URL format for TikTok, including shortened URLs like vm.tiktok.com
+  // Überprüfe das URL-Format für TikTok, einschließlich verkürzter URLs wie vm.tiktok.com
   const urlPattern = /(?:https?:\/\/(?:www\.)?)?(tiktok\.com\/(?:[^\/]+\/v\/\d+|[^\/]+\/post\/\d+)|vm\.tiktok\.com\/[\w\d]+)/gi;
   if (!args[0].match(urlPattern)) {
-    throw '❌ Invalid TikTok link';
+    throw '❌ Ungültiger TikTok-Link';
   }
 
-  // React with a loading emoji to show the process has started
+  // Reagiere mit einem Lade-Emoji, um zu zeigen, dass der Prozess gestartet wurde
   message.react('⏳');
 
   try {
-    // The URL of the TikTok video
+    // Die URL des TikTok-Videos
     const url = args[0];
     console.log('URL:', url);
 
-    // Fetch media data using the nayan-video-downloader package
+    // Medieninhalte mit dem nayan-video-downloader-Paket abrufen
     let mediaData = await tikdown(url);
-    console.log('Media Data:', mediaData);
+    console.log('Mediendaten:', mediaData);
 
-    // Check if the media data has a valid video URL
+    // Überprüfe, ob die Mediendaten eine gültige Video-URL enthalten
     if (!mediaData.data || !mediaData.data.video) {
-      throw new Error('Could not fetch the video URL');
+      throw new Error('Konnte die Video-URL nicht abrufen');
     }
 
     const videoUrl = mediaData.data.video;
-    console.log('Video URL:', videoUrl);
+    console.log('Video-URL:', videoUrl);
 
-    // Fetch the media content from the download URL
+    // Medieninhalte von der Download-URL abrufen
     const response = await fetch(videoUrl);
     if (!response.ok) {
-      throw new Error('Failed to fetch the media content');
+      throw new Error('Fehler beim Abrufen der Medieninhalte');
     }
 
-    // Convert the response to an array buffer
+    // Die Antwort in einen Array-Puffer konvertieren
     const arrayBuffer = await response.arrayBuffer();
     const mediaBuffer = Buffer.from(arrayBuffer);
 
-    // Send the video file to the user
-    await conn.sendFile(message.chat, mediaBuffer, 'tiktok.mp4', '*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳*', message, false, { mimetype: 'video/mp4' });
+    // Sende die Videodatei an den Benutzer
+    await conn.sendFile(message.chat, mediaBuffer, 'tiktok.mp4', '*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © Rick-Bot*', message, false, { mimetype: 'video/mp4' });
 
-    // React with a success emoji
+    // Reagiere mit einem Erfolgs-Emoji
     message.react('✅');
   } catch (error) {
-    // Log and handle any errors
-    console.error('Error downloading from TikTok:', error.message, error.stack);
-    await message.reply('⚠️ An error occurred while processing the request. Please try again later.');
+    // Protokolliere und behandle alle Fehler
+    console.error('Fehler beim Herunterladen von TikTok:', error.message, error.stack);
+    await message.reply('⚠️ Ein Fehler ist bei der Verarbeitung der Anfrage aufgetreten. Bitte versuche es später erneut.');
     message.react('❌');
   }
 };
 
-// Define command metadata
+// Definiere Befehlsmetadaten
 handler.help = ['tiktok', 'tt', 'tikdown', 'ttdl'];
 handler.tags = ['downloader'];
 handler.command = ['tiktok', 'tt', 'tikdown', 'ttdl'];

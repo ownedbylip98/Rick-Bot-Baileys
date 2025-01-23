@@ -6,7 +6,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       : m.fromMe
         ? conn.user.jid
         : m.sender
-  if (!(who in global.db.data.users)) throw `✳️ The user is not found in my database`
+  if (!(who in global.db.data.users)) throw `✳️ Der Benutzer ist nicht in meiner Datenbank gefunden`
 
   let pp = './assets/A.jpg'
   let more = String.fromCharCode(8206)
@@ -16,70 +16,70 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   switch (command) {
     case 'listmenu':
     case 'menulist':
-      lkr ='*Get ready for the ride, here are your ticket options:*\n\n' +
+      lkr ='*Mach dich bereit für die Fahrt, hier sind deine Ticketoptionen:*\n\n' +
         '🌅 *' +
         usedPrefix +
-        "botmenu* - The Bot's secret control panel.\n\n" +
+        "botmenu* - Das geheime Kontrollpanel des Bots.\n\n" +
         '🖲️ *' +
         usedPrefix +
-        "ownermenu* - Yep, that's for you, Boss!\n\n" +
+        "ownermenu* - Ja, das ist für dich, Boss!\n\n" +
         '🛫 *' +
         usedPrefix +
-        'groupmenu* - Groups to unite people.\n\n' +
+        'groupmenu* - Gruppen, um Menschen zu vereinen.\n\n' +
         '🗂️ *' +
         usedPrefix +
-        "dlmenu* - 'DL' stands for 'Delicious Loot'.\n\n" +
+        "dlmenu* - 'DL' steht für 'Delicious Loot'.\n\n" +
         '🎭 *' +
         usedPrefix +
-        "funmenu* - The bot's party hat. Games, jokes and instant ROFLs.\n\n" +
+        "funmenu* - Der Partyhut des Bots. Spiele, Witze und sofortige ROFLs.\n\n" +
         '💵 *' +
         usedPrefix +
-        'economy* - Your personal vault of virtual economy.\n\n' +
+        'economy* - Dein persönlicher Tresor der virtuellen Wirtschaft.\n\n' +
         '🎮 *' +
         usedPrefix +
-        'gamemenu* - Enter the gaming arena.\n\n' +
+        'gamemenu* - Betritt die Gaming-Arena.\n\n' +
         '🫐 *' +
         usedPrefix +
-        'stickermenu* - A rainbow of stickers.\n\n' +
+        'stickermenu* - Ein Regenbogen von Stickern.\n\n' +
         '🪙 *' +
         usedPrefix +
-        "toolsmenu* - Your handy-dandy toolkit.\n\n" +
+        'toolsmenu* - Dein praktisches Werkzeugset.\n\n' +
         '🧲 *' +
         usedPrefix +
-        'logomenu* - Create a logo that screams You.\n\n' +
+        'logomenu* - Erstelle ein Logo, das dich repräsentiert.\n\n' +
         '💟 *' +
         usedPrefix +
-        'nsfwmenu* - The After Dark menu.\n\n' +
+        'nsfwmenu* - Das After-Dark-Menü.\n\n' +
         '🌀 *' +
         usedPrefix +
-        'aimenu* - Your Personal Artificial Intelligence Copilots.\n\n' +
+        'aimenu* - Deine persönlichen künstlichen Intelligenz-Copiloten.\n\n' +
         '🎧 *' +
         usedPrefix +
-        'aeditor* - Tune The Mp3/Audio As You Wish.\n\n' +
+        'aeditor* - Tune das Mp3/Audio nach deinen Wünschen.\n\n' +
          '🎉 *' +
         usedPrefix +
-        'animemenu* - Animated Images,Stickers and Videos.\n\n' +
+        'animemenu* - Animierte Bilder, Sticker und Videos.\n\n' +
          '🍒 *' +
         usedPrefix +
-        'reactions* - Anime reactions menu for group.\n\n' +
+        'reactions* - Anime-Reaktionsmenü für Gruppen.\n\n' +
         '🪁 *' +
         usedPrefix +
-        'infoanime* - Full Information About Animes Like imdb.\n\n' +
+        'infoanime* - Vollständige Informationen über Animes wie IMDb.\n\n' +
         '💡 *' +
         usedPrefix +
-        'imagen* - Create Images and designs based on your thoughts/prompts.\n\n' +
+        'imagen* - Erstelle Bilder und Designs basierend auf deinen Gedanken/Prompts.\n\n' +
         '🃏 *' +
         usedPrefix +
-        'randompic* - Random Images you might like and love.\n\n' +
+        'randompic* - Zufällige Bilder, die dir gefallen könnten.\n\n' +
         '🏖️ *' +
         usedPrefix +
-        'textpro* - Generate Beautiful Logos Using Text Of Your Choice.\n\n' +
+        'textpro* - Erstelle schöne Logos mit einem Text deiner Wahl.\n\n' +
         '🎥 *' +
         usedPrefix +
-        'randomvid* - Random Videos you might like and love.\n\n' +
+        'randomvid* - Zufällige Videos, die dir gefallen könnten.\n\n' +
         '🖍️ *' +
         usedPrefix +
-        'fancy* - Fancy text generator Menu.' 
+        'fancy* - Fancy-Text-Generator-Menü.' 
         break
 
     case 'botmenu':
@@ -111,7 +111,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ◈ •listprem
 ◈ •listmenu
 ◈ •mrcs
-◈ © GlobalTechInfo
+◈ © OwnedbyLIP
 ╰─────────❍` // Your bot menu message here
       break
       case 'aimenu':

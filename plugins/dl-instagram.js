@@ -6,44 +6,44 @@ const fetchWithRetry = async (url, options, retries = 3) => {
   for (let i = 0; i < retries; i++) {
     const response = await fetch(url, options);
     if (response.ok) return response;
-    console.log(`Retrying... (${i + 1})`);
+    console.log(`Erneuter Versuch... (${i + 1})`);
   }
-  throw new Error('Failed to fetch media content after retries');
+  throw new Error('Fehler beim Abrufen des Medieninhalts nach mehreren Versuchen');
 };
 
 const handler = async (m, { conn, args }) => {
-  if (!args[0]) throw '✳️ Enter the Instagram link next to the command';
+  if (!args[0]) throw '✳️ Gib den Instagram-Link neben dem Befehl ein';
 
-  // Updated regex to capture various Instagram link formats
+  // Aktualisierte Regex, um verschiedene Instagram-Linkformate zu erfassen
   const instagramRegex = /^(https?:\/\/)?(www\.)?(instagram\.com\/(reel|p|tv)\/[A-Za-z0-9._%+-]+(\/)?(\?igsh=[A-Za-z0-9=]+)?)$/;
 
   if (!args[0].match(instagramRegex)) {
-    throw '❌ Link incorrect. Please ensure it is a valid Instagram post or reel link.';
+    throw '❌ Falscher Link. Bitte stelle sicher, dass es ein gültiger Instagram-Post- oder Reel-Link ist.';
   }
 
   m.react('⏳');
 
   try {
     const url = args[0];
-    console.log('Checking link:', url);
+    console.log('Link überprüfen:', url);
 
     const mediaData = await instagram(url);
-    console.log('Media Data:', mediaData);
+    console.log('Mediendaten:', mediaData);
 
     if (!mediaData.status) {
-      throw new Error(`Error: ${mediaData.msg || 'Failed to retrieve media data'}`);
+      throw new Error(`Fehler: ${mediaData.msg || 'Fehler beim Abrufen der Mediendaten'}`);
     }
 
     let downloadUrl;
     if (mediaData.data.video && mediaData.data.video.length > 0) {
-      downloadUrl = mediaData.data.video[0]; // Use the first video URL
+      downloadUrl = mediaData.data.video[0]; // Verwende die erste Video-URL
     } else if (mediaData.data.images && mediaData.data.images.length > 0) {
-      downloadUrl = mediaData.data.images[0]; // Use the first image URL
+      downloadUrl = mediaData.data.images[0]; // Verwende die erste Bild-URL
     } else {
-      throw new Error('Could not fetch the download URL');
+      throw new Error('Download-URL konnte nicht abgerufen werden');
     }
 
-    console.log('Download URL:', downloadUrl);
+    console.log('Download-URL:', downloadUrl);
 
     const response = await fetchWithRetry(downloadUrl, {
       headers: {
@@ -57,22 +57,22 @@ const handler = async (m, { conn, args }) => {
         (!contentType.includes('image') && 
         !contentType.includes('octet-stream') && 
         !contentType.includes('video'))) {
-      throw new Error('Invalid content type received');
+      throw new Error('Ungültiger Inhaltstyp empfangen');
     }
 
     const arrayBuffer = await response.arrayBuffer();
     const mediaBuffer = Buffer.from(arrayBuffer);
 
-    if (mediaBuffer.length === 0) throw new Error('Downloaded file is empty');
+    if (mediaBuffer.length === 0) throw new Error('Heruntergeladene Datei ist leer');
 
     const fileName = mediaData.data.title ? `${mediaData.data.title}.jpg` : 'media.jpg';
     const mimetype = mediaData.data.video.length > 0 ? 'video/mp4' : 'image/jpeg';
 
-    await conn.sendFile(m.chat, mediaBuffer, fileName, '*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳*', m, false, { mimetype });
+    await conn.sendFile(m.chat, mediaBuffer, fileName, '*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 © Rick-Bot*', m, false, { mimetype });
     m.react('✅');
   } catch (error) {
-    console.error('Error downloading from Instagram:', error.message, error.stack);
-    await m.reply('⚠️ An error occurred while processing the request. Please try again later.');
+    console.error('Fehler beim Herunterladen von Instagram:', error.message, error.stack);
+    await m.reply('⚠️ Ein Fehler ist bei der Verarbeitung der Anfrage aufgetreten. Bitte versuche es später erneut.');
     m.react('❌');
   }
 };

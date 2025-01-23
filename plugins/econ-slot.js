@@ -1,12 +1,12 @@
 let reg = 40
 let handler = async (m, { conn, args, usedPrefix, command }) => {
   /* if (global.db.data.users[m.sender].level < 5) {
-        return conn.reply(m.chat, 'You must be at least level 5 to use this command.', m);
+        return conn.reply(m.chat, 'Du musst mindestens Level 5 sein, um diesen Befehl zu verwenden.', m);
     }*/
 
-  let fa = `🟥 *Provide the amount of gold to bet*
+  let fa = `🟥 *Gib den Betrag an Gold an, den du setzen möchtest*
 
-*Example :
+*Beispiel :
 ${usedPrefix + command} 500*`.trim()
   if (!args[0]) throw fa
   if (isNaN(args[0])) throw fa
@@ -15,12 +15,12 @@ ${usedPrefix + command} 500*`.trim()
   let users = global.db.data.users[m.sender]
   let time = users.lastslot + 10000
   if (new Date() - users.lastslot < 10000)
-    throw `⏳ Wait *${msToTime(time - new Date())}* to use again`
-  if (amount < 500) throw `🟥 *You can't bet gold less than 500*`
+    throw `⏳ Warte *${msToTime(time - new Date())}* bevor du es erneut verwendest`
+  if (amount < 500) throw `🟥 *Du kannst nicht weniger als 500 Gold setzen*`
   if (users.credit < amount) {
-    throw `🟥 *You do not have enough gold to bet*`
+    throw `🟥 *Du hast nicht genug Gold zum Setzen*`
   }
-  if (amount > 100000) throw `🟥 *You can't bet gold more than 100000*`
+  if (amount > 100000) throw `🟥 *Du kannst nicht mehr als 100000 Gold setzen*`
 
   let emojis = ['🕊️', '🦀', '🦎']
   let a = Math.floor(Math.random() * emojis.length)
@@ -46,13 +46,13 @@ ${usedPrefix + command} 500*`.trim()
   }
   let end
   if (a == b && b == c) {
-    end = `🎊 *Jackpot!* You won ${amount + amount} gold`
+    end = `🎊 *Jackpot!* Du hast ${amount + amount} Gold gewonnen`
     users.credit += amount + amount
     // } else if (a == b || a == c || b == c) {
-    //     end = `You lost  *₹${amount}*\n*But you almost made it keep trying*`
+    //     end = `Du hast *₹${amount}* verloren\n*Aber du warst fast da, versuche es weiter*`
     //     users.credit -= amount
   } else {
-    end = `      You lost ${amount} gold`
+    end = `      Du hast ${amount} Gold verloren`
     users.credit -= amount
   }
   users.lastslot = new Date() * 1
@@ -67,7 +67,7 @@ ${usedPrefix + command} 500*`.trim()
 ${end}`
   )
 }
-handler.help = ['slot <amount>']
+handler.help = ['slot <Betrag>']
 handler.tags = ['game']
 handler.command = ['slot']
 
@@ -85,5 +85,5 @@ function msToTime(duration) {
   minutes = minutes < 10 ? '0' + minutes : minutes
   seconds = seconds < 10 ? '0' + seconds : seconds
 
-  return seconds + ' seconds'
+  return seconds + ' Sekunden'
 }

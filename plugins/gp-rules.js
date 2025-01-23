@@ -1,4 +1,3 @@
-
 let handler = async function (m, { conn, text, usedPrefix }) {
 	
 	let chat = global.db.data.chats[m.chat]

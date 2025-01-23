@@ -1,5 +1,5 @@
 let handler = async (m, { conn, text }) => {
-  if (!text) throw 'No Text'
+  if (!text) throw 'Kein Text'
 
   const avatar = await conn
     .profilePictureUrl(m.sender, 'image')
@@ -12,10 +12,10 @@ let handler = async (m, { conn, text }) => {
 
   const url = `https://some-random-api.com/canvas/misc/tweet?displayname=${encodeURIComponent(displayName)}&username=${encodeURIComponent(username)}&avatar=${encodeURIComponent(avatar)}&comment=${encodeURIComponent(text)}&replies=${encodeURIComponent(replies)}&retweets=${encodeURIComponent(retweets)}&theme=${encodeURIComponent(theme)}`
 
-  conn.sendFile(m.chat, url, 'tweet.png', '*THANKS FOR TWEETING*', m)
+  conn.sendFile(m.chat, url, 'tweet.png', '*DANKE FÜR DEINEN TWEET*', m)
 }
 
-handler.help = ['tweet <comment>']
+handler.help = ['tweet <kommentar>']
 handler.tags = ['maker']
 handler.command = /^(tweet)$/i
 

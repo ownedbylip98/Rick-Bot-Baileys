@@ -29,4 +29,12 @@ handler.admin = true
 handler.botAdmin = true
 handler.fail = null
 
+// Translate messages to German
+const mssg = {
+	useCmd: 'Benutze den Befehl',
+	numError: 'Nummer ist ungültig',
+	promote: 'Erfolgreich befördert',
+	userError: 'Benutzer nicht gefunden'
+}
+
 export default handler

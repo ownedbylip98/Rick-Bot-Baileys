@@ -1,9 +1,9 @@
 let handler = async (m, { conn }) => {
   if (global.conn.user.jid === conn.user.jid) {
-    await conn.reply(m.chat, `*Rent Has Been Successfully Stoped*`, m);
+    await conn.reply(m.chat, `*Miete wurde erfolgreich gestoppt*`, m);
   } else {
     // If the number does not match, stop the bot.
-    await conn.reply(m.chat, '*Why don’t you go directly to the terminal?*', m);
+    await conn.reply(m.chat, '*Warum gehst du nicht direkt zum Terminal?*', m);
     conn.ws.close();
   }
 };

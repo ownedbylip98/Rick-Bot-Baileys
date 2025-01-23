@@ -1,4 +1,3 @@
-
 import { createHash } from 'crypto'
 import PhoneNumber from 'awesome-phonenumber'
 import { xpRange } from '../lib/levelling.js'
@@ -21,7 +20,9 @@ let str = `
    • ${username} ${registered ? '\n   • ' + name + ' ': ''}
    • @${who.replace(/@.+/, '')}
 ▢ *📱${mssg.number}:* ${PhoneNumber('+' + who.replace('@s.whatsapp.net', '')).getNumber('international')}
-▢ *🔗${mssg.link}:* wa.me/${who.split`@`[0]}${registered ? `\n▢ *🎈${mssg.age}:* ${age}\n▢ *🧬${mssg.gender}:* ${genero}` : ''}
+▢ *🔗${mssg.link}:* wa.me/${who.split`@`[0]}${registered ? `
+▢ *🎈${mssg.age}:* ${age}
+▢ *🧬${mssg.gender}:* ${genero}` : ''}
 ▢ *🌎${mssg.lang}:* ${language}
 ▢ *⚠️${mssg.warns}:* ${warn}/${maxwarn}
 ▢ *🪙${mssg.money}:* ${coin.toLocaleString()}
@@ -32,12 +33,12 @@ let str = `
 ▢ *📇${mssg.regOn}:* ${registered ? '✅': '❎'}
 ▢ *🎟️${mssg.prem}:* ${premG ? '✅' : '❎'}
 └──────────────`
-    conn.sendFile(m.chat, pp, 'perfil.jpg', str, m, false, { mentions: [who] })
+    conn.sendFile(m.chat, pp, 'profil.jpg', str, m, false, { mentions: [who] })
     m.react(done)
 
 }
-handler.help = ['profile']
-handler.tags = ['group']
-handler.command = ['profile', 'perfil']
+handler.help = ['profil']
+handler.tags = ['gruppe']
+handler.command = ['profil', 'profile']
 
 export default handler

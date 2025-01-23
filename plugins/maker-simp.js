@@ -14,11 +14,11 @@ let handler = async (m, { conn }) => {
         .catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png'),
     }),
     'error.png',
-    '*your religion is simping*',
+    '*deine Religion ist Simping*',
     m
   )
 }
-handler.help = ['simpcard']
-handler.tags = ['maker']
-handler.command = /^(simpcard)$/i
+handler.help = ['simpkarte']
+handler.tags = ['macher']
+handler.command = /^(simpkarte)$/i
 export default handler

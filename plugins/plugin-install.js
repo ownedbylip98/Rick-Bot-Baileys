@@ -3,12 +3,12 @@ import fs from 'fs'
 import path from 'path'
 
 let handler = async (m, { text, usedPrefix, command }) => {
-  if (!text) throw `Please provide a plugin URL`
+  if (!text) throw `Bitte gib eine Plugin-URL an`
 
   // Extract the Gist ID from the URL
   const gistId = text.match(/(?:\/|gist\.github\.com\/)([a-fA-F0-9]+)/)
 
-  if (!gistId) throw `Invalid plugin URL`
+  if (!gistId) throw `Ungültige Plugin-URL`
 
   const gistName = gistId[1]
   const gistURL = `https://api.github.com/gists/${gistName}`
@@ -18,7 +18,7 @@ let handler = async (m, { text, usedPrefix, command }) => {
     const gistData = response.data
 
     if (!gistData || !gistData.files) {
-      throw `No valid files found in the Gist`
+      throw `Keine gültigen Dateien im Gist gefunden`
     }
 
     for (const file of Object.values(gistData.files)) {
@@ -30,10 +30,10 @@ let handler = async (m, { text, usedPrefix, command }) => {
 
       // Write the Gist file content to the plugin file
       await fs.promises.writeFile(pluginPath, file.content)
-      m.reply(`*𝚂𝚄𝙲𝙲𝙴𝚂𝚂𝙵𝚄𝙻𝙻𝚈 𝙸𝙽𝚂𝚃𝙰𝙻𝙻𝙴𝙳 𝙿𝙻𝚄𝙶𝙸𝙽 𝙸𝙽 𝚄𝙻𝚃𝚁𝙰-𝙼𝙳*`)
+      m.reply(`*ERFOLGREICHES INSTALLIEREN DES PLUGINS IN RICK-BOT*`)
     }
   } catch (error) {
-    throw `*Error Fetching or Saving The Plugin:* ${error.message}`
+    throw `*Fehler beim Abrufen oder Speichern des Plugins:* ${error.message}`
   }
 }
 

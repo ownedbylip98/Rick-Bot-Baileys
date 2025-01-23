@@ -4,16 +4,16 @@ let handler = async (m, { conn }) => {
   const stickerList = Object.entries(global.db.data.sticker)
     .map(
       ([key, value], index) =>
-        `${index + 1}. ${value.locked ? `(blocked) ${key}` : key} : ${value.text}`
+        `${index + 1}. ${value.locked ? `(gesperrt) ${key}` : key} : ${value.text}`
     )
     .join('\n');
 
   conn.reply(
     m.chat,
     `
-*COMMAND LIST*
+*BEFEHLSLISTE*
 
-▢ *Info:* If it's in *bold*, it is blocked
+▢ *Info:* Wenn es *fett* ist, ist es gesperrt
 
 ──────────────────
 ${stickerList}
@@ -22,7 +22,7 @@ ${stickerList}
     {
       mentions: Object.values(global.db.data.sticker)
         .map(x => x.mentionedJid)
-        .flat(), // Use flat() to flatten the array
+        .flat(), // Verwende flat(), um das Array zu glätten
     }
   );
 }

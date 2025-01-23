@@ -2,50 +2,50 @@
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   let poin = 300
-  let reseqv = `✳️ Select rock/paper/scissors\n\nExample : *${usedPrefix + command}* paper\n`
+  let reseqv = `✳️ Wähle Stein/Papier/Schere\n\nBeispiel : *${usedPrefix + command}* Papier\n`
   if (!text) throw reseqv
   var astro = Math.random()
 
   if (astro < 0.34) {
-    astro = 'rock'
+    astro = 'Stein'
   } else if (astro > 0.34 && astro < 0.67) {
-    astro = 'scissors'
+    astro = 'Schere'
   } else {
-    astro = 'paper'
+    astro = 'Papier'
   }
 
   if (text == astro) {
     global.db.data.users[m.sender].exp += 100
-    m.reply(`▢ *A tie*\n\n‣ You : ${text}\n‣ Guru : ${astro}\n\n🎁 Points (±)100 XP`)
-  } else if (text == 'rock') {
-    if (astro == 'scissors') {
+    m.reply(`▢ *Unentschieden*\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\n🎁 Punkte (±)100 XP`)
+  } else if (text == 'Stein') {
+    if (astro == 'Schere') {
       global.db.data.users[m.sender].exp += 300
-      m.reply(`▢ *Won* 🎊\n\n‣ You : ${text}\n‣ GURU : ${astro}\n\n🎁 Points *+${poin} XP*`)
+      m.reply(`▢ *Gewonnen* 🎊\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\n🎁 Punkte *+${poin} XP*`)
     } else {
       global.db.data.users[m.sender].exp -= 300
-      m.reply(`▢ *lost*\n\n‣ You : ${text}\n‣ GURU : ${astro}\n\n Points *-${poin} XP*`)
+      m.reply(`▢ *Verloren*\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\n Punkte *-${poin} XP*`)
     }
-  } else if (text == 'scissors') {
-    if (astro == 'paper') {
+  } else if (text == 'Schere') {
+    if (astro == 'Papier') {
       global.db.data.users[m.sender].exp += 300
-      m.reply(`▢ *won* 🎊\n\n‣ You : ${text}\n‣ GURU : ${astro}\n\n🎁 Points *+${poin} XP*`)
+      m.reply(`▢ *Gewonnen* 🎊\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\n🎁 Punkte *+${poin} XP*`)
     } else {
       global.db.data.users[m.sender].exp -= 300
-      m.reply(`▢ *lost*\n\n‣ You : ${text}\n‣ GURU : ${astro}\n\nPoints *-${poin} XP*`)
+      m.reply(`▢ *Verloren*\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\nPunkte *-${poin} XP*`)
     }
-  } else if (text == 'paper') {
-    if (astro == 'rock') {
+  } else if (text == 'Papier') {
+    if (astro == 'Stein') {
       global.db.data.users[m.sender].exp += 300
-      m.reply(`▢ *won* 🎊\n\n‣ You : ${text}\n‣ GURU : ${astro}\n\n🎁 Points *+${poin} XP*`)
+      m.reply(`▢ *Gewonnen* 🎊\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\n🎁 Punkte *+${poin} XP*`)
     } else {
       global.db.data.users[m.sender].exp -= 300
-      m.reply(`▢ *You lost*\n\n‣ You : ${text}\n‣ GURU : ${astro}\n\nPoints *-${poin} XP*`)
+      m.reply(`▢ *Verloren*\n\n‣ Du : ${text}\n‣ Guru : ${astro}\n\nPunkte *-${poin} XP*`)
     }
   } else {
     throw reseqv
   }
 }
-handler.help = ['ppt <rock/paper/scissors>']
+handler.help = ['ppt <Stein/Papier/Schere>']
 handler.tags = ['game']
 handler.command = ['ppt']
 handler.register = false

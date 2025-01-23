@@ -2,7 +2,7 @@ import pkg from 'api-qasim';
 const { Pinterest2 } = pkg;
 
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-    if (!args[0]) throw `✳️ Enter A Query\n\n📌${mssg.example} : ${usedPrefix + command} nature`;
+    if (!args[0]) throw `✳️ Gib eine Suchanfrage ein\n\n📌${mssg.example} : ${usedPrefix + command} natur`;
 
     try {
         await m.react('⏳');
@@ -12,19 +12,19 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 
         // Check if the result contains images
         if (!res.result || res.result.length === 0) {
-            return m.reply("✳️ No images found for your search query.");
+            return m.reply("✳️ Keine Bilder für deine Suchanfrage gefunden.");
         }
 
         // Extract the first 5 image URLs
         const imageUrls = res.result.slice(0, 5).map(item => item.images_url);
 
         // If there are images, send them
-        let message = `Found images for query *${args[0]}*:\n\n`;
+        let message = `Gefundene Bilder für die Suchanfrage *${args[0]}*:\n\n`;
         await m.react('✅');
 
         for (let i = 0; i < imageUrls.length; i++) {
             // Send each image as a message
-            await conn.sendMessage(m.chat, { image: { url: imageUrls[i] }, caption: `${message}Image ${i + 1}` }, { quoted: m });
+            await conn.sendMessage(m.chat, { image: { url: imageUrls[i] }, caption: `${message}Bild ${i + 1}` }, { quoted: m });
         }
     } catch (error) {
         m.reply(`✳️ ${mssg.error}: ${error.message || error}`);

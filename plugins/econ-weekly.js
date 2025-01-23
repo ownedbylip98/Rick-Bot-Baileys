@@ -1,4 +1,3 @@
-
 const we = 5000
 let cooldown = 604800000
 let handler = async (m, {conn}) => {
@@ -12,9 +11,9 @@ let handler = async (m, {conn}) => {
 🪙 *${mssg.money}* : +${we.toLocaleString()}`)
   user.weekly = new Date * 1
 }
-handler.help = ['weekly']
-handler.tags = ['econ']
-handler.command = ['weekly', 'semanal'] 
+handler.help = ['wöchentlich']
+handler.tags = ['wirtschaft']
+handler.command = ['wöchentlich', 'semanal'] 
 
 export default handler
 

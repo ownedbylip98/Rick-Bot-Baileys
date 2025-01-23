@@ -6,19 +6,12 @@ export async function all(m) {
       m.text.startsWith('open this link')) &&
     !m.isBaileys &&
     !m.isGroup
- /* ) {
-    this.sendMessage(
-      m.chat,
-      {
-        text: `Hello @${m.sender.split('@')[0]}\nyou can rent the bot to join a group\n\n_For more info you can DM the owner_\n*Type* \`\`\`.owner\`\`\` *to contact the owner*`.trim(),
-      },
-      { quoted: m }*/
-    ) {
-    this.sendButton(m.chat, `*Invite bot to a group*      
+  ) {
+    this.sendButton(m.chat, `*Lade den Bot in eine Gruppe ein*      
     Hallo @${m.sender.split('@')[0]} 
-    you can rent the bot to join a group or contact owner 
-    more info click on the button
-  `.trim(), igfg, null, [['GROUP HELP', '.grp']] , m, { mentions: [m.sender] })
+    du kannst den Bot mieten, um einer Gruppe beizutreten oder den Besitzer kontaktieren 
+    für mehr Infos klicke auf den Button
+  `.trim(), igfg, null, [['GRUPPENHILFE', '.grp']] , m, { mentions: [m.sender] })
     m.react('💎')
   }
 

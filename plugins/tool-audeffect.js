@@ -28,7 +28,7 @@ let handler = async (m, { conn, args, __dirname, usedPrefix, command }) => {
       let media = await q.download(true)
       exec(`ffmpeg -i ${media} ${set} ${filename}`, async (err, stderr, stdout) => {
         await unlinkSync(media)
-        if (err) throw `Error`
+        if (err) throw `Fehler`
         let buff = await readFileSync(filename)
         conn.sendFile(m.chat, buff, ran, null, m, true, {
           type: 'audioMessage',
@@ -36,7 +36,7 @@ let handler = async (m, { conn, args, __dirname, usedPrefix, command }) => {
         })
       })
     } else
-      throw `*Reply your audio or vn that will be modified, using the command ${usedPrefix + command}*`
+      throw `*Antworte auf dein Audio oder Sprachnachricht, die modifiziert werden soll, mit dem Befehl ${usedPrefix + command}*`
   } catch (e) {
     throw e
   }

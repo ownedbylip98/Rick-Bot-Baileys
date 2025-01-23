@@ -1,4 +1,3 @@
-
 import fetch from 'node-fetch'
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 
@@ -15,7 +14,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   let json = await res.json()
   m.reply(json.message.replace('simsimi', `${botName}`).replace('Simsimi', `${botName}`).replace('sim simi', `${botName}`))
 } catch {
-  m.reply(`❎ Try again later SimSimi api is down`)
+  m.reply(`❎ Versuche es später noch einmal, die SimSimi-API ist ausgefallen`)
 }
 
 }

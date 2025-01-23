@@ -1,4 +1,3 @@
-
 let handler = async (m, { conn, text, participants}) => {
 	
     let users = participants.map(u => u.id).filter(v => v !== conn.user.jid)

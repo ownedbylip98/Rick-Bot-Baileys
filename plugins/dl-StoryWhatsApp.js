@@ -1,8 +1,8 @@
 const handler = async (m, { conn, args, usedPrefix, command }) => {
-  // Only proceed if the command pattern is matched
+  // Nur fortfahren, wenn das Befehlsmuster übereinstimmt
   if (!command) return;
 
-  if ("status@broadcast" != m.quoted?.chat) throw "Quote Status message to download.";
+  if ("status@broadcast" != m.quoted?.chat) throw "Zitiere die Statusnachricht, um sie herunterzuladen.";
   try {
     let buffer = await m.quoted?.download();
     await conn.sendFile(m.chat, buffer, "", m.quoted?.text || "", m, false, {
@@ -10,7 +10,7 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
     });
   } catch (e) {
     console.log(e);
-    await conn.reply(m.chat, m.quoted?.text || "Error downloading status", m);
+    await conn.reply(m.chat, m.quoted?.text || "Fehler beim Herunterladen des Status", m);
   }
 };
 

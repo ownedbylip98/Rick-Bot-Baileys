@@ -27,7 +27,7 @@ const handler = async (m, { conn, text }) => {
     })
 
     if (response.status !== 200) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`)
+      throw new Error(`Fehler: ${response.status} ${response.statusText}`)
     }
 
     const imageData = response.data
@@ -35,11 +35,11 @@ const handler = async (m, { conn, text }) => {
     fs.writeFileSync('no-bg.png', imageData)
 
     // Add the caption to the image
-    const caption = `MADE BY ${botname}`
+    const caption = `ERSTELLT VON ${botname}`
     conn.sendFile(m.chat, 'no-bg.png', '', caption, m)
   } catch (e) {
     console.error(e)
-    m.reply('Sorry, an error occurred while processing the image, maybe check your api key.')
+    m.reply('Entschuldigung, beim Verarbeiten des Bildes ist ein Fehler aufgetreten, überprüfe vielleicht deinen API-Schlüssel.')
   }
 }
 

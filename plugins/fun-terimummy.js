@@ -5,12 +5,12 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
     let res = await fetch(`https://yomamaindra.onrender.com/jokes`)
 
     if (!res.ok) {
-      throw new Error(`API request failed with status ${res.status}`)
+      throw new Error(`API-Anfrage ist fehlgeschlagen mit Status ${res.status}`)
     }
 
     let json = await res.json()
 
-    console.log('JSON response:', json)
+    console.log('JSON-Antwort:', json)
 
     let yoMamaJoke = `${json.joke}`
 
@@ -20,8 +20,8 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
   }
 }
 
-yoMamaJokeHandler.help = ['yomamajoke']
-yoMamaJokeHandler.tags = ['fun']
-yoMamaJokeHandler.command = /^(yomamajoke|yomama|terimummy)$/i
+yoMamaJokeHandler.help = ['yomamawitz']
+yoMamaJokeHandler.tags = ['spaß']
+yoMamaJokeHandler.command = /^(yomamawitz|yomama|terimummy)$/i
 
 export default yoMamaJokeHandler

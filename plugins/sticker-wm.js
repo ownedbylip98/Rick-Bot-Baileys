@@ -1,4 +1,3 @@
-
 import { addExif } from '../lib/sticker.js'
 let handler = async (m, { conn, text, args }) => {
   if (!m.quoted) throw `${mssg.replyStick}`
@@ -17,10 +16,10 @@ let handler = async (m, { conn, text, args }) => {
     if (Buffer.isBuffer(e)) stiker = e
   } finally {
     if (stiker) conn.sendFile(m.chat, stiker, 'wm.webp', '', m, null, rpl)
-     else throw 'La conversión falló'
+     else throw 'Die Konvertierung ist fehlgeschlagen'
   }
 }
-handler.help = ['take <nombre>|<autor>']
+handler.help = ['take <name>|<autor>']
 handler.tags = ['sticker']
 handler.command = ['take', 'wm'] 
 

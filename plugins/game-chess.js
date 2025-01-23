@@ -16,29 +16,29 @@ const handler = async (m, { conn, args }) => {
 
   if (feature === 'delete') {
     delete conn.chess[key]
-    return conn.reply(m.chat, '🏳️ *Chess game stopped.*', m)
+    return conn.reply(m.chat, '🏳️ *Schachspiel gestoppt.*', m)
   }
 
   if (feature === 'create') {
     if (gameData) {
-      return conn.reply(m.chat, '⚠️ *Game already in progress.*', m)
+      return conn.reply(m.chat, '⚠️ *Spiel läuft bereits.*', m)
     }
     chessData.gameData = { status: 'waiting', black: null, white: null }
-    return conn.reply(m.chat, '🎮 *Chess game started.*\nWaiting for other players to join.', m)
+    return conn.reply(m.chat, '🎮 *Schachspiel gestartet.*\nWarte auf andere Spieler, um beizutreten.', m)
   }
 
   if (feature === 'join') {
     const senderId = m.sender
     if (players.includes(senderId)) {
-      return conn.reply(m.chat, '🙅‍♂️ *You have already joined this game.*', m)
+      return conn.reply(m.chat, '🙅‍♂️ *Du hast bereits an diesem Spiel teilgenommen.*', m)
     }
     if (!gameData || gameData.status !== 'waiting') {
-      return conn.reply(m.chat, '⚠️ *No chess game is currently waiting for players.*', m)
+      return conn.reply(m.chat, '⚠️ *Kein Schachspiel wartet derzeit auf Spieler.*', m)
     }
     if (players.length >= 2) {
       return conn.reply(
         m.chat,
-        '👥 *Players are already enough.*\nThe game will start automatically.',
+        '👥 *Spieler sind bereits genug.*\nDas Spiel wird automatisch gestartet.',
         m
       )
     }
@@ -53,14 +53,14 @@ const handler = async (m, { conn, args }) => {
       chessData.currentTurn = white
       return conn.reply(
         m.chat,
-        `🙌 *Players who have joined:*\n${hasJoined.map(playerId => `- @${playerId.split('@')[0]}`).join('\n')}\n\n*Black:* @${black.split('@')[0]}\n*White:* @${white.split('@')[0]}\n\nPlease use *'chess start'* to begin the game.`,
+        `🙌 *Spieler, die beigetreten sind:*\n${hasJoined.map(playerId => `- @${playerId.split('@')[0]}`).join('\n')}\n\n*Schwarz:* @${black.split('@')[0]}\n*Weiß:* @${white.split('@')[0]}\n\nBitte benutze *'chess start'*, um das Spiel zu beginnen.`,
         m,
         { mentions: hasJoined }
       )
     } else {
       return conn.reply(
         m.chat,
-        '🙋‍♂️ *You have joined the chess game.*\nWaiting for other players to join.',
+        '🙋‍♂️ *Du hast dem Schachspiel beigetreten.*\nWarte auf andere Spieler, um beizutreten.',
         m
       )
     }
@@ -68,7 +68,7 @@ const handler = async (m, { conn, args }) => {
 
   if (feature === 'start') {
     if (gameData.status !== 'ready') {
-      return conn.reply(m.chat, '⚠️ *Cannot start the game. Wait for two players to join.*', m)
+      return conn.reply(m.chat, '⚠️ *Kann das Spiel nicht starten. Warte, bis zwei Spieler beigetreten sind.*', m)
     }
     gameData.status = 'playing'
     const senderId = m.sender
@@ -76,7 +76,7 @@ const handler = async (m, { conn, args }) => {
       const fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
       chessData.fen = fen
       const encodedFen = encodeURIComponent(fen)
-      const turn = `🎲 *Turn:* White @${gameData.white.split('@')[0]}`
+      const turn = `🎲 *Zug:* Weiß @${gameData.white.split('@')[0]}`
       const flipParam = senderId === gameData.black ? '' : '&flip=true'
       const flipParam2 = senderId === gameData.black ? '' : '-flip'
       const boardUrl = `https://www.chess.com/dynboard?fen=${encodedFen}&board=graffiti&piece=graffiti&size=3&coordinates=inside${flipParam}`
@@ -90,7 +90,7 @@ const handler = async (m, { conn, args }) => {
     } else {
       return conn.reply(
         m.chat,
-        '🙋‍♂️ *You have joined the chess game.*\nWaiting for other players to join.',
+        '🙋‍♂️ *Du hast dem Schachspiel beigetreten.*\nWarte auf andere Spieler, um beizutreten.',
         m
       )
     }
@@ -99,12 +99,12 @@ const handler = async (m, { conn, args }) => {
   if (args[0] && args[1]) {
     const senderId = m.sender
     if (!gameData || gameData.status !== 'playing') {
-      return conn.reply(m.chat, '⚠️ *The game has not started yet.*', m)
+      return conn.reply(m.chat, '⚠️ *Das Spiel hat noch nicht begonnen.*', m)
     }
     if (currentTurn !== senderId) {
       return conn.reply(
         m.chat,
-        `⏳ *It's currently ${chessData.currentTurn === gameData.white ? 'White' : 'Black'}'s turn to move.*`,
+        `⏳ *Es ist derzeit ${chessData.currentTurn === gameData.white ? 'Weiß' : 'Schwarz'}'s Zug.*`,
         m,
         {
           contextInfo: {
@@ -118,7 +118,7 @@ const handler = async (m, { conn, args }) => {
       delete conn.chess[key]
       return conn.reply(
         m.chat,
-        `⚠️ *Game Checkmate.*\n🏳️ *Chess game stopped.*\n*Winner:* @${m.sender.split('@')[0]}`,
+        `⚠️ *Schachmatt.*\n🏳️ *Schachspiel gestoppt.*\n*Gewinner:* @${m.sender.split('@')[0]}`,
         m,
         {
           contextInfo: {
@@ -131,7 +131,7 @@ const handler = async (m, { conn, args }) => {
       delete conn.chess[key]
       return conn.reply(
         m.chat,
-        `⚠️ *Game Draw.*\n🏳️ *Chess game stopped.*\n*Players:* ${hasJoined.map(playerId => `- @${playerId.split('@')[0]}`).join('\n')}`,
+        `⚠️ *Unentschieden.*\n🏳️ *Schachspiel gestoppt.*\n*Spieler:* ${hasJoined.map(playerId => `- @${playerId.split('@')[0]}`).join('\n')}`,
         m,
         {
           contextInfo: {
@@ -144,15 +144,15 @@ const handler = async (m, { conn, args }) => {
     try {
       chess.move({ from, to, promotion: 'q' })
     } catch (e) {
-      return conn.reply(m.chat, '❌ *Invalid move.*', m)
+      return conn.reply(m.chat, '❌ *Ungültiger Zug.*', m)
     }
     chessData.fen = chess.fen()
     const currentTurnIndex = players.indexOf(currentTurn)
     const nextTurnIndex = (currentTurnIndex + 1) % 2
     chessData.currentTurn = players[nextTurnIndex]
     const encodedFen = encodeURIComponent(chess.fen())
-    const currentColor = chessData.currentTurn === gameData.white ? 'White' : 'Black'
-    const turn = `🎲 *Turn:* ${currentColor} @${chessData.currentTurn.split('@')[0]}\n\n${chess.getComment() || ''}`
+    const currentColor = chessData.currentTurn === gameData.white ? 'Weiß' : 'Schwarz'
+    const turn = `🎲 *Zug:* ${currentColor} @${chessData.currentTurn.split('@')[0]}\n\n${chess.getComment() || ''}`
     const flipParam = senderId === gameData.black ? '' : '&flip=true'
     const flipParam2 = senderId === gameData.black ? '' : '-flip'
     const boardUrl = `https://www.chess.com/dynboard?fen=${encodedFen}&board=graffiti&piece=graffiti&size=3&coordinates=inside${flipParam}`
@@ -174,24 +174,24 @@ const handler = async (m, { conn, args }) => {
     return conn.reply(
       m.chat,
       `
-      🌟 *Chess Game Commands:*
+      🌟 *Schachspiel Befehle:*
 
-*chess create* - Start a chess game
-*chess join* - Join a waiting chess game
-*chess start* - Start the chess game if two players have joined
-*chess delete* - Stop the chess game
-*chess [from] [to]* - Make a move in the chess game
+*chess create* - Starte ein Schachspiel
+*chess join* - Trete einem wartenden Schachspiel bei
+*chess start* - Starte das Schachspiel, wenn zwei Spieler beigetreten sind
+*chess delete* - Stoppe das Schachspiel
+*chess [from] [to]* - Mache einen Zug im Schachspiel
 
-*Example:*
-Type *chess create* to start a chess game.
-Type *chess join* to join a waiting chess game.
+*Beispiel:*
+Tippe *chess create*, um ein Schachspiel zu starten.
+Tippe *chess join*, um einem wartenden Schachspiel beizutreten.
     `,
       m
     )
   }
   return conn.reply(
     m.chat,
-    '❓ Invalid command. Use *"chess help"* to see the available commands.',
+    '❓ Ungültiger Befehl. Benutze *"chess help"*, um die verfügbaren Befehle zu sehen.',
     m
   )
 }

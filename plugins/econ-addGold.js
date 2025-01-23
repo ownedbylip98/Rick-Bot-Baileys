@@ -2,22 +2,22 @@ let handler = async (m, { conn, text }) => {
   let who
   if (m.isGroup) who = m.mentionedJid[0]
   else who = m.chat
-  if (!who) throw '✳️ tag the user'
+  if (!who) throw '✳️ Markiere den Benutzer'
   let txt = text.replace('@' + who.split`@`[0], '').trim()
-  if (!txt) throw '✳️ Enter the amount of *Gold* you want to add'
-  if (isNaN(txt)) throw '🔢 only numbers'
+  if (!txt) throw '✳️ Gib die Menge an *Gold* ein, die du hinzufügen möchtest'
+  if (isNaN(txt)) throw '🔢 nur Zahlen'
   let dmt = parseInt(txt)
   let diamond = dmt
 
-  if (diamond < 1) throw '✳️ Mínimum  *1*'
+  if (diamond < 1) throw '✳️ Minimum *1*'
   let users = global.db.data.users
   users[who].credit += dmt
 
-  await m.reply(`≡ *Gold ADDED*
+  await m.reply(`≡ *Gold HINZUGEFÜGT*
 ┌──────────────
-▢ *Total:* ${dmt}
+▢ *Gesamt:* ${dmt}
 └──────────────`)
-  conn.fakeReply(m.chat, `▢ Did you receive \n\n *+${dmt}* Gold`, who, m.text)
+  conn.fakeReply(m.chat, `▢ Hast du erhalten \n\n *+${dmt}* Gold`, who, m.text)
 }
 
 handler.help = ['addgold <@user>']

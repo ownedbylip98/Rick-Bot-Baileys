@@ -4,23 +4,23 @@ let handler = m => m
 handler.before = async function (m) {
   if (!/^-?[0-9]+(\.[0-9]+)?$/.test(m.text)) return !0
   let id = m.chat
-  if (!m.quoted || !m.quoted.fromMe || !m.text || !/^▢ HOW MUCH IS IT/i.test(m.quoted.text))
+  if (!m.quoted || !m.quoted.fromMe || !m.text || !/^▢ WIE VIEL IST ES/i.test(m.quoted.text))
     return !0
   this.math = this.math ? this.math : {}
-  if (!(id in this.math)) return this.reply(m.chat, 'The game is over', m)
+  if (!(id in this.math)) return this.reply(m.chat, 'Das Spiel ist vorbei', m)
   if (m.quoted.id == this.math[id][0].id) {
     let math = JSON.parse(JSON.stringify(this.math[id][1]))
     if (m.text == math.result) {
       global.db.data.users[m.sender].exp += math.bonus
       clearTimeout(this.math[id][3])
       delete this.math[id]
-      m.reply(`✅ *Correct answer!*\n\n‣ won : *+${math.bonus} XP*`)
+      m.reply(`✅ *Richtige Antwort!*\n\n‣ gewonnen : *+${math.bonus} XP*`)
     } else {
       if (--this.math[id][2] == 0) {
         clearTimeout(this.math[id][3])
         delete this.math[id]
-        m.reply(`*The opportunities are over*\n\n Response : *${math.result}*`)
-      } else m.reply(`❎ *Wrong answer*\n\nThere are still  ${this.math[id][2]} opportuniities`)
+        m.reply(`*Die Gelegenheiten sind vorbei*\n\n Antwort : *${math.result}*`)
+      } else m.reply(`❎ *Falsche Antwort*\n\nEs gibt noch ${this.math[id][2]} Gelegenheiten`)
     }
   }
   return !0

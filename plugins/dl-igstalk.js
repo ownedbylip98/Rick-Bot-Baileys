@@ -2,7 +2,7 @@ import pkg from 'api-qasim'
 const { igStalk } = pkg;
 
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-    if (!args[0]) throw `✳️ ${mssg.noUsername}\n\n📌${mssg.example} : ${usedPrefix + command} truepakistanofficial`; 
+    if (!args[0]) throw `✳️ Kein Benutzername angegeben\n\n📌Beispiel: ${usedPrefix + command} truepakistanofficial`; 
 
     try {
         await m.react('⏳');
@@ -10,13 +10,13 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 
         let te = `
 ┌──「 *STALKING IG* 
-▢ *🔖${mssg.name}:* ${res.name} 
-▢ *🔖${mssg.username}:* ${res.username}
-▢ *👥${mssg.followers}:* ${res.followers}
-▢ *🫂${mssg.follows}:* ${res.following}
-▢ *📌${mssg.bio}:* ${res.description}
-▢ *🏝️${mssg.posts}:* ${res.posts}
-▢ *🔗${mssg.link}:* https://instagram.com/${res.username.replace(/^@/, '')}
+▢ *🔖Name:* ${res.name} 
+▢ *🔖Benutzername:* ${res.username}
+▢ *👥Follower:* ${res.followers}
+▢ *🫂Folgt:* ${res.following}
+▢ *📌Bio:* ${res.description}
+▢ *🏝️Beiträge:* ${res.posts}
+▢ *🔗Link:* https://instagram.com/${res.username.replace(/^@/, '')}
 └────────────`;
         await m.react('✅');
         await conn.sendFile(m.chat, res.profilePic, 'tt.png', te, m);
